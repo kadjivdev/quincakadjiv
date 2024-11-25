@@ -44,7 +44,7 @@
                             </h5>
 
                             <table id="dataTable" class="table datatable">
-                                <thead>
+                                <thead class="">
                                     <tr>
                                         <th>N°</th>
                                         <th>

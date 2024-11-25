@@ -14,18 +14,12 @@
                     <li class="breadcrumb-item"><a href="{{ route('fournisseurs.index') }}">Fournisseur</a></li>
                     <li class="breadcrumb-item"><a href="{{ route('reglements.index') }}">Règlement</a></li>
                     <li class="breadcrumb-item active">Nouveau Règlement</li>
-
                 </ol>
             </nav>
-
         </div>
         <div class="col-6 d-flex flex-row justify-content-end">
-
             <div class="">
-
-                    <a href="{{ route('reglements.index') }}" class="btn btn-dark float-end petit_bouton"> <i class="bi bi-arrow-return-left"></i> Retour</a>
-
-
+                <a href="{{ route('reglements.index') }}" class="btn btn-dark float-end petit_bouton"> <i class="bi bi-arrow-return-left"></i> Retour</a>
             </div>
         </div>
     </div><!-- End Page +++ -->
@@ -35,36 +29,37 @@
                 <div class="col-lg-12">
 
                     <div class="card">
-                        <!-- Afficher des messages de succès -->
-                        @if (session('success'))
-                            <div class="alert alert-success">
-                                {{ session('success') }}
-                            </div>
-                        @endif
-
-                        <!-- Afficher des erreurs de validation -->
-                        @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
-                        <div class="card-body">
+                        
+                        <div class="card-body pt-1">
+                            <!-- Afficher des messages de succès -->
+                            @if (session('success'))
+                                <div class="alert alert-success">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
+    
+                            <!-- Afficher des erreurs de validation -->
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
                             <h5 class="card-title">Ajouter un règlement</h5>
 
                             <!-- Vertical Form -->
                             <form class="row g-3" action="{{ route('reglements.store') }}" method="POST"
                                 enctype="multipart/form-data">
                                 @csrf
-                                <div class="col-5 mb-3">
+                                <div class="col-6 mb-3">
                                     <label class="form-label">Fournisseur</label>
                                     <select class="js-data-example-ajax form-control" name="fournisseur_id"
                                         id="fournisseur_select"></select>
                                 </div>
-                                <div class="col-7 mb-3">
+                                <div class="col-6 mb-3">
                                     <label class="form-label">Factures</label>
                                     <select class="form-control" name="facture_fournisseur_id" id="facture_select"></select>
                                 </div>
@@ -105,19 +100,15 @@
                                         value="{{ old('preuve_decharge') }}">
                                 </div>
 
-                                <div class="col-6 mb-3" id="">
+                                <div class="col-12 mb-3" id="">
                                     <label for="">Nature du compte de paiement</label>
-                                    <br>
-                                    <textarea id="nature_compte_paiement" name="nature_compte_paiement" rows="5" cols="133"></textarea>
+                                    <textarea id="nature_compte_paiement" name="nature_compte_paiement" class="form-control"></textarea>
                                 </div>
-                                <div class="text-center">
-                                    <button type="submit" class="btn btn-warning">Enregistrer le règlement</button>
-                                    <div class="loader"></div>
-
-                                    <button type="reset" class="btn btn-secondary">Annuler</button>
+                                <div class="col-lg-12 d-flex flex-row align-items-center justify-content-between">
+                                    <button type="submit" class="btn btn-sm btn-dark text_orange w-100 submitBtn"><i class="bi bi-check-circle"></i> Enregistrer</button>
+                                    <button type="button" class="btn btn-sm btn-dark text_orange w-100 loadingBtn" hidden><span class="spinner-border spinner-border-sm text_orange loading"></span> En cours ...</button>
                                 </div>
                             </form>
-
                         </div>
                     </div>
                 </div>

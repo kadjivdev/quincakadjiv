@@ -8,15 +8,13 @@
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="/">Tableau de Bord</a></li>
                         <li class="breadcrumb-item active">Programmation d'achat</li>
-
                     </ol>
                 </nav>
-
             </div>
 
             <div class="col-3">
 
-                    <a href="{{ route('liste-valider') }}" class="btn btn-success float-end petit_bouton">
+                    <a href="{{ route('liste-valider') }}" class="btn btn-sm bg-light float-end petit_bouton">
                         <i class="bi bi-check-circle-fill"></i>
                         Prog Validés et Classés</a>
 
@@ -53,13 +51,12 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex justify-content-between align-items-center">
-                                <h5 class="card-title mb-0">Liste des programmations d'achats non Validées</h5>
+                                <h5 class="card-title mb-0 text-dark">Liste des programmations d'achats non Validées</h5>
                                 <span class="badge rounded-pill bg-dark">{{ count($bons) }} Prog en attente au
                                     total</span>
                             </div>
-                            <table id="example"
-                                class="table table-bordered border-warning  table-hover table-warning table-sm">
-                                <thead>
+                            <table id="example" class="table table-bordered border-warning table-striped table-hover table-sm">
+                                <thead class="table-dark">
                                     <tr>
                                         <th>N°</th>
                                         <th>
@@ -89,13 +86,12 @@
                                                     <span
                                                         class="badge rounded-pill text-bg-success">{{ $bon->statut }}</span>
                                                 @endif
-                                                <!-- <span class="badge rounded-pill text-bg-warning">{{ $bon->statut }}</span> -->
                                             </td>
                                             <td>{{ $bon->created_at ?? '' }}</td>
 
                                             <td>
                                                 <div class="dropdown">
-                                                    <button class="btn btn-dark dropdown-toggle btn-small" type="button"
+                                                    <button class="btn w-100 text_orange btn-dark dropdown-toggle btn-small" type="button"
                                                         id="dropdownMenuButton1" data-bs-toggle="dropdown"
                                                         aria-expanded="false">
                                                         <i class="bi bi-gear"></i>
@@ -106,7 +102,7 @@
                                                                 <a href="{{ route('bon-commandes.show', $bon->id) }}"
                                                                     class="dropdown-item" data-bs-toggle="tooltip"
                                                                     data-bs-placement="left" data-bs-title="Voir détails">
-                                                                    Détails du Bon de Commande</a>
+                                                                    <i class="bi bi-list"></i> Détails du Bon de Commande</a>
                                                             </li>
                                                         @endcan
 
@@ -141,38 +137,13 @@
                                                 </div>
 
                                                 {{-- @if (is_null($bon->valideur_id) || !in_array($bon->id, $arrayIds)) --}}
-                                                <!-- @if (is_null($bon->valideur_id))
-    @can('programmations-achat.modifier-bon-commande')
-        <a href="{{ route('bon-commandes.edit', $bon->id) }}"
-                                                                    class="btn btn-warning" data-bs-toggle="tooltip"
-                                                                    data-bs-placement="top" data-bs-title="Modifier le bon"> <i
-                                                                        class="bi bi-pencil"></i> </a>
-    @endcan
-
-                                                        @can('programmations-achat.delete-bon-commande')
-        <form action="{{ route('bon-commandes.destroy', $bon->id) }}"
-                                                                    class="form-inline" method="POST"
-                                                                    onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet bon de commande?');">
-                                                                    @csrf
-                                                                    @method('DELETE')
-                                                                    <button type="submit" class="btn btn-danger"
-                                                                        data-bs-toggle="tooltip" data-bs-placement="top"
-                                                                        data-bs-title="Supprimer bon de commande"><i
-                                                                            class="bi bi-trash"></i></button>
-                                                                </form>
-    @endcan
-    @endif -->
-
                                             </td>
-
                                         </tr>
-
                                     @empty
                                         <tr>Aucun bon de commande enregistré</tr>
                                     @endforelse
                                 </tbody>
                             </table>
-
                         </div>
                     </div>
 

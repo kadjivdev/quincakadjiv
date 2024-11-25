@@ -120,12 +120,8 @@
                             </div>
 
                             <div class="col-lg-12 d-flex flex-row align-items-center justify-content-between">
-                                <button type="submit" class="btn btn-sm btn-dark text_orange w-100"><i class="bi bi-check-circle"></i> Enregistrer</button>
-                                <div class="loader"></div>
-                                <button class="btn btn-dark button_loader w-100" id="myLoader" type="button" disabled>
-                                    <span class="spinner-border spinner-border-sm text_orange" aria-hidden="true"></span>
-                                    <span role="status text_orange">En cours...</span>
-                                </button>
+                                <button type="submit" class="btn btn-sm btn-dark text_orange w-100 submitBtn"><i class="bi bi-check-circle"></i> Enregistrer</button>
+                                <button type="button" class="btn btn-sm btn-dark text_orange w-100 loadingBtn" hidden><span class="spinner-border spinner-border-sm text_orange loading"></span> En cours ...</button>
                             </div>
                         </form>
                     </div>
@@ -203,11 +199,6 @@
                 console.log(error)
                 alert("une erreure s'est produite")
             })
-        }
-
-        function submit() {
-            $(".loading").removeAttr("hidden")
-            $("#submit_icon").attr("hidden", "hidden")
         }
     </script>
 </main>

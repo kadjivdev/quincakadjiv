@@ -10,11 +10,10 @@
         <div class="col-6 justify-content-end">
 
             <div class="">
-            <a href="{{ route('commandes.index') }}" class="btn btn-success float-end mx-2"> <i
+            <a href="{{ route('commandes.index') }}" class="btn btn-dark text_orange float-end mx-2"> <i
                         class="bi bi-arrow-left"></i> Retour</a>
 
             </div>
-
         </div>
     </div>
 
@@ -43,7 +42,7 @@
                         @endif
 
                         <div class="card-body">
-                            <h5 class="card-title">Ajouter un bon commande</h5>
+                            <h5 class="card-title text-dark">Ajouter un bon commande</h5>
 
                             @if (count($bons) > 0)
                                 <!-- Vertical Form -->
@@ -61,29 +60,22 @@
                                         </select>
                                     </div>
 
-                                    <div class="col-3">
+                                    <div class="col-4">
                                         <label class="form-label" for="frsSelect">Choisir un fournisseur</label>
                                         <select class="js-example-basic-single form-control" required name="fournisseur_id" id="frsSelect" >
-                                            <option value="">Sélectionner un fournisseur</option>
                                             @foreach ($fournisseurs as $fournisseur)
                                                 <option value="{{ $fournisseur->id }}"> {{ $fournisseur->name }} </option>
                                             @endforeach
                                         </select>
                                     </div>
 
-                                    <div class="col-3">
+                                    <div class="col-4">
                                         <label class="form-label">Type de facture</label>
                                         <select class="form-control" required name="type_id" id="typeSelect">
-                                            <option value="">Sélectionner un type</option>
                                             @foreach ($types as $type)
                                                 <option value="{{ $type->id }}"> {{ $type->libelle }} </option>
                                             @endforeach
                                         </select>
-                                    </div>
-                                    <div class="col-2">
-                                        <label class="form-label">Date de bon</label>
-                                        <input type="text" class="form-control" required name="date_cmd" id="dateReglement">
-
                                     </div>
 
                                     <div class="row mt-4">
@@ -102,9 +94,12 @@
 
                                     <div class="col-4">
                                         <label class="form-label">Autres Coût</label>
-                                        <input type="number"step="0.0001" class="form-control" required name="autre" id="autre">
-
+                                        <input type="number" step="0.0001" class="form-control" required name="autre" id="autre">
                                     </div>
+
+                                    <div class="col-12 mb-2">
+                                        <label class="form-label">Date de bon</label>
+                                        <input type="text" class="form-control" required name="date_cmd" id="dateReglement">
                                     </div>
 
                                     <div id="dynamic-fields-container">
@@ -124,19 +119,19 @@
                                             <tfoot>
                                                 <tr>
                                                     <td colspan="2">Total HT</td>
-                                                    <td colspan="3" style="background-color: rgba(233, 138, 10, 0.89); font-weight:bolder;"><input type="text" style="font-weight:bolder;" id="totalInput"
+                                                    <td colspan="3" class="bg-secondary" style="font-weight:bolder;"><input type="text" style="font-weight:bolder;" id="totalInput"
                                                             class="form-control" name="montant_facture" readonly>
                                                     </td>
                                                 </tr>
                                                 <tr id="rowRem">
                                                     <td colspan="2">Taux remise(%)</td>
-                                                    <td colspan="3" style="background-color: rgba(245, 39, 54, 0.8); font-weight:bolder;"><input style="font-weight:bolder;" type="text" id="tauxRemise" value="{{old('taux_remise')}}"
+                                                    <td colspan="3" class="bg-secondary" style="font-weight:bolder;"><input style="font-weight:bolder;" type="text" id="tauxRemise" value="{{old('taux_remise')}}"
                                                             class="form-control" name="taux_remise">
                                                     </td>
                                                 </tr>
                                                 <tr id="rowAib">
                                                     <td colspan="2">Taux AIB (%)</td>
-                                                    <td colspan="3" style="background-color: rgba(114, 93, 228, 0.89); font-weight:bolder;" ><input style="font-weight:bolder;"  type="text" id="aib" value="{{old('aib')}}"
+                                                    <td colspan="3" class="bg-secondary" style="font-weight:bolder;" ><input style="font-weight:bolder;"  type="text" id="aib" value="{{old('aib')}}"
                                                             class="form-control" name="aib">
                                                             <input type="text" id="montant_aib"
                                                             class="form-control" readonly >
@@ -144,7 +139,7 @@
                                                 </tr>
                                                 <tr id="rowTva">
                                                     <td colspan="2">TVA(%)</td>
-                                                    <td colspan="3" style="background-color: rgba(150, 150, 150, 0.89); font-weight:bolder;"><input type="text" style="font-weight:bolder;" id="tva" value="{{old('tva')}}"
+                                                    <td colspan="3" class="bg-secondary" style="font-weight:bolder;"><input type="text" style="font-weight:bolder;" id="tva" value="{{old('tva')}}"
                                                             class="form-control" name="tva">
                                                             <input type="text" id="montant_tva"
                                                             class="form-control" readonly >
@@ -152,14 +147,14 @@
                                                 </tr>
                                                 <tr>
                                                     <td colspan="2">Net à payer</td>
-                                                    <td colspan="3" style="background-color: rgba(233, 138, 10, 0.89); font-weight:bolder;"><input style="font-weight:bolder;"  type="text"  id="totalNet"
+                                                    <td colspan="3" class="bg-secondary" style="font-weight:bolder;"><input style="font-weight:bolder;"  type="text"  id="totalNet"
                                                             class="form-control" name="montant_total" readonly>
                                                     </td>
                                                 </tr>
 
                                                 <tr>
                                                     <td colspan="2">Acompte</td>
-                                                    <td colspan="3" style="background-color: rgba(32, 214, 4, 0.89); font-weight:bolder;"><input style="font-weight:bolder;"   type="number" min="0"
+                                                    <td colspan="3" class="bg-secondary" style="font-weight:bolder;"><input style="font-weight:bolder;"   type="number" min="0"
                                                             id="montant_regle" class="form-control" name="montant_regle">
                                                     </td>
                                                 </tr>
@@ -167,11 +162,9 @@
                                         </table>
                                     </div>
 
-                                    <div class="text-center">
-                                        <button type="submit" class="btn btn-primary" id="btn_valid">Enregistrer</button>
-                                        <div class="loader"></div>
-
-                                        <button type="reset" class="btn btn-secondary">Annuler</button>
+                                    <div class="col-lg-12 d-flex flex-row align-items-center justify-content-between">
+                                        <button type="submit" class="btn btn-sm btn-dark text_orange w-100 submitBtn" id="ajouterArticle"><i class="bi bi-check-circle"></i> Enregistrer</button>
+                                        <button type="button" class="btn btn-sm btn-dark text_orange w-100 loadingBtn" hidden><span class="spinner-border spinner-border-sm text_orange loading"></span> En cours ...</button>
                                     </div>
                                 </form>
                             @else
@@ -201,29 +194,29 @@
             $('#typeSelect').change(function() {
 
 
-var selectedOption = $(this).val(); // Obtient la valeur sélectionnée
+        var selectedOption = $(this).val(); // Obtient la valeur sélectionnée
 
-if(selectedOption == 2) {
-    $('#rowRem').hide();
-    $('#rowAib').hide();
-    $('#rowTva').hide();
-    $("#tauxRemise").val(0);
-            $("#aib").val(0);
-            $("#tva").val(0);
+        if(selectedOption == 2) {
+            $('#rowRem').hide();
+            $('#rowAib').hide();
+            $('#rowTva').hide();
+            $("#tauxRemise").val(0);
+                    $("#aib").val(0);
+                    $("#tva").val(0);
 
-}
+        }
 
-if(selectedOption == 1) {
-    $('#rowRem').show();
-    $('#rowAib').show();
-    $('#rowTva').show();
-    $("#tauxRemise").val(0);
-            $("#aib").val(1);
-            $("#tva").val(18);
-}
+        if(selectedOption == 1) {
+            $('#rowRem').show();
+            $('#rowAib').show();
+            $('#rowTva').show();
+            $("#tauxRemise").val(0);
+                    $("#aib").val(1);
+                    $("#tva").val(18);
+        }
 
-calculateTotal();
-});
+        calculateTotal();
+        });
 
             $("#btn_valid").hide();
             $("#tauxRemise").val(0);
@@ -328,7 +321,7 @@ calculateTotal();
                         <td data-name="unite" contenteditable="false">
                             <input type="text" name="unites[]" readonly value="${data.articles[0].unite}" class="form-control">
                         </td>
-                        <td><button class="btn btn-danger btn-sm delete-row"><i class="bi bi-trash"></i></button></td>
+                        <td><button class="btn bg-dark text_orange btn-sm delete-row"><i class="bi bi-trash"></i></button></td>
                     </tr>`;
 
                         $('#editableTable tbody').append(firstRow);

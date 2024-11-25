@@ -57,9 +57,8 @@
                                 <span class="badge rounded-pill bg-dark">{{ count($bons) }} Prog validées au
                                     total</span>
                             </div>
-                            <table id="example"
-                                class="table table-bordered border-warning  table-hover table-warning table-sm">
-                                <thead>
+                            <table id="example" class="table table-bordered border-warning  table-hover table-striped table-sm">
+                                <thead class="table-dark">
                                     <tr>
                                         <th>N°</th>
                                         <th>
@@ -95,11 +94,7 @@
 
                                             <td>
                                                 <div class="dropdown">
-                                                    <button class="btn btn-dark dropdown-toggle btn-small" type="button"
-                                                        id="dropdownMenuButton1" data-bs-toggle="dropdown"
-                                                        aria-expanded="false">
-                                                        <i class="bi bi-gear"></i>
-                                                    </button>
+                                                    <button class="btn btn-dark w-100 text_orange dropdown-toggle btn-small" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-gear"></i></button>
                                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                                         @can('programmations-achat.voir-bon-commande')
                                                             <li>

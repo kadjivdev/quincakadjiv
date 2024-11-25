@@ -49,7 +49,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-sm btn-dark text_orange w-100" onclick="submit()"><span class="spinner-border spinner-border-sm text_orange loading" hidden></span> <i class="bi bi-check-circle" id="submit_icon"></i> Enregistrer</button>
+                    <button type="submit" class="btn btn-sm btn-dark text_orange w-100 submitBtn"><i class="bi bi-check-circle"></i> Enregistrer</button>
+                    <button type="button" class="btn btn-sm btn-dark text_orange w-100 loadingBtn" hidden><span class="spinner-border spinner-border-sm text_orange loading"></span> En cours ...</button>
                 </div>
             </form>
         </div>

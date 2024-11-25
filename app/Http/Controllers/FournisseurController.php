@@ -22,7 +22,7 @@ class FournisseurController extends Controller
      */
     public function index()
     {
-        $fournisseurs = Fournisseur::all();
+        $fournisseurs = Fournisseur::orderBy("id","desc")->get();
         $total_restants = [];
 
         foreach ($fournisseurs as $fournisseur) {

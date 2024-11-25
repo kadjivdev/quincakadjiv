@@ -10,28 +10,28 @@
             <div class="col-lg-12">
 
                 <div class="card">
-                    <!-- Afficher des messages de succès -->
-                    @if (session('success'))
-                    <div class="alert alert-success">
-                        {{ session('success') }}
-                    </div>
-                    @endif
-
-                    <!-- Afficher des erreurs de validation -->
-                    @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                    @endif
-                    <div class="card-body">
+                    <div class="card-body py-2">
+                        <!-- Afficher des messages de succès -->
+                        @if (session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                        @endif
+    
+                        <!-- Afficher des erreurs de validation -->
+                        @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
 
                         <h5 class="card-title text-dark">Ajouter un Fournisseur</h5>
                         <!-- Vertical Form -->
-                        <form class="row g-3" action="{{ route('fournisseurs.store') }}" method="POST">
+                        <form  class="row g-3" action="{{ route('fournisseurs.store') }}" method="POST">
                             @csrf
                             <div class="p-3 shadow shadow-lg">
                                 <div class="col-12 mb-1">
@@ -57,16 +57,15 @@
                                     <select name="articles[]" id="articles" class="form-select" multiple>
                                         @foreach ( $articles as $article )
                                         <option value="{{ $article->id }}">{{ $article->nom }}</option>
-
                                         @endforeach
                                     </select>
                                 </div>
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-sm btn-dark text_orange w-100" onclick="submit()"><span class="spinner-border spinner-border-sm text_orange loading" hidden></span> <i class="bi bi-check-circle" id="submit_icon"></i> Enregistrer</button>
+                                    <button type="submit" class="btn btn-sm btn-dark text_orange w-100 submitBtn"><i class="bi bi-check-circle"></i> Enregistrer</button>
+                                    <button type="button" class="btn btn-sm btn-dark text_orange w-100 loadingBtn" hidden><span class="spinner-border spinner-border-sm text_orange loading"></span> En cours ...</button>
                                 </div>
                             </div>
                         </form>
-
                     </div>
                 </div>
             </div>
@@ -98,7 +97,9 @@
                 //     cache: true
                 // }
             });
+
         });
+
     </script>
 
     <script>

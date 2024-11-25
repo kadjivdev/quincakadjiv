@@ -2,26 +2,23 @@
 
     <div class="row" style="text-align: center">
 
-        <div class="col-6">
-
-            <form action="" method="post">
-                <label for="">Raisons du rejet</label> <br>
-                <textarea name="raison" id="" class="form-control" style="width: 100%" rows="2"></textarea> <br>
-                <input type="submit" class="btn btn-warning" value="Rejeter ce Règlement">
+        <div class="col-8">
+            <form action="" method="post" class="d-flex">
+                <textarea name="raison" id="" class="form-control w-50" placeholder="Raisons du rejet" rows="1" required></textarea>
+                &nbsp; <button type="submit" class="btn btn-sm bg_orange"><i class="bi bi-x-circle"></i> Rejeter </button>
             </form>
         </div>
 
-        <div class="col-6">
+        <div class="col-4">
             <a href="#"
-            class="btn btn-danger details-button"
+            class="btn btn-sm bg-dark text_orange details-button"
             data-bs-toggle="modal"
             data-reg-id="{{ $reglementFrs->id }}"
             data-bs-target="#confirmModal"
             id="confirmationbtn">
-            Valider ce règlement
+            <i class="bi bi-check-circle"></i> Valider ce règlement
         </a>
         </div>
-
     </div>
     <hr>
 
@@ -96,12 +93,12 @@
         <div class="col-6">
             <small>Référence Facture</small>
             <br>
-            <h5 class="badge text-bg-success">{{ $factureFrs->ref_facture }}</h5>
+            <h5 class="badge bg-dark">{{ $factureFrs->ref_facture }}</h5>
         </div>
         <div class="col-6">
             <small>Référence Commande</small>
             <br>
-            <h5 class="badge text-bg-success">{{ $cmd->reference }}</h5>
+            <h5 class="badge bg-dark">{{ $cmd->reference }}</h5>
         </div>
     </div>
 
@@ -110,29 +107,27 @@
 
         <div class="col-4 flex-row justify-content-center">
             <small class="text-dark" style="text-decoration: underline" >Montants HT</small>
-            <h5 class="text-danger" style="font-weight: bolder">{{ number_format($factureFrs->montant_facture, 2, ',', ' ') }}</h5>
+            <h5 class="text-dark" style="font-weight: bolder">{{ number_format($factureFrs->montant_facture, 2, ',', ' ') }}</h5>
 
         </div>
 
         <div class="col-4">
             <small class="text-dark" style="text-decoration: underline">Montants TTC</small>
-            <h5 class="text-danger" style="font-weight: bolder">{{ number_format($factureFrs->montant_total, 2, ',', ' ') }}</h5>
+            <h5 class="text-dark" style="font-weight: bolder">{{ number_format($factureFrs->montant_total, 2, ',', ' ') }}</h5>
              </div>
 
         <div class="col-4">
             <small class="text-dark" style="text-decoration: underline">Montants Régler</small>
-            <h5 class="text-success" style="font-weight: bolder">{{ number_format($factureFrs->montant_total, 2, ',', ' ') }} </h5>
+            <h5 class="text_orange" style="font-weight: bolder">{{ number_format($factureFrs->montant_total, 2, ',', ' ') }} </h5>
          </div>
     </div>
-
-
-
+<br>
     <div class="row">
         <div class="col-lg-12">
-            <small class="card-title">Liste des articles de la facture </small>
-            <table id="example" class="table table-bordered border-warning  table-hover table-warning table-sm">
+            <small class="card-title text-dark">Liste des articles de la facture </small>
+            <table id="example" class="table table-bordered border-warning  table-hover table-sm table-striped">
 
-                <thead>
+                <thead class="table-dark">
                     <tr>
                         <th>N°</th>
                         <th>Article</th>
@@ -157,9 +152,6 @@
             </table>
         </div>
     </div>
-
-
-
 </section>
 
 

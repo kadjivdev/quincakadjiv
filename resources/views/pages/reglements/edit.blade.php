@@ -54,7 +54,7 @@
                             </div>
                         @endif
                         <div class="card-body">
-                            <h5 class="card-title">Modifier un règlement</h5>
+                            <h5 class="card-title"><i class="bi bi-pencil"></i> Modifier un règlement</h5>
 
                             <!-- Vertical Form -->
                             <form class="row g-3" action="{{ route('reglements.update', $reglement->id) }}" method="POST"
@@ -99,13 +99,13 @@
 
                                 <div class="col-6 mb-3">
                                     <label for="">Montant du règlement</label>
-                                    <input type="text" class="form-control text-white bg-success" value="{{ $reglement->montant_regle }}"
+                                    <input type="text" class="form-control text-white bg-secondary" value="{{ $reglement->montant_regle }}"
                                         name="montant_regle">
                                 </div>
 
                                 <div class="col-6 mb-3">
                                     <label for="">Montant Restant</label>
-                                    <input type="text" readonly class="form-control text-white bg-danger" value="{{ $restant }}"
+                                    <input type="text" readonly class="form-control text-white bg-dark text_orange" value="{{ $restant }}"
                                         name="montant_restant">
                                 </div>
 
@@ -123,12 +123,12 @@
 
                                 <div class="col-6 mb-3" id="">
                                     <label for="nature_compte_paiement">Nature du compte de paiement</label>
-                                    <textarea class="form-control" id="nature_compte_paiement" name="nature_compte_paiement" rows="5" cols="33">{{ $reglement->nature_compte_paiement }}</textarea>
+                                    <textarea class="form-control" id="nature_compte_paiement" name="nature_compte_paiement" rows="1" cols="33">{{ $reglement->nature_compte_paiement }}</textarea>
                                 </div>
-                                <div class="text-center">
-                                    <button type="submit" class="btn btn-warning">Enregistrer les modifications</button>
-                                    <div class="loader"></div>
 
+                                <div class="col-lg-12 d-flex flex-row align-items-center justify-content-between">
+                                    <button type="submit" class="btn btn-sm btn-dark text_orange w-100 submitBtn"><i class="bi bi-check-circle"></i> Enregistrer</button>
+                                    <button type="button" class="btn btn-sm btn-dark text_orange w-100 loadingBtn" hidden><span class="spinner-border spinner-border-sm text_orange loading"></span> En cours ...</button>
                                 </div>
                             </form>
 

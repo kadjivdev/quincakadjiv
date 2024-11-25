@@ -37,32 +37,32 @@
         <section class="section">
             <div class="row">
                 <div class="col-lg-12">
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-                    @if (session('success'))
-                        <div class="alert alert-success">
-                            {{ session('success') }}
-                        </div>
-                    @endif
-
+                    
                     <div class="card">
-                        <div class="card-body">
+                        <div class="card-body pt-1">
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+                            @if (session('success'))
+                                <div class="alert alert-success">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
                             <div class="d-flex justify-content-between align-items-center">
-                                <h5 class="card-title mb-0">Liste des Bons de Commande non Validés</h5>
+                                <h5 class="card-title mb-0 text-dark">Liste des Bons de Commande non Validés</h5>
                                 <span class="badge rounded-pill bg-dark">{{ count($commandes) }} Bon en attente au
                                     total</span>
                             </div>
                             <!-- Table with stripped rows -->
                             <table id="example"
-                                class="table table-bordered border-warning  table-hover table-warning table-sm">
-                                <thead>
+                                class="table table-bordered border-warning  table-hover table-striped table-sm">
+                                <thead class="table-dark">
                                     <tr>
                                         <th>N°</th>
                                         <th>Programmation</th>
@@ -98,7 +98,7 @@
 
                                             <td>
                                                 <div class="dropdown">
-                                                    <button class="btn btn-dark dropdown-toggle btn-small" type="button"
+                                                    <button class="btn btn-dark text_orange w-100 dropdown-toggle btn-small" type="button"
                                                         id="dropdownMenuButton1" data-bs-toggle="dropdown"
                                                         aria-expanded="false">
                                                         <i class="bi bi-gear"></i>

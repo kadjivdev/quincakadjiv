@@ -19,7 +19,11 @@
 } */
 
 .text_orange {
-  color: #f8c714;
+  color: #f8c714!important;
+}
+
+.breadcrumb-item{
+  color: #000!important;
 }
 
 body {
@@ -97,7 +101,7 @@ h6 {
   font-size: 24px;
   margin-bottom: 0;
   font-weight: 600;
-  color: #012970;
+  color: #000;
 }
 
 /*--------------------------------------------------------------
@@ -410,6 +414,9 @@ h6 {
   background-color: #f8c714;
 }
 
+.text-bold{
+  font-weight: bold;
+}
 
 ._card_body {
   background-color: #fff !important;

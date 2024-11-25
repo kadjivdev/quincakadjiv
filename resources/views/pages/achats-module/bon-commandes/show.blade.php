@@ -1,11 +1,8 @@
 @extends('layout.template')
 @section('content')
     <main id="main" class="main">
-
         <div class="pagetitle d-flex">
-
             <div class="col-6">
-
                 <nav>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="/">Tableau de Bord</a></li>
@@ -13,24 +10,22 @@
                             {{ $bon->date_bon_cmd->locale('fr_FR')->isoFormat('ll') }}</li>
                     </ol>
                 </nav>
-
             </div>
 
 
             <div class="col-2 ">
-
                 <div class="">
                     @if ($bon->valideur_id)
                         @if ($nombre_commande == 0)
                             @can('programmations-achat.valider-bon-commande')
-                                <button type="button" class="btn btn-danger float-end petit_bouton" id="cancelbtn"
+                                <button type="button" class="btn btn-dark text_orange float-end petit_bouton" id="cancelbtn"
                                     data-bon-id="{{ $bon->id }}" data-bs-toggle="modal" data-bs-target="#cancelV">
                                     <i class="bi bi-x-circle"></i>
                                     Annuler la validation
                                 </button>
                             @endcan
                         @else
-                            <span class="text-danger">Prog déjà passée en Commande</span>
+                            <span class="text_orange">Prog déjà passée en Commande</span>
                         @endif
                     @endif
                 </div>
@@ -54,13 +49,9 @@
 
             <div class="col-2">
                 <div class="">
-
-                    <a href="{{ route('liste-valider') }}" class="btn btn-success petit_bouton float-end mx-2">
+                    <a href="{{ route('liste-valider') }}" class="btn btn-dark text_orange petit_bouton float-end mx-2">
                         <i class="bi bi-arrow-left"></i> Retour</a>
-
-
                 </div>
-
             </div>
         </div><!-- End Page +++ -->
 
@@ -72,8 +63,8 @@
                             <h5 class="card-title">Liste des articles de la programmation</h5>
 
                             <table id="example"
-                                class="table table-bordered border-warning  table-hover table-warning table-sm">
-                                <thead>
+                                class="table table-bordered border-warning  table-hover table-striped table-sm">
+                                <thead class="table-dark">
                                     <tr>
                                         <th width="3%">N°</th>
                                         <th width="60%">

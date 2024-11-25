@@ -42,10 +42,10 @@
 
                     @if (is_null($bon->validator_id))
                         @can('bon-commandes.valider-commande')
-                            <button type="button" class="btn btn-warning float-end petit_bouton" id="confirmationbtn"
+                            <button type="button" class="btn btn-sm btn-light float-end petit_bouton" id="confirmationbtn"
                                 data-bon-id="{{ $bon->id }}" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                 <i class="bi bi-check-circle-fill"></i>
-                                Valider bon de Commande
+                                Valider la Commande
                             </button>
                         @endcan
                     @endif
@@ -56,7 +56,7 @@
 
             <div class="col-2">
                 <div class="">
-                    <a href="{{ route('commandes.index') }}" class="btn btn-success petit_bouton float-end mx-2">
+                    <a href="{{ route('commandes.index') }}" class="btn btn-sm btn-dark text_orange petit_bouton float-end mx-2">
                         <i class="bi bi-arrow-left"></i> Retour</a>
                 </div>
 
@@ -73,14 +73,14 @@
 
 
                             <div class="d-flex justify-content-between align-items-center">
-                                <h5 class="card-title">Liste des articles du bon <span
-                                        class="badge text-bg-success">{{ $bon->reference }}</span>
+                                <h5 class="card-title text-dark">Liste des articles du bon <span
+                                        class="badge bg-dark text-white">{{ $bon->reference }}</span>
                                 </h5>
 
                                 @can('bon-commandes.ajouter-cmde-sup')
                                     <div class="">
                                         <a href="{{ route('supplement-create', $bon->id) }}"
-                                            class="btn btn-primary float-end petit_bouton">
+                                            class="btn btn-sm btn-dark text_orange float-end petit_bouton">
                                             <i class="bi bi-plus-circle"></i>
                                             Ajouter un supplément</a>
                                     </div>
@@ -89,9 +89,9 @@
 
 
                             <table id="dataTable"
-                                class="table table-bordered border-warning  table-hover table-warning table-sm">
+                                class="table table-bordered border-warning  table-hover table-striped table-sm">
 
-                                <thead>
+                                <thead class="table-dark">
                                     <tr>
                                         <th>N°</th>
                                         <th>
@@ -119,9 +119,9 @@
                             </table>
                             {{-- <h5 class="card-title">Total HT du Bon de commande : <b style="font-size:30px; text-align:center; font-weight:bolder; background-color: rgba(13, 255, 97, 0.79);"> <?php echo number_format($total_ht, 2, ',', ' '); ?>  </b> FCFA</h5>
                         <h5 class="card-title">Total AIB du Bon de commande : <b style="font-size:30px; text-align:center; font-weight:bolder; background-color: rgba(13, 255, 97, 0.79);"> <?php echo number_format($aib, 2, ',', ' '); ?>  </b> FCFA</h5>
-                        <h5 class="card-title">Total TVA du Bon de commande : <b style="font-size:30px; text-align:center; font-weight:bolder; background-color: rgba(13, 255, 97, 0.79);"> <?php echo number_format($tva, 2, ',', ' '); ?>  </b> FCFA</h5> --}}
-                            <h5 class="card-title">Total TTC du Bon de commande : <b
-                                    style="font-size:30px; text-align:center; font-weight:bolder; background-color: rgba(13, 255, 97, 0.79);">
+                        <h5 class="card-title text-dark">Total TVA du Bon de commande : <b style="font-size:30px; text-align:center; font-weight:bolder; background-color: rgba(13, 255, 97, 0.79);"> <?php echo number_format($tva, 2, ',', ' '); ?>  </b> FCFA</h5> --}}
+                            <h5 class="card-title">Total TTC du Bon de commande : <b class="bg-dark text_orange"
+                                    style="font-size:30px; text-align:center; font-weight:bolder;">
                                     <?php echo number_format($total_ttc, 2, ',', ' '); ?> </b> FCFA</h5>
 
                         </div>

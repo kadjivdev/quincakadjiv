@@ -9,25 +9,19 @@
                         <li class="breadcrumb-item"><a href="/">Tableau de Bord</a></li>
                         <li class="breadcrumb-item"><a href="{{ route('fournisseurs.index') }}">Fournisseur</a></li>
                         <li class="breadcrumb-item active">Règlement</li>
-
                     </ol>
                 </nav>
-
             </div>
             <div class="col-6 d-flex flex-row justify-content-end">
-
                 <div class="">
                     @can('fournisseurs.ajouter-fournisseur')
                         <a href="{{ route('reglements.create') }}" class="btn btn-dark float-end petit_bouton text_orange"> <i
                                 class="bi bi-plus-circle"></i> Ajouter un
                             Règlement</a>
                     @endcan
-
                 </div>
             </div>
         </div><!-- End Page +++ -->
-
-
 
         <section class="section">
             <div class="row">
@@ -102,8 +96,7 @@
                                                                 data-bs-toggle="tooltip"
                                                                 data-bs-title="Plus de détails sur le reglement"
                                                                 data-bs-target="#detailsModal">
-                                                                <small class="text-success" style="font-weight: bolder">Plus
-                                                                    de Détails</small>
+                                                                <small class="text-dark" style="font-weight: bolder"><i class="bi bi-list"></i> Plus de Détails</small>
                                                             </a>
 
 
@@ -113,11 +106,11 @@
                                                             @if (is_null($reglement->validated_at))
                                                                 <li>
                                                                     <a href="{{ route('reglements.edit', $reglement->id) }}"
-                                                                        class="dropdown-item text-warning"
+                                                                        class="dropdown-item text-dark"
                                                                         data-bs-toggle="tooltip" data-bs-placement="left"
                                                                         data-bs-title="Modifier reglement">
-                                                                        <small class="text-warning"
-                                                                            style="font-weight: bolder">Modifier
+                                                                        <small class="text-dark"
+                                                                            style="font-weight: bolder"><i class="bi bi-pencil"></i> Modifier
                                                                             Règlement</small>
 
                                                                     </a>
@@ -129,14 +122,12 @@
                                                             @if (is_null($reglement->validated_at))
                                                                 <li>
                                                                     <a href="#" data-id="{{ $reglement->id }}"
-                                                                        class="dropdown-item text-dark valider-button"
+                                                                        class="dropdown-item  valider-button"
                                                                         data-bs-toggle="modal" data-bs-placement="left"
                                                                         data-bs-toggle="tooltip"
                                                                         data-bs-title="Plus de détails sur le reglement"
                                                                         data-bs-target="#validerModal">
-                                                                        <small class="text-danger"
-                                                                            style="font-weight: bolder">Valider le
-                                                                            règlement</small>
+                                                                        <small class="text-dark" style="font-weight: bolder"><i class="bi bi-check-circle"></i> Valider le règlement</small>
                                                                     </a>
                                                                 </li>
                                                             @endif
@@ -170,7 +161,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div id="modalContent">
+                    <div id="modalContent" class="shadow shadow-lg p-3">
                         <!-- Loader -->
                         <div id="loader" class="text-center" style="display: none;">
                             <div class="spinner-border" role="status">
@@ -180,9 +171,6 @@
                         </div>
                         <!-- Les détails de la facture seront insérés ici par AJAX -->
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
                 </div>
             </div>
         </div>
@@ -197,7 +185,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div id="modalValiderContent">
+                    <div id="modalValiderContent" class="shadow shadow-lg p-3">
                         <!-- Loader -->
                         <div id="loader" class="text-center" style="display: none;">
                             <div class="spinner-border" role="status">
@@ -207,9 +195,6 @@
                         </div>
                         <!-- Les détails de la facture seront insérés ici par AJAX -->
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
                 </div>
             </div>
         </div>
@@ -228,8 +213,8 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Non</button>
-                    <button type="button" class="btn btn-primary" id="confirmValidation">Oui</button>
+                    <button type="button" class="btn btn-sm btn-light " data-bs-dismiss="modal"><i class="bi bi-x-square"></i> Non</button>
+                    <button type="button" class="btn btn-sm btn-dark text_orange" id="confirmValidation"><i class="bi bi-check-circle"></i> Oui</button>
                 </div>
             </div>
         </div>
@@ -242,7 +227,6 @@
 
             $('.details-button').on('click', function() {
                 var reglementId = $(this).data('id'); // Obtenir l'ID de la facture
-
                 // Afficher le loader
                 $('#loader').show();
                 $('#modalContent').empty(); // Vider le contenu précédent
@@ -268,7 +252,7 @@
 
             $('.valider-button').on('click', function() {
                 var reglementId = $(this).data('id'); // Obtenir l'ID de la facture
-
+                
                 // Afficher le loader
                 $('#loader').show();
                 $('#modalValiderContent').empty(); // Vider le contenu précédent

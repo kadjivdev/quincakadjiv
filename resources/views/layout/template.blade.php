@@ -42,7 +42,7 @@
 
     <!-- Template Main CSS File -->
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
-    
+
     <style>
         /* Style pour le loader */
         .loader {
@@ -428,6 +428,11 @@
                     "thousands": " "
                 }
             });
+
+            $(".submitBtn").on("click", function() {
+                $(this).attr("hidden", "hidden")
+                $(".loadingBtn").removeAttr("hidden")
+            })
         });
     </script>
 

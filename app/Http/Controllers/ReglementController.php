@@ -222,102 +222,100 @@ class ReglementController extends Controller
     // }
 
     public function update(Request $request, string $id)
-{
-    $validator = Validator::make($request->all(), [
-        'montant_regle' => 'required|numeric|min:0', // Assurez-vous que le montant réglé est numérique et positif
-        'type_reglement' => 'required',
-        'date_reglement' => 'required|date',
-        'reference' => 'required',
-        'preuve_decharge' => 'required_if:type_reglement,Décharge|mimes:pdf,png,jpg|max:1024'
-    ]);
+    {
+        $validator = Validator::make($request->all(), [
+            'montant_regle' => 'required|numeric|min:0', // Assurez-vous que le montant réglé est numérique et positif
+            'type_reglement' => 'required',
+            'date_reglement' => 'required|date',
+            'reference' => 'required',
+            'preuve_decharge' => 'required_if:type_reglement,Décharge|mimes:pdf,png,jpg|max:1024'
+        ]);
 
-    // Vérifier si la validation a échoué
-    if ($validator->fails()) {
-        return redirect()->back()
-            ->withErrors($validator)
-            ->withInput();
+        // Vérifier si la validation a échoué
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        // Récupérer le règlement à mettre à jour
+        $reglement = Reglement::findOrFail($id);
+
+        // Récupérer la facture associée
+        $facture = FactureFournisseur::findOrFail($reglement->facture_fournisseur_id);
+        $restant = doubleval($facture->montant_total) - doubleval($facture->montant_regler);
+
+        // Vérifier si le montant restant est inférieur au montant réglé
+
+        if ($restant < doubleval($request->montant_regle)) {
+            return redirect()->back()
+                ->withErrors('Le montant réglé ne peut pas être supérieur au montant restant à payer.')
+                ->withInput();
+        }
+
+        // Traitement du fichier de preuve de décharge s'il est présent
+        $fileName = $reglement->preuve_decharge; // Conserver l'ancien fichier si aucun nouveau n'est fourni
+        if ($request->hasFile('preuve_decharge')) {
+            $fileName = time() . '_' . $request->preuve_decharge->getClientOriginalName();
+            $request->file('preuve_decharge')->storeAs('public/uploads', $fileName);
+        }
+
+        // Mettre à jour le règlement dans la base de données
+        $reglement->update([
+            'montant_regle' => $request->montant_regle,
+            'type_reglement' => $request->type_reglement,
+            'date_reglement' => $request->date_reglement,
+            'reference' => $request->reference,
+            'preuve_decharge' => $fileName,
+            'nature_compte_paiement' => $request->nature_compte_paiement ?? $reglement->nature_compte_paiement,
+        ]);
+
+        // Mettre à jour le montant réglé de la facture et le statut de la facture
+        $montant = $facture->montant_regle + (float)$request->montant_regle;
+        $statut = ($facture->montant_total == $montant) ? 'Soldé' : 'Non soldé';
+
+        $facture->update([
+            'montant_regle' => $montant,
+            'statut' => $statut,
+        ]);
+
+        // Redirection avec un message de succès
+        return redirect()->route('reglements.index')
+            ->with('success', 'Règlement modifié avec succès.');
     }
-
-    // Récupérer le règlement à mettre à jour
-    $reglement = Reglement::findOrFail($id);
-
-    // Récupérer la facture associée
-    $facture = FactureFournisseur::findOrFail($reglement->facture_fournisseur_id);
-    $restant = doubleval($facture->montant_total) - doubleval($facture->montant_regler);
-
-    // Vérifier si le montant restant est inférieur au montant réglé
-
-    if ($restant < doubleval($request->montant_regle)) {
-        return redirect()->back()
-            ->withErrors('Le montant réglé ne peut pas être supérieur au montant restant à payer.')
-            ->withInput();
-    }
-
-    // Traitement du fichier de preuve de décharge s'il est présent
-    $fileName = $reglement->preuve_decharge; // Conserver l'ancien fichier si aucun nouveau n'est fourni
-    if ($request->hasFile('preuve_decharge')) {
-        $fileName = time() . '_' . $request->preuve_decharge->getClientOriginalName();
-        $request->file('preuve_decharge')->storeAs('public/uploads', $fileName);
-    }
-
-    // Mettre à jour le règlement dans la base de données
-    $reglement->update([
-        'montant_regle' => $request->montant_regle,
-        'type_reglement' => $request->type_reglement,
-        'date_reglement' => $request->date_reglement,
-        'reference' => $request->reference,
-        'preuve_decharge' => $fileName,
-        'nature_compte_paiement' => $request->nature_compte_paiement ?? $reglement->nature_compte_paiement,
-    ]);
-
-    // Mettre à jour le montant réglé de la facture et le statut de la facture
-    $montant = $facture->montant_regle + (float)$request->montant_regle;
-    $statut = ($facture->montant_total == $montant) ? 'Soldé' : 'Non soldé';
-
-    $facture->update([
-        'montant_regle' => $montant,
-        'statut' => $statut,
-    ]);
-
-    // Redirection avec un message de succès
-    return redirect()->route('reglements.index')
-        ->with('success', 'Règlement modifié avec succès.');
-}
-
-
 
     public function validerReglement($id)
-{
-    // Trouver le règlement
-    $reglement = Reglement::find($id);
-    if (!$reglement) {
-        return response()->json(['error' => 'Règlement non trouvé'], 404);
+    {
+        // Trouver le règlement
+        $reglement = Reglement::find($id);
+        if (!$reglement) {
+            return response()->json(['error' => 'Règlement non trouvé'], 404);
+        }
+
+        // Trouver la facture associée
+        $facture = FactureFournisseur::find($reglement->facture_fournisseur_id);
+        if (!$facture) {
+            return response()->json(['error' => 'Facture non trouvée'], 404);
+        }
+
+        // Mettre à jour le règlement
+        $reglement->validator_id = Auth::id();
+        $reglement->validated_at = now();
+        $reglement->save();
+
+        // Créer l'entrée CompteFrs
+        $compte_frs = CompteFrs::create([
+            'date_op' => $reglement->date_reglement,
+            'montant_op' => $reglement->montant_regle,
+            'facture_id' => $reglement->facture_fournisseur_id,
+            'fournisseur_id' => $facture->fournisseur_id,
+            'user_id' => Auth::user()->id,
+            'type_op' => 'REG',
+            'cle' => $facture->id,
+        ]);
+
+        return response()->json(['redirectUrl' => route('reglements.index')]);
     }
-
-    // Trouver la facture associée
-    $facture = FactureFournisseur::find($reglement->facture_fournisseur_id);
-    if (!$facture) {
-        return response()->json(['error' => 'Facture non trouvée'], 404);
-    }
-
-    // Mettre à jour le règlement
-    $reglement->validator_id = Auth::id();
-    $reglement->validated_at = now();
-    $reglement->save();
-
-    // Créer l'entrée CompteFrs
-    $compte_frs = CompteFrs::create([
-        'date_op' => $reglement->date_reglement,
-        'montant_op' => $reglement->montant_regle,
-        'facture_id' => $reglement->facture_fournisseur_id,
-        'fournisseur_id' => $facture->fournisseur_id,
-        'user_id' => Auth::user()->id,
-        'type_op' => 'REG',
-        'cle' => $facture->id,
-    ]);
-
-    return response()->json(['redirectUrl' => route('reglements.index')]);
-}
 
 
     public function reglementParFrs($id)
@@ -386,7 +384,6 @@ class ReglementController extends Controller
         return view('pages.reglements.partials.details-reglement', compact('lignes', 'cmd', 'factureFrs', 'reglementFrs'));
     }
 
-
     public function detailValiderReglement($id)
     {
         // Récupérer la facture
@@ -424,6 +421,4 @@ class ReglementController extends Controller
         // Retourner la vue partielle avec les données
         return view('pages.reglements.partials.valider-reglement', compact('lignes', 'cmd', 'factureFrs', 'reglementFrs'));
     }
-
-
 }

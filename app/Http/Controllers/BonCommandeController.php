@@ -33,12 +33,6 @@ class BonCommandeController extends Controller
         ->whereNull('valideur_id')
         ->orderBy('id', 'desc')
         ->get();
-
-
-        // foreach($bons AS $bon){
-        //     print_r($bon->createur->name);
-        // }
-
         $arrayIds = Commande::pluck('bon_commande_id')->toArray();
         return view('pages.achats-module.bon-commandes.index', compact('bons', 'i', 'arrayIds'));
     }
@@ -233,8 +227,6 @@ class BonCommandeController extends Controller
         $bon->valideur_id = Auth::user()->id;
         $bon->save();
         return response()->json(['redirectUrl' => route('bon-commandes.index')]);
-
-        // return redirect()->route('bon-commandes.index')->with('success', 'Bon de commande validé avec succès.');
     }
 
     public function cancelValider($id)
@@ -244,8 +236,6 @@ class BonCommandeController extends Controller
         $bon->valideur_id = null;
         $bon->save();
         return response()->json(['redirectUrl' => route('bon-commandes.index')]);
-
-        // return redirect()->route('bon-commandes.index')->with('success', 'Bon de commande validé avec succès.');
     }
 
     public function generatePDF($id)
