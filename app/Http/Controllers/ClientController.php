@@ -31,14 +31,6 @@ class ClientController extends Controller
      */
     public function index()
     {
-        // $clients = Client::all();
-
-        // $clients = DB::table('clients')
-        //     ->join('departements', 'clients.departement_id', '=', 'departements.id')
-        //     ->join('agents', 'clients.agent_id', '=', 'agents.id')
-        //     ->select('clients.*', 'departements.libelle as department_name', 'agents.nom as agent_name')
-        //     ->get();
-
         $clients = Client::with('departement')->with('agent')->get();
 
 

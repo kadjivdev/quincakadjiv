@@ -16,7 +16,7 @@
                 {{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                     Importer
                 </button> --}}
-                <a href="{{ route('clients.create')}}" class="btn btn-primary float-end"> + Ajouter un client</a>
+                <a href="{{ route('clients.create')}}" class="btn btn-sm bg-dark text_orange float-end"> + Ajouter un client</a>
             </div>
         </div>
     </div><!-- End Page +++ -->
@@ -24,26 +24,26 @@
     <section class="section">
         <div class="row">
             <div class="col-lg-12">
-                @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-                @endif
-                @if (session('success'))
-                <div class="alert alert-success">
-                    {{ session('success') }}
-                </div>
-                @endif
                 <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Liste des clients</h5>
+                    <div class="card-body mt-1">
+                        @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
+                        @if (session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                        @endif
+                        <h5 class="card-title text-dark">Liste des clients</h5>
 
-                        <table id="example" class=" table table-bordered border-warning  table-hover table-warning table-sm">
-                            <thead>
+                        <table id="example" class="table table-bordered border-warning  table-hover table-striped table-sm">
+                            <thead class="table-dark">
                                 <tr>
                                     <th width="2%">N°</th>
                                     <th width="30%">
@@ -71,47 +71,46 @@
 
                                     <td>
                                         <div class="dropdown">
-                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <button class="btn btn-sm bg-dark text_orange w-100 dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                                 <i class="bi bi-gear"></i>
                                             </button>
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
 
                                             <li>
-                                                    <a href="{{route('reglements-clt' , $client->id)}}" data-bs-toggle="tooltip" class="dropdown-item" data-bs-placement="left" data-bs-title="Voir l'historique du compte">Historique du Compte </a>
+                                                    <a href="{{route('reglements-clt' , $client->id)}}" data-bs-toggle="tooltip" class="dropdown-item" data-bs-placement="left" data-bs-title="Voir l'historique du compte"><i class="bi bi-list"></i> Historique du Compte </a>
 
                                                 </li>
 
                                                 <li>
-                                                    <a href="{{route('clients.show', $client->id )}}" data-bs-toggle="tooltip" class="dropdown-item" data-bs-placement="left" data-bs-title="Voir compte client">Détail du Compte </a>
+                                                    <a href="{{route('clients.show', $client->id )}}" data-bs-toggle="tooltip" class="dropdown-item" data-bs-placement="left" data-bs-title="Voir compte client"><i class="bi bi-list"></i> Détail du Compte </a>
 
                                                 </li>
                                                 <li>
-                                                    <a href="{{route('clients.edit', $client->id )}}" data-bs-toggle="tooltip" class="dropdown-item" data-bs-placement="left" data-bs-title="Modifier client"> Modifier le Client </a>
-
-                                                </li>
-
-                                                <li>
-                                                    <a href="{{route('reglements-clt.create', $client->id )}}" class="dropdown-item" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="Enregistrer un règlement"> Enregistrer un Règlement </a>
+                                                    <a href="{{route('clients.edit', $client->id )}}" data-bs-toggle="tooltip" class="dropdown-item" data-bs-placement="left" data-bs-title="Modifier client"><i class="bi bi-pencil"></i> Modifier le Client </a>
 
                                                 </li>
 
                                                 <li>
-                                                    <a href="{{route('real-reglements-clt', $client->id )}}" class="dropdown-item" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="Liste des règlements"> Liste des Règlements </a>
+                                                    <a href="{{route('reglements-clt.create', $client->id )}}" class="dropdown-item" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="Enregistrer un règlement"><i class="bi bi-plus"></i> Enregistrer un Règlement </a>
 
                                                 </li>
 
                                                 <li>
-                                                    <a href="{{route('acompte-create', $client->id )}}" class="dropdown-item" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="Enregistrer un accompte "> Enregistrer un Accompte </a>
+                                                    <a href="{{route('real-reglements-clt', $client->id )}}" class="dropdown-item" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="Liste des règlements"><i class="bi bi-list"></i> Liste des Règlements </a>
 
                                                 </li>
 
                                                 <li>
-                                                    <a href="{{route('acomptes-clt', $client->id )}}" class="dropdown-item" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="Liste des accomptes"> Liste des Accomptes </a>
+                                                    <a href="{{route('acompte-create', $client->id )}}" class="dropdown-item" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="Enregistrer un accompte "><i class="bi bi-plus"></i> Enregistrer un Accompte </a>
+
+                                                </li>
+
+                                                <li>
+                                                    <a href="{{route('acomptes-clt', $client->id )}}" class="dropdown-item" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="Liste des accomptes"><i class="bi bi-list"></i> Liste des Accomptes </a>
 
                                                 </li>
                                             </ul>
                                         </div>
-
                                     </td>
                                 </tr>
                                 @empty

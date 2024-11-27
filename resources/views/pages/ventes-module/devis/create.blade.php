@@ -9,25 +9,25 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="card">
-                        <!-- Afficher des messages de succès -->
-                        @if (session('success'))
-                            <div class="alert alert-success">
-                                {{ session('success') }}
-                            </div>
-                        @endif
-
-                        <!-- Afficher des erreurs de validation -->
-                        @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
-                        <div class="card-body">
-                            <h5 class="card-title">Ajouter un Proforma</h5>
+                        <div class="card-body py-1">
+                            <!-- Afficher des messages de succès -->
+                            @if (session('success'))
+                                <div class="alert alert-success">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
+    
+                            <!-- Afficher des erreurs de validation -->
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+                            <h5 class="card-title text-dark">Ajouter un Proforma</h5>
                             <!-- Vertical Form -->
                             <form class="row g-3" action="{{ route('devis.store') }}" method="POST">
                                 @csrf
@@ -37,7 +37,7 @@
                                         id="client_select"></select>
                                 </div>
 
-                                <div class="col-3">
+                                <div class="col-6">
                                             <label class="form-label">Date</label>
                                             <input type="date" name="date_pf" id="data_pf" class="form-control">
                                         </div>
@@ -75,7 +75,7 @@
 
 
                                         <div class="col-2 py-2">
-                                            <button class="btn btn-primary mt-4" type="button" id="ajouterArticle">
+                                            <button class="btn btn-sm bg-dark text_orange mt-4" type="button" id="ajouterArticle">
                                                 Ajouter</button>
                                         </div>
                                     </div>
@@ -108,11 +108,9 @@
                                 </div>
 
 
-                                <div class="text-center">
-                                    <button type="submit" class="btn btn-primary">Enregistrer</button>
-                                    <div class="loader"></div>
-
-                                    <button type="reset" class="btn btn-secondary">Annuler</button>
+                                <div class="col-lg-12 d-flex flex-row align-items-center justify-content-between">
+                                    <button type="submit" class="btn btn-sm btn-dark text_orange w-100 submitBtn"><i class="bi bi-check-circle"></i> Enregistrer</button>
+                                    <button type="button" class="btn btn-sm btn-dark text_orange w-100 loadingBtn" hidden><span class="spinner-border spinner-border-sm text_orange loading"></span> En cours ...</button>
                                 </div>
                             </form>
                         </div>
@@ -251,7 +249,7 @@
                         <td>${prix} <input type="hidden" required name="prixUnits[]" value="${prix}"</td>
                         <td>${uniteNom} <input type="hidden" required name="unites[]" value="${uniteId}"</td>
                         <td>${total} <input type="hidden" required name="montants[]" value="${total}"</td>
-                        <td><button type="button" class="btn btn-danger btn-sm delete-row">Supprimer</button></td>
+                        <td><button type="button" class="btn bg-dark text_orange btn-sm delete-row"><i class="bi bi-trash3"></i></button></td>
                     </tr>`;
 
                 $('#editableTable tbody').append(newRow);

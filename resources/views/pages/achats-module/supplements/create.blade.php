@@ -10,25 +10,25 @@
                 <div class="col-lg-12">
 
                     <div class="card">
-                        <!-- Afficher des messages de succès -->
-                        @if (session('success'))
-                            <div class="alert alert-success">
-                                {{ session('success') }}
-                            </div>
-                        @endif
-
-                        <!-- Afficher des erreurs de validation -->
-                        @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
-                        <div class="card-body">
-                            <h5 class="card-title">Ajouter un supplément de commande</h5>
+                        <div class="card-body mt-1">
+                            <!-- Afficher des messages de succès -->
+                            @if (session('success'))
+                                <div class="alert alert-success">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
+    
+                            <!-- Afficher des erreurs de validation -->
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+                            <h5 class="card-title text-dark">Ajouter un supplément de commande</h5>
                             @if ($commande)
                                 <!-- Vertical Form -->
                                 <form class="row g-3" action="{{ route('supplement-store') }}" method="POST">
@@ -42,17 +42,15 @@
                                     <div id="dynamic-fields-container">
                                         <!-- Dynamic fields will be added here -->
                                     </div>
-                                    <div class="row col-2">
-                                        <button type="button" id="add-input" class="btn btn-xs btn-primary">+ Article
+
+                                    <span>
+                                        <button type="button" id="add-input" class="btn btn-sm btn-dark text_orange">+ Article
                                         </button>
+                                    </span>
 
-                                    </div>
-
-                                    <div class="text-center">
-                                        <button type="submit" class="btn btn-primary">Enregistrer</button>
-                                        <div class="loader"></div>
-
-                                        <button type="reset" class="btn btn-secondary">Annuler</button>
+                                    <div class="col-lg-12 d-flex flex-row align-items-center justify-content-between">
+                                        <button type="submit" class="btn btn-sm btn-dark text_orange w-100 submitBtn"><i class="bi bi-check-circle"></i> Enregistrer</button>
+                                        <button type="button" class="btn btn-sm btn-dark text_orange w-100 loadingBtn" hidden><span class="spinner-border spinner-border-sm text_orange loading"></span> En cours ...</button>
                                     </div>
                                 </form>
                             @else

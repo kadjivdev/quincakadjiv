@@ -7,7 +7,7 @@
                 <h1 class="float-left">Détails Proforma du {{Carbon\Carbon::parse($item->date_devis)->locale('fr_FR')->isoFormat('ll')}} </h1>
             </div>
             <div class="col-6 justify-content-end">
-                <a href="{{ route('devis.index')}}" class="btn btn-success float-end mx-2"> <i class="bi bi-arrow-left"></i> Retour</a>
+                <a href="{{ route('devis.index')}}" class="btn btn-sm bg-dark text_orange float-end mx-2"> <i class="bi bi-arrow-left"></i> Retour</a>
 
             </div>
         </div>
@@ -17,11 +17,10 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Liste des articles du devis <span class="badge text-bg-success">{{ $item->reference }}</span>
-                                </h5>
+                            <h5 class="card-title text-dark">Liste des articles du devis <span class="badge bg-dark text_orange">{{ $item->reference }}</span></h5>
 
-                            <table id="dataTable" class="table datatable">
-                                <thead>
+                            <table id="example" class="table table-sm table-hover table-bordered border-warning table-sm">
+                                <thead class="table-dark">
                                     <tr>
                                         <th>N°</th>
                                         <th>
@@ -50,10 +49,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                        <h5 class="card-title">Total du Proforma : <b style="font-size:30px; text-align:center; font-weight:bolder; background-color: rgba(13, 255, 97, 0.79);"> <?php echo number_format($total, 2, ',', ' ') ; ?>  </b> FCFA</h5>
-
-
-
+                            <h5 class="card-title">Total du Proforma : <b class="bg-dark text_orange" style="font-size:30px; text-align:center; font-weight:bolder;"> <?php echo number_format($total, 2, ',', ' ') ; ?>  </b> FCFA</h5>
                         </div>
                     </div>
 

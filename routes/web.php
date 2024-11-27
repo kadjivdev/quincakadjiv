@@ -182,7 +182,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/reglement-clt-to-valid', [ReglementClientController::class, 'regByCltToValid'])->name('reglements-clt-to-valid');
 
     // Ajax routes
-
     Route::get('/articles-supl/{id}', [SupplementController::class, 'lignesSup']);
     Route::get('/articles-frs/{id}/{bonId}', [CommandeController::class, 'articlesParFournisseur'])->name('articles-frs');
     Route::get('/unites-list', [BonCommandeController::class, 'listUnites'])->name('unites-list');

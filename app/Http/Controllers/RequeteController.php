@@ -17,7 +17,7 @@ class RequeteController extends Controller
     public function index()
     {
         $requetes = Requete::with('client')->with('articles')->get();
-
+        
         return view('pages.ventes-module.requetes.index', compact(['requetes']));
     }
 
@@ -49,7 +49,7 @@ class RequeteController extends Controller
             'articles.*' => 'exists:articles,id',
             'fichier' => 'nullable|file|mimes:pdf,doc,docx,jpeg,png', // types de fichiers autorisés
         ]);
-        
+
         if ($request->hasFile('fichier')) {
             $filePath = $request->file('fichier')->store('uploads', 'public'); // Stocke le fichier dans le dossier 'uploads'
             $validated['fichier'] = $filePath;
@@ -71,7 +71,7 @@ class RequeteController extends Controller
         ]);
 
 
-        if($request->motif == 'Articles'){
+        if ($request->motif == 'Articles') {
             $requete->articles()->attach($request->articles);
         }
 
@@ -114,7 +114,7 @@ class RequeteController extends Controller
             // 'articles' => 'required|array',
             'articles.*' => 'exists:articles,id',
         ]);
-        
+
 
         $requete->update([
             'num_demande' => $request->num_demande,
@@ -132,7 +132,7 @@ class RequeteController extends Controller
 
         return redirect()->route('requetes.index')->with('success', 'Requête modifiée avec succès');
     }
-    
+
 
     /**
      * Remove the specified resource from storage.
@@ -146,12 +146,13 @@ class RequeteController extends Controller
         return redirect()->route('requetes.index')->with('success', 'Requête supprimée avec succès');
     }
 
-    public function validateRequete($id) {
+    public function validateRequete($id)
+    {
         $requete = Requete::findOrFail($id);
 
         $requete->update([
             'validator' => Auth::user()->id,
-            'validate_at' =>now()
+            'validate_at' => now()
         ]);
 
         CompteClient::create([
@@ -159,7 +160,7 @@ class RequeteController extends Controller
             'montant_op' =>  $requete->montant,
             'facture_id' => null,
             'client_id' => $requete->client_id,
-            'user_id'=> Auth::user()->id,
+            'user_id' => Auth::user()->id,
             'type_op' => 'REQ',
             'cle' => $requete->id,
         ]);

@@ -9,7 +9,7 @@
             <div class="col-6 justify-content-end">
                 @can('proforma.ajouter-facture-devis')
                     <div class="">
-                        <a href="{{ route('factures.create') }}" class="btn btn-primary float-end"> + Ajouter une facture</a>
+                        <a href="{{ route('factures.create') }}" class="btn btn-sm bg-dark text_orange float-end"> + Ajouter une facture</a>
                     </div>
                 @endcan
             </div>
@@ -18,27 +18,27 @@
         <section class="section">
             <div class="row">
                 <div class="col-lg-12">
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-                    @if (session('success'))
-                        <div class="alert alert-success">
-                            {{ session('success') }}
-                        </div>
-                    @endif
                     <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Liste des factures</h5>
+                        <div class="card-body py-1">
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+                            @if (session('success'))
+                                <div class="alert alert-success">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
+                            <h5 class="card-title text-dark">Liste des factures</h5>
 
                             <table id="example"
-                                class=" table table-bordered border-warning  table-hover table-warning table-sm">
-                                <thead>
+                                class=" table table-bordered border-warning  table-hover table-striped table-sm">
+                                <thead class="table-dark">
                                     <tr>
                                         <th>N°</th>
                                         <th>
@@ -72,7 +72,7 @@
                                             <td>
 
                                                 <div class="dropdown">
-                                                    <button class="btn btn-secondary dropdown-toggle" type="button"
+                                                    <button class="btn btn-sm bg-dark text_orange w-100 dropdown-toggle" type="button"
                                                         id="dropdownMenuButton1" data-bs-toggle="dropdown"
                                                         aria-expanded="false">
                                                         <i class="bi bi-gear"></i>
@@ -84,7 +84,7 @@
                                                                 <a href="{{ route('facture-pdf', $item->id) }}"
                                                                     class="dropdown-item" data-bs-toggle="tooltip"
                                                                     data-bs-placement="left" data-bs-title="Générer la facture">
-                                                                    Télécharger la Facture </a>
+                                                                    <i class="bi bi-file-earmark-pdf"></i> Télécharger la Facture </a>
                                                             @endcan
 
                                                         </li>
@@ -92,7 +92,7 @@
                                                             <a href="{{ route('factures.show', $item->id) }}"
                                                                 class="dropdown-item" data-bs-toggle="tooltip"
                                                                 data-bs-placement="left" data-bs-title="Détail de la facture">
-                                                                Validation </a>
+                                                                <i class="bi bi-check-circle"></i> Validation </a>
                                                         </li>
 
                                                         @if (is_null($item->validate_at))
@@ -108,7 +108,7 @@
                                                             </li> --}}
 
                                                             <li>
-                                                                <a href="{{route('factures.edit', $item->id )}}"  data-bs-toggle="tooltip" class="dropdown-item" data-bs-placement="left" data-bs-title="Modifier facture">Modifier </a>
+                                                                <a href="{{route('factures.edit', $item->id )}}"  data-bs-toggle="tooltip" class="dropdown-item" data-bs-placement="left" data-bs-title="Modifier facture"><i class="bi bi-pencil"></i> Modifier </a>
                                                             </li>
 
                                                             <li>
@@ -117,8 +117,7 @@
                                                                     @csrf
                                                                     @method('DELETE')
                                                                     <button type="submit" class="dropdown-item"
-                                                                        onclick="return confirm('Voulez vous vraiment valider cette facture? Cette opération est irréversible')">Supprimer
-                                                                        la Facture</button>
+                                                                        onclick="return confirm('Voulez vous vraiment valider cette facture? Cette opération est irréversible')"><i class="bi bi-trash3"></i> Supprimer la Facture</button>
                                                                 </form>
                                                             </li>                                                        
                                                         @endif

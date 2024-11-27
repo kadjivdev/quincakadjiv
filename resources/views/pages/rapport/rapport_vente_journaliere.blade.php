@@ -1,12 +1,10 @@
 @extends('layout.template')
 @section('content')
     <main id="main" class="main">
-
         <div class="pagetitle d-flex">
             <div class="col-6">
                 <h1 class="float-left">Ventes Journalière</h1>
             </div>
-
         </div>
 
         <section class="section">
@@ -18,9 +16,8 @@
                             <input type="date" class="form-control" name="date_facture" id="date_facture" value="{{ request('date_facture') }}">
                         </div>
 
-
-                        <div class="col-1 mt-4">
-                            <button type="submit" class="btn btn-primary">Valider</button>
+                        <div class="col-4 mt-4">
+                            <button type="submit" class="btn btn-sm bg-dark text_orange w-100"><i class="bi bi-check-circle"></i> Valider</button>
                         </div>
                     </div>
                 </form>
@@ -29,12 +26,12 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Liste des ventes</h5>
+                            <h5 class="card-title text-dark">Liste des ventes</h5>
 
                             <!-- Table with stripped rows -->
                             <table id="example"
-                                class=" table table-bordered border-warning  table-hover table-warning table-sm">
-                                <thead>
+                                class=" table table-bordered border-warning  table-hover table-striped table-sm">
+                                <thead class="table-dark">
                                     <tr>
                                         <th>N°</th>
                                         <th>Date Ecriture</th>
@@ -69,7 +66,7 @@
                                             <td>{{ number_format($facture->montant_total , 2, ',', ' ')}} </td>
                                             <td>
                                                 @can('ventes.voir-vente')
-                                                    <a href="{{ route('rapport_vente_journaliere_detail', ['facture' => $facture->id, 'vente_id' => $vente_id]) }}" class="btn btn-primary"
+                                                    <a href="{{ route('rapport_vente_journaliere_detail', ['facture' => $facture->id, 'vente_id' => $vente_id]) }}" class="btn btn-sm bg-dark text_orange"
                                                         data-bs-toggle="tooltip" data-bs-placement="top"
                                                         data-bs-title="Voir détails"> <i class="bi bi-eye"></i> </a>
                                                 </td>
@@ -85,25 +82,19 @@
                     </div>
 
                     <div class="row" style="display: flex; flex-direction: row; justify-content: space-between">
-                        <div class="col-6" style="display: flex; flex-direction: column; justify-content: center; align-items: flex-start">
-                            <h3 style="text-decoration: underline"> Total Vente Comptant </h3>
-                            <h1> <span style="color: darkgoldenrod; font-weight: bolder">{{ number_format($total_comptant, 2, ',', ' ') }} <small>FCFA</small></span></h1>
-
+                        <div class="col-4 text-center" style="display: flex; flex-direction: column; justify-content: center;">
+                            <h5> Total Vente Comptant </h5>
+                            <h6> <span class="badge bg-dark text_orange">{{ number_format($total_comptant, 2, ',', ' ') }} <small>FCFA</small></span></h6>
                         </div>
 
-                        <div class="col-6" style="display: flex; flex-direction: column; justify-content: center; align-items: flex-end">
-                            <h3 style="text-decoration: underline"> Total Vente à Crédit </h3>
-                            <h1> <span style="color: darkgoldenrod; font-weight: bolder">{{ number_format($total_proforma , 2, ',', ' ')}} <small>FCFA</small></span></h1>
-
+                        <div class="col-4 text-center" style="display: flex; flex-direction: column; justify-content: center;">
+                            <h5> Total Globale </h5>
+                            <h6> <span class="badge bg-dark text_orange">{{ number_format($total_comptant + $total_proforma, 2, ',', ' ') }} <small>FCFA</small></span></h6>
                         </div>
 
-                </div>
-
-                <div class="row">
-                        <div class="col-12" style="display: flex; flex-direction: column; justify-content: center; align-items: center">
-                            <h3 style="text-decoration: underline"> Total Global </h3>
-                            <h1> <span style="color: darkgoldenrod; font-weight: bolder">{{ number_format($total_comptant + $total_proforma, 2, ',', ' ') }} <small>FCFA</small></span></h1>
-
+                        <div class="col-4 text-center" style="display: flex; flex-direction: column; justify-content: center;">
+                            <h5> Total Vente à Crédit </h5>
+                            <h6> <span class="badge bg-dark text_orange">{{ number_format($total_proforma, 2, ',', ' ') }} <small>FCFA</small></span></h6>
                         </div>
                 </div>
             </div>

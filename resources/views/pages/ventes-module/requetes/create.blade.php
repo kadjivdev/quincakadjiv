@@ -11,25 +11,25 @@
                 <div class="col-lg-12">
 
                     <div class="card px-4">
-                        <!-- Afficher des messages de succès -->
-                        @if (session('success'))
-                            <div class="alert alert-success">
-                                {{ session('success') }}
-                            </div>
-                        @endif
-
-                        <!-- Afficher des erreurs de validation -->
-                        @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
-                        <div class="card-body">
-                            <h5 class="card-title">Ajouter une requête</h5>
+                        <div class="card-body py-1">
+                            <!-- Afficher des messages de succès -->
+                            @if (session('success'))
+                                <div class="alert alert-success">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
+    
+                            <!-- Afficher des erreurs de validation -->
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+                            <h5 class="card-title text-dark">Ajouter une requête</h5>
 
                             <!-- Vertical Form -->
                             <form class="row px-3" action="{{ route('requetes.store') }}" method="POST" enctype="multipart/form-data">
@@ -97,18 +97,20 @@
                                     </select>
                                 </div>
 
-                                <div class="col-12 mb-3" id="autre_motif_div" style="display: none">
-                                    <label for="autre_motif">Contenu du motif</label>
-                                    <textarea class="form-control" name="autre_motif" id="autre_motif">{{ old('autre_motif') }}</textarea>
+                                <div class="row">
+                                    <div class="col-6 mb-3" id="autre_motif_div" style="display: none">
+                                        <label for="autre_motif">Contenu du motif</label>
+                                        <textarea class="form-control" name="autre_motif" id="autre_motif">{{ old('autre_motif') }}</textarea>
+                                    </div>
+                                    <div class="col-6">
+                                        <input type="file" class="form-control my-2" name="fichier">
+                                    </div>
                                 </div>
 
-                                <input type="file" name="fichier">
                                 
-                                <div class="text-center">
-                                    <button type="submit" class="btn btn-primary">Enregistrer</button>
-                                    <div class="loader"></div>
-
-                                    <button type="reset" class="btn btn-secondary">Annuler</button>
+                                <div class="col-lg-12 d-flex flex-row align-items-center justify-content-between">
+                                    <button type="submit" class="btn btn-sm btn-dark text_orange w-100 submitBtn"><i class="bi bi-check-circle" id="ajouterArticle"></i> Enregistrer</button>
+                                    <button type="button" class="btn btn-sm btn-dark text_orange w-100 loadingBtn" hidden><span class="spinner-border spinner-border-sm text_orange loading"></span> En cours ...</button>
                                 </div>
                             </form>
 

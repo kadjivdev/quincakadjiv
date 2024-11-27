@@ -10,29 +10,28 @@
     <section class="section">
         <div class="row">
             <div class="col-lg-12">
-                @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-                @endif
-                @if (session('success'))
-                <div class="alert alert-success">
-                    {{ session('success') }}
-                </div>
-                @endif
                 <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Liste des acomptes</h5>
+                    <div class="card-body pt-1">
+                        @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
+                        @if (session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                        @endif
+                        <h5 class="card-title text-dark">Liste des acomptes</h5>
 
-                        <table id="example" class=" table table-bordered border-warning  table-hover table-warning table-sm">
-                            <thead>
+                        <table id="example" class=" table table-bordered border-warning  table-hover table-striped table-sm">
+                            <thead class="table-dark">
                                 <tr>
                                     <th>N°</th>
-
                                     <th>Date acompte</th>
 
                                     <th>Référence</th>
@@ -66,22 +65,22 @@
                                     <td><strong class="{{$class}}">{{ $statut }}</strong></td>
                                     <td>
                                         <div class="dropdown">
-                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <button class="btn btn-sm bg-dark text_orange dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                                 <i class="bi bi-gear"></i>
                                             </button>
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                                 @if (!$acompte->validated_at)
                                                     <li>
-                                                        <a href="{{route('validate-accompte' , $acompte->id)}}" data-bs-toggle="tooltip" class="dropdown-item" data-bs-placement="left" data-bs-title="Valider l'accompte">Valider </a>
+                                                        <a href="{{route('validate-accompte' , $acompte->id)}}" data-bs-toggle="tooltip" class="dropdown-item" data-bs-placement="left" data-bs-title="Valider l'accompte"><i class="bi bi-check-circle"></i> Valider </a>
                                                     </li>  
                                                     <li>
-                                                        <a href="{{route('update-accompte' , $acompte->id)}}" data-bs-toggle="tooltip" class="dropdown-item" data-bs-placement="left" data-bs-title="Modifier l'accompte">Modifier </a>
+                                                        <a href="{{route('update-accompte' , $acompte->id)}}" data-bs-toggle="tooltip" class="dropdown-item" data-bs-placement="left" data-bs-title="Modifier l'accompte"><i class="bi bi-pencil"></i> Modifier </a>
                                                     </li>
                                                     <li>
                                                         <form action="{{ route('delete-accompte', $acompte->id) }}" method="POST" class="col-3">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <button type="submit"  class="dropdown-item" data-bs-placement="left" data-bs-toggle="tooltip" onclick="return confirm('Êtes-vous sûr de vouloir supprimer l\'accompte ?')" data-bs-title="Supprimer l'accompte">Supprimer</button>
+                                                            <button type="submit"  class="dropdown-item" data-bs-placement="left" data-bs-toggle="tooltip" onclick="return confirm('Êtes-vous sûr de vouloir supprimer l\'accompte ?')" data-bs-title="Supprimer l'accompte"><i class="bi bi-trash3"></i> Supprimer</button>
                                                         </form>
                                                     </li>                                                  
                                                 @endif

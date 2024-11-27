@@ -15,11 +15,11 @@
 
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Liste des approvisionnements</h5>
+                            <h5 class="card-title text-dark">Liste des approvisionnements</h5>
 
                             <!-- Table with stripped rows -->
-                            <table class="table datatable" >
-                                <thead>
+                            <table id="example" class="table border-warning table-hover table-sm table-striped" >
+                                <thead class="table-dark">
                                     <tr>
                                         <th>N°</th>
                                         <th>Date</th>
@@ -28,7 +28,6 @@
                                         <th>Chauffeur</th>
                                         <th>Véhicule</th>
                                         <th>Actions</th>
-
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -46,14 +45,12 @@
         <td>
             @can('livraisons.modifier-appro')
                 <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button class="btn btn-sm w-100 bg-dark text_orange dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="bi bi-gear"></i>
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li>
-                            <a href="{{route('annulation-approvisionnement.show', $liv->id)  }}" class="btn btn-primary"
-                                data-bs-toggle="tooltip" data-bs-placement="top"
-                                data-bs-title="Voir détails"> Détails du Bon </a>
+                        <li class="">
+                            <a href="{{route('annulation-approvisionnement.show', $liv->id)  }}" class="btn btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Voir détails"><i class="bi bi-list"></i> Détails du Bon </a>
                         </li>
                         <li>
                             <form
@@ -63,7 +60,7 @@
                                 @method('DELETE')
                                 <button type="submit" class="dropdown-item"
                                     data-bs-toggle="tooltip" data-bs-placement="left"
-                                    data-bs-title="Supprimer">Supprimer la livraison</button>
+                                    data-bs-title="Supprimer"><i class="bi bi-trash3"></i> Supprimer la livraison</button>
                             </form>
                         </li>
                     </ul>

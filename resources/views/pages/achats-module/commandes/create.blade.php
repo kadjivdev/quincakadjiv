@@ -51,7 +51,7 @@
 
                                     <div class="col-4">
                                         <label class="form-label">Choisir une programmation</label>
-                                        <select class="form-control" required name="bon_id" id="bonSelect">
+                                        <select class="js-example-basic-single form-control" required name="bon_id" id="bonSelect">
                                             <option value="">Sélectionner une program... </option>
 
                                             @foreach ($bons as $bon)
@@ -71,19 +71,16 @@
 
                                     <div class="col-4">
                                         <label class="form-label">Type de facture</label>
-                                        <select class="form-control" required name="type_id" id="typeSelect">
+                                        <select class="js-example-basic-single form-control" required name="type_id" id="typeSelect">
                                             @foreach ($types as $type)
                                                 <option value="{{ $type->id }}"> {{ $type->libelle }} </option>
                                             @endforeach
                                         </select>
                                     </div>
 
-                                    <div class="row mt-4">
-
                                     <div class="col-4">
                                         <label class="form-label">Coût du Transport</label>
                                         <input type="number" step="0.0001" class="form-control" required name="transport" id="transport">
-
                                     </div>
 
                                     <div class="col-4">

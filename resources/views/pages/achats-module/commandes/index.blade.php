@@ -26,7 +26,7 @@
 
                     @can('fournisseurs.ajouter-fournisseur')
                         <a href="{{ route('commandes.create') }}" class="btn btn-dark float-end petit_bouton"> <i
-                                class="bi bi-plus-circle"></i> Ajouter une Bon</a>
+                                class="bi bi-plus-circle"></i> Ajouter un Bon</a>
                     @endcan
 
             </div>
@@ -109,14 +109,14 @@
                                                                 <a href="{{ route('commandes.show', $commande->id) }}"
                                                                     data-bs-toggle="tooltip" data-bs-placement="left"
                                                                     data-bs-title="Voir les détails du bon"
-                                                                    class="dropdown-item"> Voir détail </a>
+                                                                    class="dropdown-item"><i class="bi bi-eye"></i> Voir détail </a>
                                                             </li>
                                                             <li>
                                                                 <a target="_blank"
                                                                     href="{{ url('generate_bon_cde', $commande->id) }}"
                                                                     class="dropdown-item" data-bs-toggle="tooltip"
                                                                     data-bs-placement="left"
-                                                                    data-bs-title="Générer le pdf à imprimer"> Générer PDF </a>
+                                                                    data-bs-title="Générer le pdf à imprimer"><i class="bi bi-file-earmark-pdf"></i> Générer PDF </a>
                                                             </li>
                                                         @endcan
 
@@ -124,7 +124,7 @@
                                                             @if (is_null($commande->validated_at))
                                                                 <li>
                                                                     <a href="{{ route('commandes.edit', $commande->id) }}"
-                                                                        class="dropdown-item text-warning"> Modifier la
+                                                                        class="dropdown-item text-dark"><i class="bi bi-pencil"></i> Modifier la
                                                                         Commande</a>
                                                                 </li>
                                                             @endif
@@ -137,9 +137,9 @@
                                                                         onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette commande?');">
                                                                         @csrf
                                                                         @method('DELETE')
-                                                                        <button type="submit" class="dropdown-item text-danger"
+                                                                        <button type="submit" class="dropdown-item text-dark"
                                                                             data-bs-toggle="tooltip" data-bs-placement="left"
-                                                                            data-bs-title="Supprimer le bon ">Supprimer la
+                                                                            data-bs-title="Supprimer le bon "><i class="bi bi-trash3"></i> Supprimer la
                                                                             Commande</button>
                                                                     </form>
                                                                 </li>

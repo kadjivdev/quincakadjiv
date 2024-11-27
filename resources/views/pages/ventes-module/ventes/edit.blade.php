@@ -9,25 +9,25 @@
     <section class="section">
         <div class="row">
             <div class="col-lg-12">
-                @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-                @endif
-                @if (session('success'))
-                <div class="alert alert-success">
-                    {{ session('success') }}
-                </div>
-                @endif
                 <div class="card">
-                    <div class="card-body">
+                    <div class="card-body py-1">
+                        @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
+                        @if (session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                        @endif
                         <div class="row">
                             <div class="col-6">
-                                <h5 class="card-title">Enregistrer une vente</h5>
+                                <h5 class="card-title text-dark">Enregistrer une vente</h5>
                             </div>
                         </div>
                         <form class="row g-3" action="{{ route('ventes.update', $vente->id) }}" method="POST">
@@ -96,10 +96,11 @@
                                         <option value="">Choisir l'unité </option>
                                     </select>
                                 </div>
+                                
 
                                 <div class="col-2 py-2">
-                                    <button class="btn btn-primary mt-4" type="button" id="ajouterArticle">
-                                        Ajouter</button>
+                                    <button class="btn btn-sm bg-dark text_orange mt-4" type="button" >
+                                       + Ajouter</button>
                                 </div>
                             </div>
 
@@ -129,50 +130,50 @@
                                                 <td>{{$ligne->prix_unit}} <input type="hidden" required name="prixUnits[]" value="{{ $ligne->prix_unit }}"></td>
                                                 <td>{{$ligne->unite}} <input type="hidden" required name="unites[]" value="{{ $ligne->unite_mesure_id }}"></td>
                                                 <td>{{$ligne->prix_unit * $ligne->qte_cmde}} <input type="hidden" required name="montants[]" value="{{$ligne->prix_unit * $ligne->qte_cmde}}"></td>
-                                                <td><button type="button" class="btn btn-danger btn-sm delete-row">Supprimer</button></td>
+                                                <td><button type="button" class="btn bg-dark text-dark text_orange btn-sm delete-row"><i class="bi bi-trash3"></i></button></td>
                                             </tr>
                                         @endforeach
                                     </tbody>
                                     <tfoot>
                                         <tr>
                                             <td colspan="2">Montant HT</td>
-                                            <td colspan="3" style="background-color: rgba(233, 138, 10, 0.89);"><input type="text" id="totalInput" class="form-control" name="montant_facture" readonly>
+                                            <td colspan="3" class="bg-secondary"><input type="text" id="totalInput" class="form-control" name="montant_facture" readonly>
                                             </td>
                                         </tr>
                                         <tr id="rowRem">
                                             <td colspan="2">Taux remise</td>
-                                            <td colspan="3" style="background-color: rgba(245, 39, 54, 0.8);"><input type="text" id="tauxRemise" class="form-control" name="taux_remise">
+                                            <td colspan="3" class="bg-secondary"><input type="text" id="tauxRemise" class="form-control" name="taux_remise">
                                             </td>
                                         </tr>
                                         <tr id="rowAib" style="background-color: red !important;">
                                             <td colspan="2">Taux AIB (%)</td>
-                                            <td colspan="3" style="background-color: rgba(114, 93, 228, 0.89);"><input type="text" id="aib" value="{{ old('aib') }}" class="form-control" name="aib">
+                                            <td colspan="3" class="bg-secondary"><input type="text" id="aib" value="{{ old('aib') }}" class="form-control" name="aib">
                                                 <input type="text" id="montant_aib" class="form-control" readonly>
                                             </td>
                                         </tr>
                                         <tr id="rowTva">
                                             <td colspan="2">TVA(%)</td>
-                                            <td colspan="3" style="background-color: rgba(150, 150, 150, 0.89);"><input type="number" id="tva" min="0" max="18" value="{{ old('tva') }}" class="form-control" name="tva">
+                                            <td colspan="3" class="bg-secondary"><input type="number" id="tva" min="0" max="18" value="{{ old('tva') }}" class="form-control" name="tva">
                                                 <input type="text" id="montant_tva" class="form-control" readonly>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td colspan="2">Montant total</td>
-                                            <td colspan="3" style="background-color: rgba(233, 138, 10, 0.89);"><input type="text" id="totalNet" class="form-control" name="montant_total" readonly>
+                                            <td colspan="3" class="bg-secondary"><input type="text" id="totalNet" class="form-control" name="montant_total" readonly>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td colspan="2">Montant payer</td>
-                                            <td colspan="3" style="background-color: rgba(32, 214, 4, 0.89);"><input type="number" id="montant_regle" class="form-control" name="montant_regle" required>
+                                            <td colspan="3" class="bg-secondary"><input type="number" id="montant_regle" class="form-control" name="montant_regle" required>
                                             </td>
                                         </tr>
                                     </tfoot>
                                 </table>
                             </div>
 
-                            <div class="text-center">
-                                <button type="submit" class="btn btn-primary">Modifier</button>
-                                <button type="reset" class="btn btn-secondary">Annuler</button>
+                            <div class="col-lg-12 d-flex flex-row align-items-center justify-content-between">
+                                <button type="submit" class="btn btn-sm btn-dark text_orange w-100 submitBtn"><i class="bi bi-check-circle" id="ajouterArticle"></i> Enregistrer</button>
+                                <button type="button" class="btn btn-sm btn-dark text_orange w-100 loadingBtn" hidden><span class="spinner-border spinner-border-sm text_orange loading"></span> En cours ...</button>
                             </div>
                         </form>
                     </div>

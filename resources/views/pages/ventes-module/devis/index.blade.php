@@ -9,7 +9,7 @@
             <div class="col-6 justify-content-end">
                 @can('proforma.ajouter-devis')
                     <div class="">
-                        <a href="{{ route('devis.create') }}" class="btn btn-primary float-end"> + Ajouter un proforma</a>
+                        <a href="{{ route('devis.create') }}" class="btn btn-sm bg-dark text_orange float-end"> + Ajouter un proforma</a>
                     </div>
                 @endcan
             </div>
@@ -18,27 +18,27 @@
         <section class="section">
             <div class="row">
                 <div class="col-lg-12">
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-                    @if (session('success'))
-                        <div class="alert alert-success">
-                            {{ session('success') }}
-                        </div>
-                    @endif
                     <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Liste des Proformas</h5>
+                        <div class="card-body pt-1">
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+                            @if (session('success'))
+                                <div class="alert alert-success">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
+                            <h5 class="card-title text-dark">Liste des Proformas</h5>
 
                             <table id="example"
-                                class=" table table-bordered border-warning  table-hover table-warning table-sm">
-                                <thead>
+                                class=" table table-bordered border-warning  table-hover table-striped table-sm">
+                                <thead class="table-dark">
                                     <tr>
                                         <th>N°</th>
                                         <th>
@@ -67,26 +67,26 @@
                                                 @can('proforma.detail-devis')
 
                                                 <div class="dropdown">
-                                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <button class="btn btn-sm bg-dark text_orange w-100 dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                                         <i class="bi bi-gear"></i>
                                                     </button>
                                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                                         <li>
                                                             <a href="{{ route('devis.show', $item->id) }}" class="dropdown-item"
                                                                 data-bs-toggle="tooltip" data-bs-placement="left"
-                                                                data-bs-title="Voir détails"> Détails du ProForma </a>
+                                                                data-bs-title="Voir détails"><i class="bi bi-list"></i> Détails du ProForma </a>
                                                         </li>
 
                                                         <li>
                                                             <a href="{{ route('devis.edit', $item->id) }}" class="dropdown-item"
                                                                 data-bs-toggle="tooltip" data-bs-placement="left"
-                                                                data-bs-title="Modifier le ProForma"> Modifier </a>
+                                                                data-bs-title="Modifier le ProForma"><i class="bi bi-pencil"></i> Modifier </a>
                                                         </li>
 
                                                         <li>
                                                             <a href="{{ url('generate-proforma', $item->id) }}" class="dropdown-item"
                                                                 data-bs-toggle="tooltip" data-bs-placement="left"
-                                                                data-bs-title="Voir détails"> Générer la ProForma </a>
+                                                                data-bs-title="Voir détails"><i class="bi bi-file-earmark-pdf"></i> Générer la ProForma </a>
                                                         </li>
 
                                                         <li>
@@ -98,7 +98,7 @@
                                                                 @method('DELETE')
                                                                 <button type="submit" class="dropdown-item"
                                                                     data-bs-toggle="tooltip" data-bs-placement="left"
-                                                                    data-bs-title="Supprimer">Supprimer la ProForma</button>
+                                                                    data-bs-title="Supprimer"><i class="bi bi-trash3"></i> Supprimer la ProForma</button>
                                                             </form>
                                                         </li>
                                                     </ul>

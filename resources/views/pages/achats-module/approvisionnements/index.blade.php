@@ -10,13 +10,11 @@
 
                 @can('livraisons.ajouter-livraison-frs')
                 <div class="">
-                    <a href="{{ route('annulation-approvisionnement.index') }}" class="btn btn-primary float-end"> Demande d'annulation</a>
+                    <a href="{{ route('annulation-approvisionnement.index') }}" class="btn btn-sm text_orange btn-dark float-end"><i class="bi bi-arrow-clockwise"></i> Demande d'annulation</a>
                 </div>
-
-
-                    <div class="">
-                        <a href="{{ route('livraisons.create') }}" class="btn btn-primary float-end"> + Nouvelle livraison</a>
-                    </div>
+                <div class="">
+                    <a href="{{ route('livraisons.create') }}" class="mx-1 btn btn-sm btn-dark text_orange float-end"> + Nouvelle livraison</a>
+                </div>
                 @endcan
             </div>
         </div>
@@ -24,32 +22,32 @@
         <section class="section">
             <div class="row">
                 <div class="col-lg-12">
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-                    @if (session('success'))
-                        <div class="alert alert-success">
-                            {{ session('success') }}
-                        </div>
-                    @endif
-                    @if (session('error'))
-                        <div class="alert alert-danger">
-                            {{ session('error') }}
-                        </div>
-                    @endif
                     <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Liste des approvisionnements</h5>
+                        <div class="card-body mt-1">
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+                            @if (session('success'))
+                                <div class="alert alert-success">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
+                            @if (session('error'))
+                                <div class="alert alert-danger">
+                                    {{ session('error') }}
+                                </div>
+                            @endif
+                            <h5 class="card-title text-dark">Liste des approvisionnements</h5>
 
                             <!-- Table with stripped rows -->
-                            <table class="table datatable">
-                                <thead>
+                            <table id="example" class="table table-bordered border-warning table-striped table-hover table-sm">
+                                <thead class="bg-dark">
                                     <tr>
                                         <th>N°</th>
                                         <th>Réf Commande</th>
@@ -59,7 +57,6 @@
                                         {{-- <th>Prix unitaire</th> --}}
                                         <th>Lieu livraison </th>
                                         <th>Action </th>
-
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -80,12 +77,12 @@
                                                 @can('livraisons.modifier-appro')
                                                     @if (is_null($appro->validated_at))
                                                         <div class="dropdown">
-                                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                                            <button class="btn btn-dark w-100 text_orange btn-sm dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                                                 <i class="bi bi-gear"></i>
                                                             </button>
                                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                                                 <li>
-                                                                    <a data-bs-target="#staticBackdrop{{ $appro->id }}" data-bs-toggle="modal" class="dropdown-item" data-bs-placement="left" data-bs-title="Valider la livraison">Valider la livraison </a>
+                                                                    <a data-bs-target="#staticBackdrop{{ $appro->id }}" data-bs-toggle="modal" class="dropdown-item btn" data-bs-placement="left" data-bs-title="Valider la livraison"><i class="bi bi-check-circle"></i> Valider la livraison </a>
                                                                 </li>
                                                                 <li>
                                                                     <form action="{{ route('livraisons.destroy', $appro->id) }}"
@@ -95,7 +92,7 @@
                                                                         @method('DELETE')
                                                                         <button type="submit" class="dropdown-item"
                                                                             data-bs-toggle="tooltip" data-bs-placement="left"
-                                                                            data-bs-title="Supprimer">Supprimer la livraison</button>
+                                                                            data-bs-title="Supprimer"><i class="bi bi-trash3"></i> Supprimer la livraison</button>
                                                                     </form>
                                                                 </li>
                                                             </ul>
@@ -103,8 +100,6 @@
                                                     @endif
                                                 @endcan
                                             </td>
-
-
                                         </tr>
 
                                         @include('pages.achats-module.approvisionnements.edit')

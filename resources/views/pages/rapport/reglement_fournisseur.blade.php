@@ -11,24 +11,24 @@
         <section class="section">
             <div class="row">
                 <div class="col-lg-12">
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-                    @if (session('success'))
-                        <div class="alert alert-success">
-                            {{ session('success') }}
-                        </div>
-                    @endif
-
+                    
                     <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Filtre</h5>
+                        <div class="card-body py-1">
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+                            @if (session('success'))
+                                <div class="alert alert-success">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
+                            <h5 class="card-title text-dark"><i class="bi bi-filter-circle"></i> Filtre</h5>
                             
                             <form class="row g-3" method="GET" action="{{ route('rap_reg_frs') }}">
                                 <div class="col-3 mb-3">
@@ -52,7 +52,7 @@
                                 </div>
 
                                 <div class="text-center col-1 mt-5">
-                                    <button type="submit" class="btn btn-primary ">Filtrer</button>
+                                    <button type="submit" class="btn btn-sm bg-dark text_orange ">Filtrer</button>
                                 </div>
                             </form>
 
@@ -61,11 +61,11 @@
 
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Liste des règlements</h5>
+                            <h5 class="card-title text-dark">Liste des règlements</h5>
 
                             <table id="example"
-                                class=" table table-bordered border-warning  table-hover table-warning table-sm">
-                                <thead>
+                                class=" table table-bordered border-warning  table-hover table-striped table-sm">
+                                <thead class="table-dark">
                                     <tr>
                                         <th>N°</th>
                                         <th>
@@ -94,7 +94,7 @@
                                                 @if (is_null($reglement->validated_at))
                                                     @can('fournisseurs.modifier-reglement-frs')
                                                         <a href="{{ route('reglements.edit', $reglement->id) }}"
-                                                            class="btn btn-success" data-bs-toggle="tooltip"
+                                                            class="btn btn-sm bg-dark text_orange" data-bs-toggle="tooltip"
                                                             data-bs-placement="top" data-bs-title="Modifier reglement"> <i
                                                                 class="bi bi-pencil"></i> </a>
                                                     @endcan

@@ -27,8 +27,6 @@ class BonCommandeController extends Controller
     public function index()
     {
         $i = 1;
-        // $users = Auth::user()->boutique()->users->pluck('id');
-        // dd($users);
         $bons = BonCommande::with('createur')
         ->whereNull('valideur_id')
         ->orderBy('id', 'desc')

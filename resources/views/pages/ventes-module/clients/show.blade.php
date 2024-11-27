@@ -40,7 +40,7 @@
             <h1 class="float-left">Compte du client {{ $client->nom_client }} </h1>
         </div>
         <div class="col-4 mb-3">
-            <button type="button" class="btn btn-primary float-end mt-3" id="confirmationbtn" data-bs-toggle="modal" data-bs-target="#clientListModal">
+            <button type="button" class="btn btn-sm bg-dark text_orange float-end mt-3" id="confirmationbtn" data-bs-toggle="modal" data-bs-target="#clientListModal">
                 Tout les clients
             </button>
         </div>
@@ -74,9 +74,9 @@
     </div>
 
     <div class="row">
-        <h5> Rapports des Factures Simples</h5>
+        <h5 class="text-dark"> Rapports des Factures Simples</h5>
         <div class="col-4">
-            <div class="card border border-primary" style="width: 18rem;">
+            <div class="card border_orange shadow shadow-lg" style="width: 18rem;">
                 <div class="card-body">
                     <h5 class="card-title ">{{ number_format($total_du, 2, ',', ' ') }} </h5>
                     <h6 class="card-subtitle mb-2 text-body-secondary">Montant total</h6>
@@ -85,7 +85,7 @@
         </div>
 
         <div class="col-4">
-            <div class="card border border-warning" style="width: 18rem;">
+            <div class="card border_orange shadow shadow-lg" style="width: 18rem;">
                 <div class="card-body">
                     <h5 class="card-title">{{ number_format($total_solde, 2, ',', ' ') }} </h5>
                     <h6 class="card-subtitle mb-2 text-body-secondary">Montant total règlement</h6>
@@ -94,7 +94,7 @@
         </div>
 
         <div class="col-4">
-            <div class="card border border-danger" style="width: 18rem;">
+            <div class="card border_orange shadow shadow-lg" style="width: 18rem;">
                 <div class="card-body">
                     <h5 class="card-title text-danger">{{ number_format($total_restant, 2, ',', ' ') }} </h5>
                     <h6 class="card-subtitle mb-2 text-body-secondary">Montant restant</h6>
@@ -105,9 +105,9 @@
     </div>
 
     <div class="row">
-        <h5> Rapports des Factures Normalisées</h5>
+        <h5 class="text-dark"> Rapports des Factures Normalisées</h5>
         <div class="col-4">
-            <div class="card border border-primary" style="width: 18rem;">
+            <div class="card border_orange shadow shadow-lg" style="width: 18rem;">
                 <div class="card-body">
                     <h5 class="card-title ">{{ number_format($total_du1, 2, ',', ' ') }} </h5>
                     <h6 class="card-subtitle mb-2 text-body-secondary">Montant total</h6>
@@ -116,7 +116,7 @@
         </div>
 
         <div class="col-4">
-            <div class="card border border-warning" style="width: 18rem;">
+            <div class="card border_orange shadow shadow-lg" style="width: 18rem;">
                 <div class="card-body">
                     <h5 class="card-title">{{ number_format($total_solde1, 2, ',', ' ') }} </h5>
                     <h6 class="card-subtitle mb-2 text-body-secondary">Montant total règlement</h6>
@@ -125,7 +125,7 @@
         </div>
 
         <div class="col-4">
-            <div class="card border border-danger" style="width: 18rem;">
+            <div class="card border_orange shadow shadow-lg" style="width: 18rem;">
                 <div class="card-body">
                     <h5 class="card-title text-danger">{{ number_format($total_restant1, 2, ',', ' ') }} </h5>
                     <h6 class="card-subtitle mb-2 text-body-secondary">Montant restant</h6>
@@ -136,9 +136,9 @@
     </div>
 
     <div class="row">
-        <h5> Solde et accompte</h5>
+        <h5 class="text-dark"> Solde et accompte</h5>
         <div class="col-6">
-            <div class="card border border-primary" style="width: 18rem;">
+            <div class="card border border-success" style="width: 18rem;">
                 <div class="card-body">
                     <h5 class="card-title ">{{ number_format($avance, 2, ',', ' ') }} </h5>
                     <h6 class="card-subtitle mb-2 text-body-secondary">Accompte client</h6>
@@ -163,23 +163,23 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-6">
-                                <h5 class="card-title">Liste des factures
+                                <h5 class="card-title text-dark">Liste des factures
                                 </h5>
                             </div>
                             <div class="col-6 float-end py-3">
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                                    Report à nouveau
+                                <button type="button" class="btn btn-sm bg-dark text_orange" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                <i class="bi bi-list"></i> Report à nouveau
                                 </button>
                                 @can('clients.reglements-d-un-client')
-                                <a href="{{route('real-reglements-clt', $id )}}" class="btn btn-primary float-end">
-                                    Voir ses règlements</a>
+                                <a href="{{route('real-reglements-clt', $id )}}" class="btn btn-sm bg-dark text_orange float-end">
+                                <i class="bi bi-eye"></i> Voir ses règlements</a>
                                 @endcan
                             </div>
                         </div>
 
                         @if (count($factures) > 0)
-                            <table id="example" class=" table table-bordered border-warning  table-hover table-warning table-sm">
-                                <thead>
+                            <table id="example" class="table table-bordered border-warning  table-hover table-striped table-sm">
+                                <thead class="table-dark">
                                     <tr>
                                         <th>N°</th>
                                         <th>
@@ -245,8 +245,10 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                        <button type="submit" class="btn btn-primary">Enregistrer</button>
+                        <div class="col-lg-12 d-flex flex-row align-items-center justify-content-between">
+                            <button type="submit" class="btn btn-sm btn-dark text_orange w-100 submitBtn"><i class="bi bi-check-circle"></i> Enregistrer</button>
+                            <button type="button" class="btn btn-sm btn-dark text_orange w-100 loadingBtn" hidden><span class="spinner-border spinner-border-sm text_orange loading"></span> En cours ...</button>
+                        </div>
                     </div>
                 </form>
             </div>

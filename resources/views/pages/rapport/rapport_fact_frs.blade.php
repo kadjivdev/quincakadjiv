@@ -36,7 +36,7 @@
                         </div>
 
                         <div class="col-1 mt-4">
-                            <button type="submit" class="btn btn-primary">Filtrer</button>
+                            <button type="submit" class="btn btn-sm bg-dark text_orange"><i class="bi bi-filter-circle"></i> Filtrer</button>
                         </div>
                     </div>
                 </form>
@@ -45,11 +45,11 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Liste des factures</h5>
+                            <h5 class="card-title text-dark">Liste des factures</h5>
 
                             <table id="example"
-                                class="table table-bordered border-warning  table-hover table-warning table-sm">
-                                <thead>
+                                class="table table-bordered border-warning  table-hover table-striped table-sm">
+                                <thead class="table-dark">
                                     <tr>
                                         <th>N°</th>
                                         <th>Référence</th>
@@ -74,7 +74,7 @@
                                                 @can('bon-commandes.voir-commande')
                                                     <a href="{{ route('commandes.show', $facture->id) }}"
                                                         data-bs-toggle="tooltip" data-bs-placement="top"
-                                                        data-bs-title="Voir détails" class="btn btn-primary"> <i
+                                                        data-bs-title="Voir détails" class="btn btn-sm bg-dark text_orange w-100"> <i
                                                             class="bi bi-eye"></i> </a>
                                                 @endcan
                                             </td>

@@ -9,7 +9,7 @@
             <div class="col-6 justify-content-end">
                 @can('livraisons.ajouter-livraison-client')
                     <div class="">
-                        <a href="{{ route('deliveries.create') }}" class="btn btn-primary float-end"> + Nouvelle livraison</a>
+                        <a href="{{ route('deliveries.create') }}" class="btn btn-sm bg-dark text_orange float-end"> + Nouvelle livraison</a>
                     </div>
                 @endcan
             </div>
@@ -18,28 +18,28 @@
         <section class="section">
             <div class="row">
                 <div class="col-lg-12">
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-                    @if (session('success'))
-                        <div class="alert alert-success">
-                            {{ session('success') }}
-                        </div>
-                    @endif
                     <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Liste des Bon de livraisons clients</h5>
+                        <div class="card-body py-1">
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+                            @if (session('success'))
+                                <div class="alert alert-success">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
+                            <h5 class="card-title text-dark">Liste des Bon de livraisons clients</h5>
 
                             <!-- Table with stripped rows -->
-                            <table id="example" class=" table table-bordered border-warning  table-hover table-warning table-sm">
+                            <table id="example" class=" table table-bordered border-warning  table-hover table-striped table-sm">
 
-                                <thead>
+                                <thead class="table-dark">
                                     <tr>
                                         <th>N°</th>
                                         <th>Date</th>
@@ -80,7 +80,7 @@
 </td>
                                             <td>
                                                     <div class="dropdown">
-                                                        <button class="btn btn-secondary dropdown-toggle" type="button"
+                                                        <button class="btn btn-sm bg-dark text_orange dropdown-toggle" type="button"
                                                             id="dropdownMenuButton1" data-bs-toggle="dropdown"
                                                             aria-expanded="false">
                                                             <i class="bi bi-gear"></i>
@@ -92,12 +92,10 @@
 
                                                             <li>
                                                                 <a href="{{ route('deliveries.show', $livraison->id) }}"
-                                                                    class="dropdown-item text-dark"> Détail du Bon</a>
+                                                                    class="dropdown-item text-dark"><i class="bi bi-list"></i> Détail du Bon</a>
                                                             </li>
 
                                                                 @if ($livraison->lignes_non_valides == $livraison->lignes_non_valides + $livraison->lignes_valides)
-
-
                                                                     <li>
                                                                         <form action="{{ route('deliveries.destroy', $livraison->id) }}"
                                                                             class="form-inline" method="POST"
@@ -106,13 +104,12 @@
                                                                             @method('DELETE')
                                                                             <button type="submit" class="dropdown-item text-danger"
                                                                                 data-bs-toggle="tooltip" data-bs-placement="left"
-                                                                                data-bs-title="Supprimer le bon ">Supprimer le Bon</button>
+                                                                                data-bs-title="Supprimer le bon "><i class="bi bi-trash3"></i> Supprimer le Bon</button>
                                                                         </form>
 
                                                                     </li>
                                                                 @endif
                                                             {{-- @endcan --}}
-
                                                         </ul>
                                                     </div>
 

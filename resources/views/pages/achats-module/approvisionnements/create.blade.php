@@ -8,45 +8,42 @@
     <section class="section">
         <div class="row">
             <div class="col-lg-12">
-                @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-                @endif
-                @if (session('success'))
-                <div class="alert alert-success">
-                    {{ session('success') }}
-                </div>
-                @endif
                 <div class="card">
-                    <div class="card-body">
+                    <div class="card-body mt-1">
+                        @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
+                        @if (session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                        @endif
                         <div class="row mt-4">
-                            <!-- <div class="col-7 float-start">
-                                <h5 class="card-title">Enregistrer une appro / livraison</h5> -->
-
                                 <div class="col-4">
                                 <label class="form-label">Coût du Transport</label>
-                                <input type="text" name="transport" readonly id="transport" style="font-weight: bolder; font-size: medium;" class="form-control bg bg-warning">
+                                <input type="text" name="transport" readonly id="transport" style="font-weight: bolder; font-size: medium;" class="form-control bg bg-light">
                             </div>
 
                             <div class="col-4">
                                 <label class="form-label">Coût du Chargement déchargement</label>
-                                <input type="text" name="charge_decharge" readonly id="charge_decharge" style="font-weight: bolder; font-size: medium;" class="form-control bg bg-warning">
+                                <input type="text" name="charge_decharge" readonly id="charge_decharge" style="font-weight: bolder; font-size: medium;" class="form-control bg bg-light">
                             </div>
 
                             <div class="col-4">
                                 <label class="form-label">Autre Coût</label>
-                                <input type="text" name="autre" readonly id="autre" style="font-weight: bolder; font-size: medium;" class="form-control bg bg-warning">
+                                <input type="text" name="autre" readonly id="autre" style="font-weight: bolder; font-size: medium;" class="form-control bg bg-light">
                             </div>
 
                             <!-- </div> -->
                             @can('approvisionnements.ajouter-livraison-directe')
                             <div class="col-3 float-end">
-                                <button type="button" class="btn btn-primary mt-3" id="btn-formDisplay">Livraison
+                                <button type="button" class="btn btn-sm bg-dark text_orange mt-3" id="btn-formDisplay">Livraison
                                     non physique</button>
                             </div>
                             @endcan
@@ -132,9 +129,9 @@
                                 </table>
                             </div>
 
-                            <div class="text-center">
-                                <button type="submit" class="btn btn-primary">Enregistrer</button>
-                                <button type="reset" class="btn btn-secondary">Annuler</button>
+                            <div class="col-lg-12 d-flex flex-row align-items-center justify-content-between">
+                                <button type="submit" class="btn btn-sm btn-dark text_orange w-100 submitBtn"><i class="bi bi-check-circle"></i> Enregistrer</button>
+                                <button type="button" class="btn btn-sm btn-dark text_orange w-100 loadingBtn" hidden><span class="spinner-border spinner-border-sm text_orange loading"></span> En cours ...</button>
                             </div>
                         </form>
 
@@ -285,7 +282,7 @@
                                 <td data-name="unite" contenteditable="false">
                                     <input type="text" required readonly class="form-control unites" name="unites[]" value="${data.articles[i].unite}">
                                 </td>
-                                <td><button class="btn btn-danger btn-sm delete-row"><i class="bi bi-trash"></i></button></td>
+                                <td><button class="btn btn-sm text_orange btn-sm bg-dark delete-row"><i class="bi bi-trash"></i></button></td>
                             </tr>`;
                             $('#editableTableAppro tbody').append(newRow);
                         }

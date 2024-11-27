@@ -7,52 +7,51 @@
             }
         </style>
         <div class="pagetitle">
-            <h1>Reglements</h1>
+            <h1 class="text-dark">Reglements</h1>
         </div><!-- End Page Title -->
         <section class="section">
             <div class="row">
                 <div class="col-lg-12">
 
                     <div class="card">
-                        <!-- Afficher des messages de succès -->
-                        @if (session('success'))
-                            <div class="alert alert-success">
-                                {{ session('success') }}
-                            </div>
-                        @endif
-
-                        <!-- Afficher des erreurs de validation -->
-                        @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
-                        <div class="card-body">
-                            <h5 class="card-title">Détail règlement</h5>
+                        <div class="card-body pt-1">
+                            <!-- Afficher des messages de succès -->
+                            @if (session('success'))
+                                <div class="alert alert-success">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
+    
+                            <!-- Afficher des erreurs de validation -->
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+                            <h5 class="card-title text-dark">Détail règlement</h5>
 
                             <!-- Vertical Form -->
                             <form class="row g-3" action="{{ route('reglements-clt.update', $reglement->id) }}" method="POST"
                                 enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
-                                <div class="col-5 mb-3">
+                                <div class="col-6 mb-3">
                                     <label class="form-label">Client</label>
                                     <input type="hidden" id="clientId" value="{{ $client->id }}">
                                     <input type="text" class="form-control" readonly name="clientId" value="{{ $client->nom_client }}" />
                                 </div>
-                                <div class="col-7 mb-3">
+                                <div class="col-6 mb-3">
                                     <label class="form-label">Facture</label>
                                     <input type="hidden" id="factId" value="{{ $reglement->facture_id }}">
                                     <input type="text" class="form-control" readonly name="facture_ref" value="{{ $facture->num_facture }}" />
-
                                 </div>
                                 <div class="col-6 mb-3">
                                     <label class="form-label">Type de règlement</label>
-                                    <select name="type_reglement" class="form-control" id="type_reglement">
+                                    <select name="type_reglement" class="form-control js-example-basic-multiple" id="type_reglement">
                                         <option value="Espèce"
                                             {{ $reglement->type_reglement == 'Espèce' ? 'selected' : '' }}>En espèce
                                         </option>
@@ -92,11 +91,11 @@
                                     <input type="file" class="form-control" value="{{ $reglement->preuve_decharge }}"
                                         name="preuve_decharge">
                                 </div>
-                                {{-- <div class="text-center">
-                                    <button type="submit" class="btn btn-primary">Valider</button>
-                                    <div class="loader"></div>
-
-                                    <button type="reset" class="btn btn-secondary">Annuler</button>
+                                {{-- 
+                                    <div class="col-lg-12 d-flex flex-row align-items-center justify-content-between">
+                                        <button type="submit" class="btn btn-sm btn-dark text_orange w-100 submitBtn"><i class="bi bi-check-circle"></i> Enregistrer</button>
+                                        <button type="button" class="btn btn-sm btn-dark text_orange w-100 loadingBtn" hidden><span class="spinner-border spinner-border-sm text_orange loading"></span> En cours ...</button>
+                                    </div>
                                 </div> --}}
                             </form>
 

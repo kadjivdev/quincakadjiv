@@ -11,25 +11,25 @@
                 <div class="col-lg-12">
 
                     <div class="card">
-                        <!-- Afficher des messages de succès -->
-                        @if (session('success'))
-                            <div class="alert alert-success">
-                                {{ session('success') }}
-                            </div>
-                        @endif
-
-                        <!-- Afficher des erreurs de validation -->
-                        @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
-                        <div class="card-body">
-                            <h5 class="card-title">Ajouter un Magasin</h5>
+                        <div class="card-body py-1">
+                            <!-- Afficher des messages de succès -->
+                            @if (session('success'))
+                                <div class="alert alert-success">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
+    
+                            <!-- Afficher des erreurs de validation -->
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+                            <h5 class="card-title text-dark">Ajouter un Magasin</h5>
 
                             <!-- Vertical Form -->
                             <form class="row g-3" action="{{ route('magasins.store') }}" method="POST">
@@ -54,20 +54,18 @@
 
                                 <div class="col-12">
                                     <label for="">Responsable</label>
-                                    <select name="user_id" id="users_select" class="form-control">
+                                    <select name="user_id" id="users_select" class="form-control js-data-example-ajax">
                                         {{-- @foreach ($users as $user)
                                             <option value="{{ $user->id }}">{{ $user->name }}</option>
                                         @endforeach --}}
                                     </select>
                                 </div>
-                                <div class="text-center">
-                                    <button type="submit" class="btn btn-primary">Enregistrer</button>
-                                    <div class="loader"></div>
 
-                                    <button type="reset" class="btn btn-secondary">Annuler</button>
+                                <div class="col-lg-12 d-flex flex-row align-items-center justify-content-between">
+                                    <button type="submit" class="btn btn-sm btn-dark text_orange w-100 submitBtn" id="ajouterArticle"><i class="bi bi-check-circle"></i> Enregistrer</button>
+                                    <button type="button" class="btn btn-sm btn-dark text_orange w-100 loadingBtn" hidden><span class="spinner-border spinner-border-sm text_orange loading"></span> En cours ...</button>
                                 </div>
                             </form>
-
                         </div>
                     </div>
                 </div>

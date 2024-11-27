@@ -19,8 +19,6 @@
 
                     <a href="{{ route('liste_taux_convert') }}" class="btn btn-primary float-end">Gérer les taux de conversions</a>
 
-
-
                     <a href="{{ route('UniteBase') }}" class="btn btn-primary float-end" style="margin-right: 1%"> Unité de base</a>
                     <button type="button" class="btn btn-primary float-end mx-2" id="tauxBtn">
                         Mettre Taux </button> --}}

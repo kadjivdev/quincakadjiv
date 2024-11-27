@@ -7,29 +7,27 @@
         </div><!-- End Page Title -->
         <section class="section">
             <div class="row">
-
                 <div class="col-lg-12">
-
                     <div class="card px-4">
-                        <!-- Afficher des messages de succès -->
-                        @if (session('success'))
-                            <div class="alert alert-success">
-                                {{ session('success') }}
-                            </div>
-                        @endif
-
-                        <!-- Afficher des erreurs de validation -->
-                        @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
                         <div class="card-body">
-                            <h5 class="card-title">Détail de la requête N° {{$requete->num_demande}}</h5>
+                            <!-- Afficher des messages de succès -->
+                            @if (session('success'))
+                                <div class="alert alert-success">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
+    
+                            <!-- Afficher des erreurs de validation -->
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+                            <h5 class="card-title text-dark">Détail de la requête N° {{$requete->num_demande}}</h5>
                             <div class="row">
                                 <div class="col-6 mb-3">
                                     <label for="num_demande">N° demande</label>

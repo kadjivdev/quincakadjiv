@@ -17,9 +17,7 @@
                         Importer article
                     </button>
 
-                    <a href="{{ route('liste_taux_convert') }}" class="btn btn-primary float-end">Gérer les taux de conversions</a>
-
-
+                    <a href="{{ route('liste_taux_convert') }}" class="btn btn-sm bg-dark text_orange float-end">Gérer les taux de conversions</a>
 
                     <a href="{{ route('UniteBase') }}" class="btn btn-primary float-end" style="margin-right: 1%"> Unité de base</a>
                     <button type="button" class="btn btn-primary float-end mx-2" id="tauxBtn">
@@ -28,8 +26,6 @@
                         {{-- @can('articles.ajouter-article') --}}
                         <a href="{{ route('requetes.create') }}" style="margin-left: 10px;" class="btn btn-warning float-end petit_bouton"> <i class="bi bi-plus-circle"></i> Ajouter une requête</a>
                     {{-- @endcan --}}
-
-
             </div>
         </div><!-- End Page +++ -->
 
@@ -38,26 +34,26 @@
                 <div class="col-lg-12">
                     <div class="alert alert-success d-none" id="tauxMsg">
                     </div>
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-                    @if (session('success'))
-                        <div class="alert alert-success">
-                            {{ session('success') }}
-                        </div>
-                    @endif
-
+                    
                     <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Liste des requêtes</h5>
-                                <table  id="example" class=" table table-bordered border-warning  table-hover table-warning table-sm">
-                                    <thead>
+                        <div class="card-body py-1">
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+                            @if (session('success'))
+                                <div class="alert alert-success">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
+                            <h5 class="card-title text-dark">Liste des requêtes</h5>
+                                <table  id="example" class=" table table-bordered border-warning  table-hover table-striped table-sm">
+                                    <thead class="table-dark">
                                         <tr>
                                             <th>N° demande</th>
                                             <th>Client</th>
@@ -95,22 +91,22 @@
                                                 <td>
                                                     @if (is_null($requete->validate_at))
                                                         <div class="dropdown">
-                                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                                            <button class="btn btn-sm bg-dark text_orange w-100 dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                                                 <i class="bi bi-gear"></i>
                                                             </button>
                                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">            
                                                                 <li>
-                                                                    <a href="{{route('requetes.show', $requete->id)}}" data-bs-toggle="tooltip" class="dropdown-item" data-bs-placement="left" data-bs-title="Détail"> Détail </a>            
+                                                                    <a href="{{route('requetes.show', $requete->id)}}" data-bs-toggle="tooltip" class="dropdown-item" data-bs-placement="left" data-bs-title="Détail"><i class="bi bi-list"></i> Détail </a>            
                                                                 </li>
                                                                 <li>
-                                                                    <a href="{{route('requetes.edit', $requete->id)}}" data-bs-toggle="tooltip" class="dropdown-item" data-bs-placement="left" data-bs-title="Editer"> Modifier </a>            
+                                                                    <a href="{{route('requetes.edit', $requete->id)}}" data-bs-toggle="tooltip" class="dropdown-item" data-bs-placement="left" data-bs-title="Editer"><i class="bi bi-pencil"></i> Modifier </a>            
                                                                 </li>
                                                                 <li>
                                                                     <form action="{{ route('valider-requete', $requete->id) }}"
                                                                         method="POST" class="col-3">
                                                                         @csrf
                                                                         @method('POST')
-                                                                        <button type="submit" class="dropdown-item" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="Valider la requête"  onclick="return confirm('Voulez vous vraiment valider cette requête ? Cette opération est irréversible')">Valider </button>
+                                                                        <button type="submit" class="dropdown-item" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="Valider la requête"  onclick="return confirm('Voulez vous vraiment valider cette requête ? Cette opération est irréversible')"><i class="bi bi-check-circle"></i> Valider </button>
                                                                     </form>
                                                                 </li>
                                                                 <li>
@@ -118,7 +114,7 @@
                                                                         method="POST" class="col-3">
                                                                         @csrf
                                                                         @method('DELETE')
-                                                                        <button type="submit" class="dropdown-item" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="Su^pprimer la requête" onclick="return confirm('Voulez vous vraiment valider cette requête? Cette opération est irréversible')">Supprimer</button>
+                                                                        <button type="submit" class="dropdown-item" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="Su^pprimer la requête" onclick="return confirm('Voulez vous vraiment valider cette requête? Cette opération est irréversible')"><i class="bi bi-trash3"></i> Supprimer</button>
                                                                     </form>
                                                                 </li>   
     

@@ -21,7 +21,7 @@
             <div class="col-6 justify-content-end">
                 @can('livraisons.ajouter-livraison-client')
                     <div class="">
-                        <a href="{{ route('deliveries.create') }}" class="btn btn-primary float-end"> + Nouvelle livraison</a>
+                        <a href="{{ route('deliveries.create') }}" class="btn btn-sm bg-dark text_orange float-end"> + Nouvelle livraison</a>
                     </div>
                 @endcan
             </div>
@@ -30,42 +30,41 @@
         <section class="section">
             <div class="row">
                 <div class="col-lg-12">
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-                    @if (session('success'))
-                        <div class="alert alert-success">
-                            {{ session('success') }}
-                        </div>
-                    @endif
                     <div class="card">
-                        <div class="card-body">
+                        <div class="card-body py-1">
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+                            @if (session('success'))
+                                <div class="alert alert-success">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
 
                             <div class="row">
                                 <div class="col-6 float-left">
-                                    <h5 class="card-title">
+                                    <h5 class="card-title text-dark">
                                         Liste des articles du bon de livraisons</h5>
                                 </div>
 
                                 <div class="col-6 float-right">
 
-                                    <a href="{{ route('deliveries.index') }}" class="btn btn-warning float-end mt-2"> <i
+                                    <a href="{{ route('deliveries.index') }}" class="btn btn-sm bg-dark text_orange float-end mt-2"> <i
                                             class="bi bi-arrow-left"></i> Retour</a>
-
                                 </div>
                             </div>
 
                             <!-- Table with stripped rows -->
                             <table id="example"
-                                class=" table table-bordered border-warning  table-hover table-warning table-sm">
+                                class=" table table-bordered border-warning  table-hover table-striped table-sm">
 
-                                <thead>
+                                <thead class="table-dark">
                                     <tr>
                                         <th>N°</th>
                                         <th>Article</th>
@@ -101,7 +100,7 @@
                                             <td >
                                                 @if (is_null($livraison->validated_at))
                                                     <div class="dropdown">
-                                                        <button class="btn btn-secondary dropdown-toggle" type="button"
+                                                        <button class="btn btn-sm bg-dark w-100 text_orange dropdown-toggle" type="button"
                                                             id="dropdownMenuButton1" data-bs-toggle="dropdown"
                                                             aria-expanded="false">
                                                             <i class="bi bi-gear"></i>
@@ -114,13 +113,13 @@
                                                                 <form
                                                                     action="{{ route('validation-liv-clt', $livraison->id) }}"
                                                                     class="form-inline" method="POST"
-                                                                    onsubmit="return confirm('Êtes-vous sûr de vouloir lvalider cette livraison?');">
+                                                                    onsubmit="return confirm('Êtes-vous sûr de vouloir valider cette livraison?');">
                                                                     @csrf
                                                                     @method('POST')
                                                                     <button type="submit"
                                                                         class="dropdown-item text-success"
                                                                         data-bs-toggle="tooltip" data-bs-placement="left"
-                                                                        data-bs-title="Valider la livraison ">Valider</button>
+                                                                        data-bs-title="Valider la livraison"><i class="bi bi-check-circle"></i> Valider</button>
                                                                 </form>
 
                                                             </li>
@@ -128,7 +127,7 @@
                                                             <li>
                                                                 <a class="dropdown-item text-danger" style="cursor: pointer" data-bs-toggle="modal"
                                                                     data-bs-target="#staticBackdrop{{ $livraison->id }}">
-                                                                    Rejeter </a>
+                                                                    <i class="bi bi-trash3"></i> Rejeter </a>
                                                             </li>
 
                                                             <li>
@@ -139,7 +138,7 @@
                                                                     @method('DELETE')
                                                                     <button type="submit" class="dropdown-item text-danger"
                                                                         data-bs-toggle="tooltip" data-bs-placement="left"
-                                                                        data-bs-title="Supprimer le bon ">Supprimer cette Livraison</button>
+                                                                        data-bs-title="Supprimer le bon "><i class="bi bi-trash3"></i> Supprimer cette Livraison</button>
                                                                 </form>
                                                             </li>
 
@@ -158,8 +157,7 @@
                                             </td>
                                         </tr>
 
-                                        <div class="modal fade" id="staticBackdrop{{ $livraison->id }}"
-                                            data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                                        <div class="modal fade" id="staticBackdrop{{ $livraison->id }}" data-bs-keyboard="false" tabindex="-1"
                                             aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
@@ -182,10 +180,10 @@
 
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary"
-                                                                data-bs-dismiss="modal">Fermer</button>
-                                                            <button type="submit"
-                                                                class="btn btn-warning">Enregistrer</button>
+                                                            <div class="col-lg-12 d-flex flex-row align-items-center justify-content-between">
+                                                                <button type="submit" class="btn btn-sm btn-dark text_orange w-100 submitBtn"><i class="bi bi-check-circle"></i> Enregistrer</button>
+                                                                <button type="button" class="btn btn-sm btn-dark text_orange w-100 loadingBtn" hidden><span class="spinner-border spinner-border-sm text_orange loading"></span> En cours ...</button>
+                                                            </div>
                                                         </div>
                                                     </form>
                                                 </div>

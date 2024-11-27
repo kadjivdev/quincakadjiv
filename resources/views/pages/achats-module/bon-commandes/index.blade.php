@@ -13,7 +13,6 @@
             </div>
 
             <div class="col-3">
-
                     <a href="{{ route('liste-valider') }}" class="btn btn-sm bg-light float-end petit_bouton">
                         <i class="bi bi-check-circle-fill"></i>
                         Prog Validés et Classés</a>

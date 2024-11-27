@@ -26,7 +26,7 @@ class DevisController extends Controller
     public function index()
     {
         $i = 1;
-        // $devis = Devis::all();
+        
         $devis = Devis::whereNotIn('id', function($query) {
             $query->select('devis_id')
                 ->from('factures');
@@ -35,7 +35,6 @@ class DevisController extends Controller
 
         $devisIds = Facture::pluck('devis_id');
         return view('pages.ventes-module.devis.index', compact('devis', 'devisIds', 'i'));
-
     }
 
     /**

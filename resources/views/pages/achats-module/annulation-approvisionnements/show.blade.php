@@ -4,11 +4,11 @@
 
         <div class="pagetitle d-flex">
             <div class="col-10">
-                <h1 class="float-left">Détail du Bon de Livraison {{$liv[0]->ref_liv}} </h1>
+                <h1 class="float-left ">Détail du Bon de Livraison {{$liv->first()?$liv->first()->ref_liv:"---"}} </h1>
             </div>
 
             <div class="col-10">
-            <a href="{{ url('/rapport_livraison_frs') }}" class="btn btn-warning"
+            <a href="{{ url('/rapport_livraison_frs') }}" class="btn btn-sm bg-dark text_orange"
                                                         data-bs-toggle="tooltip" data-bs-placement="Retour a la liste"
                                                         data-bs-title="Voir détails"> Retour </a>
             </div>
@@ -21,7 +21,7 @@
 
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Liste des articles livrés</h5>
+                            <h5 class="card-title text-dark">Liste des articles livrés</h5>
 
                             <!-- Table with stripped rows -->
                             <table class="table datatable">
@@ -33,8 +33,6 @@
                                         <th>Unité</th>
                                         <th>Réf Commande</th>
                                         <th>Validé le</th>
-
-
                                     </tr>
                                 </thead>
                                 <tbody>

@@ -8,32 +8,31 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
-                    <!-- Afficher des messages de succès -->
-                    @if (session('success'))
-                    <div class="alert alert-success">
-                        {{ session('success') }}
-                    </div>
-                    @endif
-                    <!-- Afficher des erreurs de validation -->
-                    @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                    @endif
-                    <div class="card-body">
-                        <h5 class="card-title">Ajouter des inventaire</h5>
-
+                    <div class="card-body py-1">
+                        <!-- Afficher des messages de succès -->
+                        @if (session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                        @endif
+                        <!-- Afficher des erreurs de validation -->
+                        @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
+                        <h5 class="card-title text-dark">Ajouter des inventaire</h5>
 
                         <form class="row g-3" id="programForm" action="{{ route('inventaire-multiple-store') }}" method="POST">
                             @csrf
                             <td><input style="width:150px" type="text" class="form-control datepicker" name="date_inventaire"></td>
                             <td><input style="width:150px" value="{{$magasin->id}}" type="hidden" class="form-control datepicker" name="magasin_id"></td>
                             <div class="table-responsive">
-                                <table id="example1" class="table ">
+                                <table id="example" class="table border border-warning table-sm table-striped ">
                                     <thead>
                                         <tr>
                                             <th>N°</th>
@@ -62,10 +61,9 @@
                             <div id="dynamic-fields-container">
 
                             </div>
-                            <div class="text-center">
-                                <button type="button" id="enregistrerVente" class="btn btn-primary">Enregistrer</button>
-                                <div class="loader"></div>
-                                <button type="reset" class="btn btn-secondary">Annuler</button>
+                            <div class="col-lg-12 d-flex flex-row align-items-center justify-content-between">
+                                <button type="submit" class="btn btn-sm btn-dark text_orange w-100 submitBtn" id="enregistrerVente"><i class="bi bi-check-circle"></i> Enregistrer</button>
+                                <button type="button" class="btn btn-sm btn-dark text_orange w-100 loadingBtn" hidden><span class="spinner-border spinner-border-sm text_orange loading"></span> En cours ...</button>
                             </div>
                         </form>
                     </div>

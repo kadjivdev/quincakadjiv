@@ -16,6 +16,7 @@ use App\Models\CompteClient;
 use App\Models\Encaissement;
 use App\Models\EncaisseReglement;
 use App\Models\FactureVente;
+use App\Models\Reglement;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\DB;
@@ -42,7 +43,6 @@ class ReglementClientController extends Controller
     public function regByCltToValid()
     {
         $reglements = ReglementClient::where('validated_at', null)->with(['client'])->orderBy('id', 'desc')->get(); 
-        // dd($reglements);
         return view('pages.reglements-client.reglement_by_clt_to_valid', compact('reglements'));
     }
 
@@ -378,14 +378,10 @@ class ReglementClientController extends Controller
 
     }
 
-
     public function getAccompteByClient($id)
     {
-
         $client = Client::find($id);
-
         $accomptes = AcompteClient::where('client_id', $client->id)->get();
-
         $getDateReglementByRegId = function ($reglement_client_id) {
             ReglementClient::find($reglement_client_id);
         };

@@ -23,7 +23,7 @@
                             <input type="date" class="form-control" name="end_date" id="end_date" value="{{ request('end_date') }}">
                         </div>
                         <div class="col-2 mt-4">
-                            <button type="submit" class="btn btn-primary">Filtrer</button>
+                            <button type="submit" class="btn btn-sm bg-dark text_orange"><i class="bi bi-filter-circle"></i> Filtrer</button>
                         </div>
                     </div>
                 </form>
@@ -32,11 +32,11 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Liste des factures</h5>
+                            <h5 class="card-title text-dark">Liste des factures</h5>
 
                             <table id="example"
                                 class="table table-bordered border-warning  table-hover table-warning table-sm">
-                                <thead>
+                                <thead class="table-dark">
                                     <tr>
                                         <th>N°</th>
                                         <th>Référence</th>

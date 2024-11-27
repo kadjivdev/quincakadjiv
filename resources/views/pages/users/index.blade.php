@@ -9,7 +9,7 @@
             <div class="col-6 justify-content-end">
                 @can('users.user-create')
                     <div class="">
-                        <a href="{{ route('users.create') }}" class="btn btn-primary float-end"> + Ajouter un utilisateur</a>
+                        <a href="{{ route('users.create') }}" class="btn btn-sm bg-dark text_orange float-end"> + Ajouter un utilisateur</a>
                     </div>
                 @endcan
             </div>
@@ -18,27 +18,27 @@
         <section class="section">
             <div class="row">
                 <div class="col-lg-12">
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-                    @if (session('success'))
-                        <div class="alert alert-success">
-                            {{ session('success') }}
-                        </div>
-                    @endif
                     <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Liste des utilisateurs</h5>
+                        <div class="card-body mt-1">
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+                            @if (session('success'))
+                                <div class="alert alert-success">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
+                            <h5 class="card-title text-dark">Liste des utilisateurs</h5>
 
                             <!-- Table with stripped rows -->
-                            <table class="table datatable" id="usersTable">
-                                <thead>
+                            <table id="example" class="table table-hover border border-warning table-sm table-striped" id="usersTable">
+                                <thead class="table-dark">
                                     <tr>
                                         <th>N°</th>
                                         <th>

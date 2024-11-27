@@ -16,35 +16,34 @@
         <section class="section">
             <div class="row">
                 <div class="col-lg-12">
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-                    @if (session('success'))
-                        <div class="alert alert-success">
-                            {{ session('success') }}
-                        </div>
-                    @endif
-
+                    
                     <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Liste des commandes supplémentaires</h5>
+                        <div class="card-body mt-1">
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+                            @if (session('success'))
+                                <div class="alert alert-success">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
+                            <h5 class="card-title text-dark">Liste des commandes supplémentaires</h5>
 
                             <!-- Table with stripped rows -->
-                            <table class="table datatable">
-                                <thead>
+                            <table class="table datatable table-striped">
+                                <thead class="table-dark">
                                     <tr>
                                         <th>N°</th>
                                         <th>Reférence commande</th>
                                         <th>Date commande sup</th>
                                         <th>Fournisseur</th>
                                         <th>Action</th>
-
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -59,7 +58,7 @@
                                                 @can('bon-commandes.list-cmde-sup')
                                                     <a href="{{ route('supplements.show', $commande->id) }}"
                                                         data-bs-toggle="tooltip" data-bs-placement="top"
-                                                        data-bs-title="Voir détails" class="btn btn-primary"> <i
+                                                        data-bs-title="Voir détails" class="btn btn-sm btn-dark text_orange"> <i
                                                             class="bi bi-eye"></i> </a>
                                                 @endcan
                                             </td>

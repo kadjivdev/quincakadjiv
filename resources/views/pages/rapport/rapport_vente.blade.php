@@ -33,7 +33,7 @@
                             </select>
                         </div>
                         <div class="col-1 mt-4">
-                            <button type="submit" class="btn btn-primary">Filtrer</button>
+                            <button type="submit" class="btn btn-sm bg-dark text_orange"><i class="bi bi-filter-circle"></i> Filtrer</button>
                         </div>
                     </div>
                 </form>
@@ -42,12 +42,12 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Liste des ventes</h5>
+                            <h5 class="card-title text-dark">Liste des ventes</h5>
 
                             <!-- Table with stripped rows -->
                             <table id="example"
-                                class=" table table-bordered border-warning  table-hover table-warning table-sm">
-                                <thead>
+                                class=" table table-bordered border-warning  table-hover table-striped table-sm">
+                                <thead class="table-dark">
                                     <tr>
                                         <th>N°</th>
                                         <th>Date Ecriture</th>
@@ -74,7 +74,7 @@
                                             <td>{{ $vente->montant }} </td>
                                             <td>
                                                 @can('ventes.voir-vente')
-                                                    <a href="{{ route('ventes.show', $vente->id) }}" class="btn btn-primary"
+                                                    <a href="{{ route('ventes.show', $vente->id) }}" class="btn btn-sm bg-dark text_orange"
                                                         data-bs-toggle="tooltip" data-bs-placement="top"
                                                         data-bs-title="Voir détails"> <i class="bi bi-eye"></i> </a>
                                                 </td>

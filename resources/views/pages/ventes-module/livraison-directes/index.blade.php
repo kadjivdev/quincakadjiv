@@ -4,35 +4,35 @@
 
         <div class="pagetitle d-flex">
             <div class="col-6">
-                <h1 class="float-left">Livraisons non physiques</h1>
+                <h1 class="float-left text-dark">Livraisons non physiques</h1>
             </div>
         </div>
 
         <section class="section">
             <div class="row">
                 <div class="col-lg-12">
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-                    @if (session('success'))
-                        <div class="alert alert-success">
-                            {{ session('success') }}
-                        </div>
-                    @endif
                     <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Liste des livraisons directes</h5>
+                        <div class="card-body py-1">
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+                            @if (session('success'))
+                                <div class="alert alert-success">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
+                            <h5 class="card-title text-dark">Liste des livraisons directes</h5>
 
                             <!-- Table with stripped rows -->
                             <table id="example"
-                                class=" table table-bordered border-warning  table-hover table-warning table-sm">
-                                <thead>
+                                class=" table table-bordered border-warning  table-hover table-striped table-sm">
+                                <thead class="table-dark">
                                     <tr>
                                         <th>N°</th>
                                         <th>Article</th>
@@ -60,7 +60,7 @@
                                             <td>
                                                 @if (is_null($livraison->validated_at))
                                                     @can('livraisons.valider-livraison-directe')
-                                                        <a class="btn btn-primary" data-bs-toggle="modal"
+                                                        <a class="btn btn-sm bg-dark text_orange" data-bs-toggle="modal"
                                                             data-bs-target="#validationModal{{ $livraison->id }}"> <i
                                                                 class="bi bi-check"></i> </a>
                                                     @endcan
@@ -78,7 +78,7 @@
                                                             @csrf
                                                             @method('PUT')
                                                             <div class="modal-header">
-                                                                <h1 class="modal-title fs-5" id="validationModalLabel">
+                                                                <h1 class="modal-title text-dark fs-5" id="validationModalLabel">
                                                                     Valider une livraison</h1>
                                                                 <button type="button" class="btn-close"
                                                                     data-bs-dismiss="modal" aria-label="Close"></button>
@@ -137,15 +137,10 @@
                                                                         name="montant_regle" class="form-control"
                                                                         value="">
                                                                 </div>
-
-
-
                                                             </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary"
-                                                                    data-bs-dismiss="modal">Fermer</button>
-                                                                <button type="submit"
-                                                                    class="btn btn-primary">Valider</button>
+                                                            <div class="col-lg-12 d-flex flex-row align-items-center justify-content-between">
+                                                                <button type="submit" class="btn btn-sm btn-dark text_orange w-100 submitBtn"><i class="bi bi-check-circle" id="ajouterArticle"></i> Enregistrer</button>
+                                                                <button type="button" class="btn btn-sm btn-dark text_orange w-100 loadingBtn" hidden><span class="spinner-border spinner-border-sm text_orange loading"></span> En cours ...</button>
                                                             </div>
                                                         </form>
                                                     </div>

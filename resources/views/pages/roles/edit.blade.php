@@ -18,7 +18,7 @@
 
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Modifier un Rôle</h5>
+                            <h5 class="card-title text-dark">Modifier un Rôle</h5>
 
                             {!! Form::model($role, ['method' => 'PATCH', 'route' => ['roles.update', $role->id]]) !!}
                             <div class="row">
@@ -28,6 +28,7 @@
                                         {!! Form::text('name', null, ['placeholder' => 'Nom', 'class' => 'form-control']) !!}
                                     </div>
                                 </div>
+                                <br><br>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
                                         <strong>Permissions:</strong>
@@ -42,8 +43,9 @@
 
                                     </div>
                                 </div>
-                                <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                                    <button type="submit" class="btn btn-primary">Modifier</button>
+                                <div class="col-lg-12 mt-5 d-flex flex-row align-items-center justify-content-between">
+                                    <button type="submit" class="btn btn-sm btn-dark text_orange w-100 submitBtn" id="ajouterArticle"><i class="bi bi-check-circle"></i> Enregistrer</button>
+                                    <button type="button" class="btn btn-sm btn-dark text_orange w-100 loadingBtn" hidden><span class="spinner-border spinner-border-sm text_orange loading"></span> En cours ...</button>
                                 </div>
                             </div>
                             {!! Form::close() !!}

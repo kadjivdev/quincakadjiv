@@ -9,7 +9,7 @@
             <div class="col-6 justify-content-end">
                 @can('clients.enregistrer-accompte')
                 <div class="">
-                    <a href="{{ route('acompte-create') }}" class="btn btn-primary float-end"> + Ajouter un
+                    <a href="{{ route('acompte-create') }}" class="btn btn-sm bg-dark text_orange float-end"> + Ajouter un
                         accompte</a>
                 </div>
                 @endcan
@@ -19,27 +19,27 @@
         <section class="section">
             <div class="row">
                 <div class="col-lg-12">
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-                    @if (session('success'))
-                        <div class="alert alert-success">
-                            {{ session('success') }}
-                        </div>
-                    @endif
                     <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Liste des accomptes</h5>
+                        <div class="card-body py-1">
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+                            @if (session('success'))
+                                <div class="alert alert-success">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
+                            <h5 class="card-title text-dark">Liste des accomptes</h5>
 
                             <table id="example"
                                 class=" table table-bordered border-warning  table-hover table-warning table-sm">
-                                <thead>
+                                <thead class="table-dark">
                                     <tr>
                                         <th>N°</th>
                                         <th>

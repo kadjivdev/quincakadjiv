@@ -97,7 +97,7 @@
 
         @can('livraisons.list-livraisons-frs')
         <li class="nav-item">
-            <a class="nav-link collapsed {{ request()->is('livraisons') ? 'actif_menu' : '' }}" href="{{ route('livraisons.index') }}">
+            <a class="nav-link collapsed {{ request()->is('livraisons') || request()->is('annulation-approvisionnement') ? 'actif_menu' : '' }}" href="{{ route('livraisons.index') }}">
                 <i class="bi bi-person"></i>
                 <span>Appros / Livraisons</span>
             </a>

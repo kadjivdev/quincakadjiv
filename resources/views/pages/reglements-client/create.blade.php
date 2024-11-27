@@ -12,37 +12,36 @@
     <section class="section">
         <div class="row">
             <div class="col-lg-12">
-
                 <div class="card">
-                    <!-- Afficher des messages de succès -->
-                    @if (session('success'))
-                    <div class="alert alert-success">
-                        {{ session('success') }}
-                    </div>
-                    @endif
-
-                    <!-- Afficher des erreurs de validation -->
-                    @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                    @endif
-                    <div class="card-body">
+                    <div class="card-body pt-1">
+                        <!-- Afficher des messages de succès -->
+                        @if (session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                        @endif
+    
+                        <!-- Afficher des erreurs de validation -->
+                        @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
                         <h5 class="card-title">Ajouter un règlement client</h5>
 
                         <!-- Vertical Form -->
                         <form class="row g-3" action="{{ route('reglements-clt.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
-                            <div class="col-5 mb-3">
+                            <div class="col-6 mb-3">
                                 <label class="form-label">Client</label>
                                 <input type="text" readonly value="{{ $client->nom_client }}" class="form-control" name="client_name" id="client_name"> 
                                 <input type="hidden" value="{{ $client->id }}" class="form-control" name="client_id" id="client_select">
                             </div>
-                            <div class="col-7 mb-3">
+                            <div class="col-6 mb-3">
                                 <label class="form-label">Factures</label>
                                 <select class="form-control" name="facture_ref" id="facture_select"></select>
                             </div>
@@ -74,24 +73,19 @@
                                 <input type="text" class="form-control" name="reference" value="{{ old('reference') }}">
                             </div>
 
-
                             <div class="col-6 mb-3 d-none" id="preuveBloc">
                                 <label for="">Preuve de décharge</label>
                                 <input type="file" class="form-control" name="preuve_decharge" value="{{ old('preuve_decharge') }}">
                             </div>
                             <div class="col-12 mb-3">
                                 <label for="">Observations du règlement</label>
-                                <textarea name="observations" id="" rows="5" class="form-control">
-                                    </textarea>
+                                <textarea name="observations" id="" rows="" class="form-control"></textarea>
                             </div>
-                            <div class="text-center">
-                                <button type="submit" class="btn btn-primary">Enregistrer</button>
-                                <div class="loader"></div>
-
-                                <button type="reset" class="btn btn-secondary">Annuler</button>
+                            <div class="col-lg-12 d-flex flex-row align-items-center justify-content-between">
+                                <button type="submit" class="btn btn-sm btn-dark text_orange w-100 submitBtn"><i class="bi bi-check-circle"></i> Enregistrer</button>
+                                <button type="button" class="btn btn-sm btn-dark text_orange w-100 loadingBtn" hidden><span class="spinner-border spinner-border-sm text_orange loading"></span> En cours ...</button>
                             </div>
                         </form>
-
                     </div>
                 </div>
             </div>

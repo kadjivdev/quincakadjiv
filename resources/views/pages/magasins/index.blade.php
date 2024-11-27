@@ -9,7 +9,7 @@
             <div class="col-6 justify-content-end">
                 @can('point-ventes.add-magasin')
                     <div class="">
-                        <a href="{{ route('magasins.create') }}" class="btn btn-primary float-end"> + Ajouter un magasin</a>
+                        <a href="{{ route('magasins.create') }}" class="btn btn-sm bg-dark text_orange float-end"> + Ajouter un magasin</a>
                     </div>
                 @endcan
             </div>
@@ -19,28 +19,28 @@
             <div class="row">
                 <div class="col-lg-12">
 
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-                    @if (session('success'))
-                        <div class="alert alert-success">
-                            {{ session('success') }}
-                        </div>
-                    @endif
-
+                    
                     <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Liste des magasins</h5>
+                        <div class="card-body py-1">
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+                            @if (session('success'))
+                                <div class="alert alert-success">
+                                    {{ session('success') }}
+                                </div>
+                            @endif 
+                            <h5 class="card-title text-dark">Liste des magasins</h5>
 
                             <!-- Table with stripped rows -->
-                            <table id="example" class="table table-bordered border-warning  table-hover table-warning table-sm">
-                                <thead>
+                            <table id="example" class="table table-bordered border-warning  table-hover table-striped table-sm">
+                                <thead class="table-dark">
                                     <tr>
                                         <th>N°</th>
                                         <th>Nom Magasin</th>
@@ -56,7 +56,7 @@
                                             <td>{{ $magasin->adresse }}</td>
                                             <td>
                                                 <div class="dropdown">
-                                                    <button class="btn btn-secondary dropdown-toggle" type="button"
+                                                    <button class="btn btn-sm bg-dark text_orange w-100 dropdown-toggle" type="button"
                                                         id="dropdownMenuButton1" data-bs-toggle="dropdown"
                                                         aria-expanded="false">
                                                         <i class="bi bi-gear"></i>
@@ -66,12 +66,12 @@
                                                             <li>
                                                                 <a href="{{ route('magasins.show', $magasin->id) }}" class="dropdown-item"
                                                                     data-bs-toggle="tooltip" data-bs-placement="left"
-                                                                    data-bs-title="Voir détails"> Détail </a>
+                                                                    data-bs-title="Voir détails"><i class="bi bi-list"></i> Détail </a>
                                                             </li>
                                                         @endcan
 
                                                         <li>
-                                                            <a href="{{route('magasins.edit', $magasin->id )}}"  data-bs-toggle="tooltip" class="dropdown-item" data-bs-placement="left" data-bs-title="Modifier magasin">Modifier </a>
+                                                            <a href="{{route('magasins.edit', $magasin->id )}}"  data-bs-toggle="tooltip" class="dropdown-item" data-bs-placement="left" data-bs-title="Modifier magasin"><i class="bi bi-pencil"></i> Modifier </a>
                                                         </li>
 
                                                         <li>
@@ -80,14 +80,14 @@
                                                                 @csrf
                                                                 @method('DELETE')
                                                                 <button type="submit" class="dropdown-item" data-bs-placement="left"
-                                                                    data-bs-title="Supprimer Magasin" onclick="return confirm('Voulez vous vraiment valider ce magasin? Cette opération est irréversible')">Supprimer</button>
+                                                                    data-bs-title="Supprimer Magasin" onclick="return confirm('Voulez vous vraiment valider ce magasin? Cette opération est irréversible')"><i class="bi bi-trash3"></i> Supprimer</button>
                                                             </form>
                                                         </li>      
 
                                                         <li>
                                                             <a href="{{ route('magasin-inventaires', $magasin->id) }}" class="dropdown-item"
                                                                 data-bs-toggle="tooltip" data-bs-placement="left"
-                                                                data-bs-title="Voir mes inventaires"> Inventaires</a>
+                                                                data-bs-title="Voir mes inventaires"><i class="bi bi-list"></i> Inventaires</a>
 
                                                         </li>
                                                     </ul>

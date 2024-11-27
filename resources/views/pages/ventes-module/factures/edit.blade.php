@@ -8,23 +8,23 @@
         <section class="section">
             <div class="row">
                 <div class="col-lg-12">
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-                    @if (session('success'))
-                        <div class="alert alert-success">
-                            {{ session('success') }}
-                        </div>
-                    @endif
                     <div class="card">
                         <div class="card-body py-3">
-                                <h5 class="card-title">Enregistrer une facture client</h5>
+                                @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
+                                @if (session('success'))
+                                    <div class="alert alert-success">
+                                        {{ session('success') }}
+                                    </div>
+                                @endif
+                                <h5 class="card-title text-dark">Enregistrer une facture client</h5>
                                 <form class="row g-3" action="{{ route('factures.update', $facture->id) }}" method="POST">
                                     @csrf
                                     @method('PUT')
@@ -77,19 +77,19 @@
                                             <tfoot>
                                                 <tr>
                                                     <td colspan="2">Montant HT</td>
-                                                    <td colspan="3" style="background-color: rgba(233, 138, 10, 0.89);"><input type="text" id="totalInput"
+                                                    <td colspan="3" class="bg-secondary" ><input type="text" id="totalInput"
                                                             class="form-control" name="montant_facture" readonly>
                                                     </td>
                                                 </tr>
                                                 <tr id="rowRem">
                                                     <td colspan="2">Taux remise</td>
-                                                    <td colspan="3" style="background-color: rgba(245, 39, 54, 0.8);"><input required type="text" id="tauxRemise"
+                                                    <td colspan="3" class="bg-secondary" ><input required type="text" id="tauxRemise"
                                                             class="form-control" name="taux_remise">
                                                     </td>
                                                 </tr>
                                                 <tr id="rowAib">
                                                     <td colspan="2">Taux AIB (%)</td>
-                                                    <td colspan="3" style="background-color: rgba(114, 93, 228, 0.89);"><input type="text" id="aib"
+                                                    <td colspan="3" class="bg-secondary"><input type="text" id="aib"
                                                             value="{{ old('aib') }}" required class="form-control" name="aib">
                                                         <input type="text" id="montant_aib" class="form-control"
                                                             readonly>
@@ -97,7 +97,7 @@
                                                 </tr>
                                                 <tr id="rowTva">
                                                     <td colspan="2">TVA(%)</td>
-                                                    <td colspan="3" style="background-color: rgba(150, 150, 150, 0.89);"><input type="number" id="tva" min="0"
+                                                    <td colspan="3" class="bg-secondary" ><input type="number" id="tva" min="0"
                                                             max="18" value="{{ old('tva') }}" required class="form-control"
                                                             name="tva">
                                                         <input type="text" id="montant_tva" class="form-control"
@@ -106,13 +106,13 @@
                                                 </tr>
                                                 <tr>
                                                     <td colspan="2">Montant total</td>
-                                                    <td colspan="3" style="background-color: rgba(233, 138, 10, 0.89);"><input type="text" id="totalNet"
+                                                    <td colspan="3" class="bg-secondary" ><input type="text" id="totalNet"
                                                             class="form-control" name="montant_total" readonly>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td colspan="2">Acompte</td>
-                                                    <td colspan="3" style="background-color: rgba(32, 214, 4, 0.89);"><input type="number" id="montant_regle"
+                                                    <td colspan="3" class="bg-secondary" ><input type="number" id="montant_regle"
                                                             class="form-control" name="montant_regle" value="{{$facture->montant_regle}}">
                                                     </td>
                                                 </tr>
@@ -120,12 +120,12 @@
                                         </table>
                                     </div>
 
-                                    <div class="text-center">
-                                        <button type="submit" class="btn btn-primary">Enregistrer</button>
-                                        <button type="reset" class="btn btn-secondary">Annuler</button>
+                                    <div class="col-lg-12 d-flex flex-row align-items-center justify-content-between">
+                                        <button type="submit" class="btn btn-sm btn-dark text_orange w-100 submitBtn"><i class="bi bi-check-circle"></i> Enregistrer</button>
+                                        <button type="button" class="btn btn-sm btn-dark text_orange w-100 loadingBtn" hidden><span class="spinner-border spinner-border-sm text_orange loading"></span> En cours ...</button>
                                     </div>
-                                </form>
 
+                                </form>
                         </div>
                     </div>
                 </div>
@@ -163,7 +163,7 @@
                                         <td data-name="unite" contenteditable="false"> ${data.articles[0].unite}
                                             <input type="hidden" name="unite[]" readonly value="${data.articles[0].unite_mesure_id}" class="form-control">
                                         </td>
-                                        <td><button class="btn btn-danger btn-sm delete-row"><i class="bi bi-trash"></i></button></td>
+                                        <td><button class="btn bg-dark text_orange btn-sm delete-row"><i class="bi bi-trash"></i></button></td>
                                     </tr>`;
 
                         $('#editableTable tbody').append(firstRow);
@@ -171,7 +171,7 @@
                         for (let i = 1; i < data.articles.length; i++) {
                             const newRow = `
                                         <tr>
-                                            <td data-name="article">${data.articles[i].nom}
+                                            <td data-name="article">  ${data.articles[i].nom}
                                             <input type="hidden" name="article[]" readonly value="${data.articles[i].article_id}" class="form-control">
 
                                                 </td>
@@ -183,7 +183,7 @@
                                             <td data-name="unite" contenteditable="false"> ${data.articles[i].unite}
                                             <input type="hidden" name="unite[]" readonly value="${data.articles[i].unite_mesure_id}" class="form-control">
                                                 </td>
-                                            <td><button class="btn btn-danger btn-sm delete-row"><i class="bi bi-trash"></i></button></td>
+                                            <td><button class="btn bg-dark text_orange btn-sm delete-row"><i class="bi bi-trash"></i></button></td>
                                         </tr>`;
 
                             $('#editableTable tbody').append(newRow);
@@ -300,7 +300,7 @@
                                         <td data-name="unite" contenteditable="false"> ${data.articles[0].unite}
                                             <input type="hidden" name="unite[]" readonly value="${data.articles[0].unite_mesure_id}" class="form-control">
                                         </td>
-                                        <td><button class="btn btn-danger btn-sm delete-row"><i class="bi bi-trash"></i></button></td>
+                                        <td><button class="btn bg-dark text_orange btn-sm delete-row"><i class="bi bi-trash"></i></button></td>
                                     </tr>`;
 
                         $('#editableTable tbody').append(firstRow);
@@ -320,7 +320,7 @@
                                             <td data-name="unite" contenteditable="false"> ${data.articles[i].unite}
                                             <input type="hidden" name="unite[]" readonly value="${data.articles[i].unite_mesure_id}" class="form-control">
                                                 </td>
-                                            <td><button class="btn btn-danger btn-sm delete-row"><i class="bi bi-trash"></i></button></td>
+                                            <td><button class="btn bg-dark text_orange btn-sm delete-row"><i class="bi bi-trash"></i></button></td>
                                         </tr>`;
 
                             $('#editableTable tbody').append(newRow);

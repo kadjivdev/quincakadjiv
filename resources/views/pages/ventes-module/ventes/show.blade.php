@@ -8,10 +8,11 @@
                 <h1 style="font-size:150%" class="float-left">Détails vente n° {{$item->factureVente?->num_facture}} | Client : {{$item->acheteur?->nom_client}} </h1>
             </div>
             <div class="col-3 justify-content-end" >
-                <a href="{{ route('ventes.index')}}" class="btn btn-success float-end mx-2"> <i class="bi bi-arrow-left"></i> Retour</a>
+                <a href="{{ route('ventes.index')}}" class="btn btn-sm bg-dark text_orange float-end mx-2"> <i class="bi bi-arrow-left"></i> Retour</a>
 
             </div>
         </div>
+        
         <div class="pagetitle d-flex">
             <div class="col-6">
                 {{-- <h1 class="float-left">Détails vente n° {{Carbon\Carbon::parse($item->created_at)->locale('fr_FR')->isoFormat('ll')}} </h1> --}}
@@ -24,11 +25,11 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Liste des articles  <span class="badge text-bg-success">{{ $item->reference }}</span>
+                            <h5 class="card-title text-dark">Liste des articles  <span class="badge bg-dark text_orange">{{ $item->reference }}</span>
                                 </h5>
 
-                            <table id="example" class=" table table-bordered border-warning  table-hover table-warning table-sm">
-                                <thead>
+                            <table id="example" class=" table table-bordered border-warning  table-hover table-striped table-sm">
+                                <thead class="bg-dark">
                                     <tr>
                                         <th>N°</th>
                                         <th>

@@ -33,34 +33,30 @@
         <section class="section">
             <div class="row">
                 <div class="col-lg-12">
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-                    @if (session('success'))
-                        <div class="alert alert-success">
-                            {{ session('success') }}
-                        </div>
-                    @endif
                     <div class="card">
-                        <div class="card-body">
+                        <div class="card-body pt-1">
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+                            @if (session('success'))
+                                <div class="alert alert-success">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
                             @if ($solde > 0)
-                                <h5 class="card-title">Solde des Opérations : <b
-                                        style="font-size:30px; text-align:center; font-weight:bolder; background-color: rgba(13, 255, 97, 0.79);">{{ number_format($solde, 2, ',', ' ') }}
-                                        FCFA</b></h5>
+                                <h5 class="card-title">Solde des Opérations : <b class="text_orange" style="font-size:30px; text-align:center; font-weight:bolder; background-color: #000;">{{ number_format($solde, 2, ',', ' ') }} FCFA</b></h5>
                             @else
-                                <h5 class="card-title">Solde des Opérations : <b
-                                        style="font-size:30px; text-align:center; font-weight:bolder; background-color: rgba(255, 12, 12, 0.62);">{{ number_format($solde, 2, ',', ' ') }}
-                                        FCFA</b></h5>
+                                <h5 class="card-title">Solde des Opérations : <b class="text_orange" style="font-size:30px; text-align:center; font-weight:bolder; background-color: #000;">{{ number_format($solde, 2, ',', ' ') }} FCFA</b></h5>
                             @endif
 
-                            <table id="example" class=" table table-bordered border-warning  table-hover table-warning table-sm">
-                                <thead>
+                            <table id="example" class=" table table-bordered border-warning  table-hover table-striped table-sm">
+                                <thead class="table-dark">
                                     <tr>
                                         <th style="width: 5% !important;">N°</th>
                                         <th style="width: 15% !important;">
@@ -81,8 +77,8 @@
                                             <td style="width: 40% !important; ">
                                                 {{ $typeOpDescriptions[$op->type_op] ?? 'Autre' }}
                                             </td>
-                                            <td
-                                                style="width: 20% !important; font-size:18px; text-align:center; font-weight:bolder; background-color: rgba(255, 12, 12, 0.62);">
+                                            <td class="text_orange"
+                                                style="width: 20% !important; font-size:18px; text-align:center; font-weight:bolder; background-color: #000;">
                                                 {{ $op->type_op == 'FAC_AC' ||
                                                 $op->type_op == 'FAC_VP' ||
                                                 $op->type_op == 'FAC_VC' ||
@@ -93,8 +89,8 @@
 
                                             </td>
 
-                                            <td
-                                                style="width: 20% !important; font-size:18px; text-align:center; font-weight:bolder; background-color: rgba(13, 255, 97, 0.79);">
+                                            <td class="bg-light"
+                                                style="width: 20% !important; font-size:18px; text-align:center; font-weight:bolder;">
                                                 {{ $op->type_op == 'REG'
                                                     ? number_format($op->montant_op, 2, ',', ' ')
                                                     : ($op->type_op == 'ACC' || $op->type_op == 'Acc'

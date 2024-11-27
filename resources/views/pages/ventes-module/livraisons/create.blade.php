@@ -8,26 +8,25 @@
         <section class="section">
             <div class="row">
                 <div class="col-lg-12">
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-                    @if (session('success'))
-                        <div class="alert alert-success">
-                            {{ session('success') }}
-                        </div>
-                    @endif
                     <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Enregistrer une livraison client</h5>
+                        <div class="card-body py-1">
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+                            @if (session('success'))
+                                <div class="alert alert-success">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
+                            <h5 class="card-title text-dark">Enregistrer une livraison client</h5>
                             <form class="row g-3" action="{{ route('deliveries.store') }}" method="POST">
                                 @csrf
-
                                 <div class="col-6">
                                     <label class="form-label" for="client_id">Client</label>
                                     {{-- <input type="text" name="client_nom" readonly id="clientNom" class="form-control" required> --}}
@@ -95,10 +94,9 @@
                                         </tbody>
                                     </table>
                                 </div>
-
-                                <div class="text-center">
-                                    <button type="submit" class="btn btn-primary">Enregistrer</button>
-                                    <button type="reset" class="btn btn-secondary">Annuler</button>
+                                <div class="col-lg-12 d-flex flex-row align-items-center justify-content-between">
+                                    <button type="submit" class="btn btn-sm btn-dark text_orange w-100 submitBtn"><i class="bi bi-check-circle"></i> Enregistrer</button>
+                                    <button type="button" class="btn btn-sm btn-dark text_orange w-100 loadingBtn" hidden><span class="spinner-border spinner-border-sm text_orange loading"></span> En cours ...</button>
                                 </div>
                             </form>
                         </div>

@@ -9,29 +9,29 @@
     <section class="section">
         <div class="row">
             <div class="col-lg-12">
-                @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-                @endif
-                @if (session('success'))
-                <div class="alert alert-success">
-                    {{ session('success') }}
-                </div>
-                @endif
                 <div class="card">
-                    <div class="card-body">
+                    <div class="card-body py-1">
+                        @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
+                        @if (session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                        @endif
                         <div class="row">
                             <div class="col-6">
-                                <h5 class="card-title">Enregistrer une vente</h5>
+                                <h5 class="card-title text-dark">Enregistrer une vente</h5>
                             </div>
                             <div class="col-6 ">
-                                <button type="button" class="btn btn-primary float-end mt-3" id="confirmationbtn" data-bs-toggle="modal" data-bs-target="#clientModal">
-                                    Nouveau client
+                                <button type="button" class="btn btn-sm bg-dark text_orange float-end mt-3" id="confirmationbtn" data-bs-toggle="modal" data-bs-target="#clientModal">
+                                   + Nouveau client
                                 </button>
                             </div>
                         </div>
@@ -103,8 +103,8 @@
                                 </div>
 
                                 <div class="col-2 py-2">
-                                    <button class="btn btn-primary mt-4" type="button" id="ajouterArticle">
-                                        Ajouter</button>
+                                    <button class="btn btn-sm  bg-dark text_orange mt-4" type="button" id="ajouterArticle">
+                                       + Ajouter</button>
                                 </div>
                             </div>
 
@@ -126,43 +126,43 @@
                                     <tfoot>
                                         <tr>
                                             <td colspan="2">Montant HT</td>
-                                            <td colspan="3" style="background-color: rgba(233, 138, 10, 0.89);"><input type="text" id="totalInput" class="form-control" name="montant_facture" readonly>
+                                            <td colspan="3" class="bg-secondary" ><input type="text" id="totalInput" class="form-control" name="montant_facture" readonly>
                                             </td>
                                         </tr>
                                         <tr id="rowRem">
                                             <td colspan="2">Taux remise</td>
-                                            <td colspan="3" style="background-color: rgba(245, 39, 54, 0.8);"><input type="text" id="tauxRemise" class="form-control" name="taux_remise">
+                                            <td colspan="3" class="bg-secondary" ><input type="text" id="tauxRemise" class="form-control" name="taux_remise">
                                             </td>
                                         </tr>
                                         <tr id="rowAib" style="background-color: red !important;">
                                             <td colspan="2">Taux AIB (%)</td>
-                                            <td colspan="3" style="background-color: rgba(114, 93, 228, 0.89);"><input type="text" id="aib" value="{{ old('aib') }}" class="form-control" name="aib">
+                                            <td colspan="3" class="bg-secondary" ><input type="text" id="aib" value="{{ old('aib') }}" class="form-control" name="aib">
                                                 <input type="text" id="montant_aib" class="form-control" readonly>
                                             </td>
                                         </tr>
                                         <tr id="rowTva">
                                             <td colspan="2">TVA(%)</td>
-                                            <td colspan="3" style="background-color: rgba(150, 150, 150, 0.89);"><input type="number" id="tva" min="0" max="18" value="{{ old('tva') }}" class="form-control" name="tva">
+                                            <td colspan="3" class="bg-secondary" ><input type="number" id="tva" min="0" max="18" value="{{ old('tva') }}" class="form-control" name="tva">
                                                 <input type="text" id="montant_tva" class="form-control" readonly>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td colspan="2">Montant total</td>
-                                            <td colspan="3" style="background-color: rgba(233, 138, 10, 0.89);"><input type="text" id="totalNet" class="form-control" name="montant_total" readonly>
+                                            <td colspan="3" class="bg-secondary"><input type="text" id="totalNet" class="form-control" name="montant_total" readonly>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td colspan="2">Montant payer</td>
-                                            <td colspan="3" style="background-color: rgba(32, 214, 4, 0.89);"><input type="number" id="montant_regle" class="form-control" name="montant_regle" required>
+                                            <td colspan="3" class="bg-secondary" ><input type="number" id="montant_regle" class="form-control" name="montant_regle" required>
                                             </td>
                                         </tr>
                                     </tfoot>
                                 </table>
                             </div>
 
-                            <div class="text-center">
-                                <button type="submit" class="btn btn-primary">Enregistrer</button>
-                                <button type="reset" class="btn btn-secondary">Annuler</button>
+                            <div class="col-lg-12 d-flex flex-row align-items-center justify-content-between">
+                                <button type="submit" class="btn btn-sm btn-dark text_orange w-100 submitBtn"><i class="bi bi-check-circle"></i> Enregistrer</button>
+                                <button type="button" class="btn btn-sm btn-dark text_orange w-100 loadingBtn" hidden><span class="spinner-border spinner-border-sm text_orange loading"></span> En cours ...</button>
                             </div>
                         </form>
                     </div>
@@ -181,21 +181,28 @@
                         <form id="clientForm" method="post">
                             @csrf
 
-                            <input type="hidden" id="clientId" name="id" value="">
+                            <div class="p-3 shadow shadow-lg">
 
-                            <div class="col-12 mb-3">
-                                <label class="form-label">Client</label>
-                                <input type="text" name="nom_client" required id="nom_client" class="form-control">
+                                <input type="hidden" id="clientId" name="id" value="">
+    
+                                <div class="col-12 mb-3">
+                                    <label class="form-label">Client</label>
+                                    <input type="text" name="nom_client" required id="nom_client" class="form-control">
+                                </div>
+                                <div class="col-12 mb-3">
+                                    <label class="form-label">Téléphone</label>
+                                    <input type="text" name="phone" required id="phone" class="form-control">
+                                </div>
+                                <div class="col-12 mb-3">
+                                    <label class="form-label">Seuil</label>
+                                    <input type="text" name="seuil" required id="seuil" class="form-control">
+                                </div>
+    
+                                <div class="col-lg-12 d-flex flex-row align-items-center justify-content-between">
+                                    <button type="submit" class="btn btn-sm btn-dark text_orange w-100 submitBtn"><i class="bi bi-check-circle"></i> Enregistrer</button>
+                                    <button type="button" class="btn btn-sm btn-dark text_orange w-100 loadingBtn" hidden><span class="spinner-border spinner-border-sm text_orange loading"></span> En cours ...</button>
+                                </div>
                             </div>
-                            <div class="col-12 mb-3">
-                                <label class="form-label">Téléphone</label>
-                                <input type="text" name="phone" required id="phone" class="form-control">
-                            </div>
-                            <div class="col-12 mb-3">
-                                <label class="form-label">Seuil</label>
-                                <input type="text" name="seuil" required id="seuil" class="form-control">
-                            </div>
-                            <button type="submit" class="btn btn-primary subBtn">Enregistrer client</button>
                         </form>
                     </div>
                 </div>

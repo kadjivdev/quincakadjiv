@@ -29,7 +29,7 @@
 
             <a type="button" class="btn btn-dark position-relative petit_bouton" href="{{ route('articles.all_articles') }}">
                 <i class="bi bi-card-list"></i> Afficher Tous les articles
-                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg_orange text-dark">
                     {{count($articles_all)}}
                 </span>
             </a>

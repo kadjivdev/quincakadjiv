@@ -14,10 +14,10 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Liste des articles de la commande sup</h5>
+                            <h5 class="card-title text-dark">Liste des articles de la commande sup</h5>
 
-                            <table id="dataTable" class="table datatable">
-                                <thead>
+                            <table id="dataTable" class="table datatable table-striped">
+                                <thead class="table-dark">
                                     <tr>
                                         <th>N°</th>
                                         <th>
@@ -35,7 +35,6 @@
                                             <td>{{ $article->qte_cmde }}</td>
                                             <td>{{ $article->unite }}</td>
                                         </tr>
-
                                     @endforeach
                                 </tbody>
                             </table>

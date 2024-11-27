@@ -22,8 +22,6 @@ class FactureAncienneController extends Controller
     public function indexAccompte(Request $request)
     {
         $accomptes = AcompteClient::with(['client'])->get();
-
-
         return view('pages.reglements-client.list-accomptes', compact('accomptes'));
     }
 

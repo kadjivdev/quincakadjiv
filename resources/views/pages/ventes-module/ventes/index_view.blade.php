@@ -37,11 +37,11 @@
                 @endif
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Liste des ventes</h5>
+                        <h5 class="card-title text-dark">Liste des ventes</h5>
 
                         <!-- Table with stripped rows -->
-                        <table id="example" class=" table table-bordered border-warning  table-hover table-warning table-sm">
-                            <thead>
+                        <table id="example" class=" table table-bordered border-warning  table-hover table-striped table-sm">
+                            <thead class="table-dark">
                                 <tr>
                                     <th>N°</th>
                                     <th>Id Vente</th>
@@ -71,15 +71,15 @@
                                     <td>{{ number_format($vente->montant, 0, ',', ' ') }} </td>
                                     <td>
                                         <div class="dropdown">
-                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <button class="btn btn-sm w-100 bg-dark text_orange dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                                 <i class="bi bi-gear"></i>
                                             </button>
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                                 @can('ventes.voir-vente')
                                                 <li>
-                                                    <a href="{{ route('ventes.show', $vente->id) }}" data-bs-toggle="tooltip" class="dropdown-item" data-bs-placement="left" data-bs-title="Voir détails">Détails </a>
+                                                    <a href="{{ route('ventes.show', $vente->id) }}" data-bs-toggle="tooltip" class="dropdown-item" data-bs-placement="left" data-bs-title="Voir détails"><i class="bi bi-list"></i> Détails </a>
                                                     @if ($vente->encaisse == 'non')
-                                                        <a onclick="return confirm('Voulez-vius réellement encaisser cette vente ? Cette opération est irréversible')" href="{{ route('ventes-encaisser', $vente->id) }}" data-bs-toggle="tooltip" class="dropdown-item" data-bs-placement="left" data-bs-title="Voir détails">Encaisser </a>                                                        
+                                                        <a onclick="return confirm('Voulez-vius réellement encaisser cette vente ? Cette opération est irréversible')" href="{{ route('ventes-encaisser', $vente->id) }}" data-bs-toggle="tooltip" class="dropdown-item" data-bs-placement="left" data-bs-title="Voir détails"><i class="bi bi-cart3"></i> Encaisser </a>                                                        
                                                     @endif
                                                 </li>
                                             </ul>
