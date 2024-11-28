@@ -11,7 +11,7 @@
                     {{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop3">
                         Importer chauffeur
                     </button> --}}
-                    <a href="{{ route('vehicules.create') }}" class="btn btn-primary float-end"> + Ajouter un
+                    <a href="{{ route('vehicules.create') }}" class="btn btn-sm bg-dark text_orange float-end"> + Ajouter un
                         Véhicule</a>
                 </div>
             </div>
@@ -20,27 +20,27 @@
         <section class="section">
             <div class="row">
                 <div class="col-lg-12">
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-                    @if (session('success'))
-                        <div class="alert alert-success">
-                            {{ session('success') }}
-                        </div>
-                    @endif
                     <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Liste des Véhicules</h5>
+                        <div class="card-body py-2">
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+                            @if (session('success'))
+                                <div class="alert alert-success">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
+                            <h5 class="card-title text-dark">Liste des Véhicules</h5>
 
                             <!-- Table with stripped rows -->
-                            <table id="example" class="table table-bordered border-warning  table-hover table-warning table-sm">
-                                <thead>
+                            <table id="example" class="table table-bordered border-warning  table-hover table-striped table-sm">
+                                <thead class="table-dark">
                                     <tr>
                                         <th>N°</th>
                                         <th>Immatriculation</th>
@@ -52,8 +52,8 @@
                                         <tr>
                                             <td>{{ $i++ }} </td>
                                             <td>{{ $vehicule->num_vehicule }}</td>
-                                            <td><a href="{{ route('vehicules.edit', $vehicule->id) }}"
-                                                class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="left"
+                                            <td class="text-center"><a href="{{ route('vehicules.edit', $vehicule->id) }}"
+                                                class="btn btn-sm bg-dark text_orange" data-bs-toggle="tooltip" data-bs-placement="left"
                                                 data-bs-title="Modifier vehicule"> <i class="bi bi-pencil"></i> </a></td>
                                         </tr>
                                     @empty
@@ -67,7 +67,7 @@
                 </div>
             </div>
 
-            <div class="modal fade" id="staticBackdrop3" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            <div class="modal fade" id="staticBackdrop3" data-bs-keyboard="false" tabindex="-1"
                 aria-labelledby="staticBackdropLabel3" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -86,8 +86,10 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                                <button type="submit" class="btn btn-primary">Enregistrer</button>
+                                <div class="col-lg-12 d-flex flex-row align-items-center justify-content-between">
+                                    <button type="submit" class="btn btn-sm btn-dark text_orange w-100 submitBtn"><i class="bi bi-check-circle"></i> Enregistrer</button>
+                                    <button type="button" class="btn btn-sm btn-dark text_orange w-100 loadingBtn" hidden><span class="spinner-border spinner-border-sm text_orange loading"></span> En cours ...</button>
+                                </div>
                             </div>
                         </form>
                     </div>

@@ -8,23 +8,23 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="card">
-                        @if (session('success'))
-                            <div class="alert alert-success">
-                                {{ session('success') }}
-                            </div>
-                        @endif
-
-                        @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
-                        <div class="card-body">
-                            <h5 class="card-title">Modifier le chauffeur</h5>
+                        <div class="card-body py-3">
+                            @if (session('success'))
+                                <div class="alert alert-success">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
+    
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+                            <h5 class="card-title text-dark">Modifier le chauffeur</h5>
 
                             <!-- Vertical Form -->
                             <form class="row g-3" action="{{ route('chauffeurs.update', $chauffeur->id) }}"
@@ -46,10 +46,9 @@
                                     <input type="text" class="form-control" name="permis" id="permis" value="{{ $chauffeur->permis }}">
                                 </div>
 
-                                <div class="text-center">
-                                    <button type="submit" class="btn btn-primary">Modifier</button>
-                                    <div class="loader"></div>
-                                    <button type="reset" class="btn btn-secondary">Annuler</button>
+                                <div class="col-lg-12 d-flex flex-row align-items-center justify-content-between">
+                                    <button type="submit" class="btn btn-sm btn-dark text_orange w-100 submitBtn"><i class="bi bi-check-circle"></i> Enregistrer</button>
+                                    <button type="button" class="btn btn-sm btn-dark text_orange w-100 loadingBtn" hidden><span class="spinner-border spinner-border-sm text_orange loading"></span> En cours ...</button>
                                 </div>
                             </form>
 

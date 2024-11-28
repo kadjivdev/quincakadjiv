@@ -10,13 +10,13 @@
             <div class="col-6 justify-content-end">
                 @if (is_null($invent->validator_id))
                     @can('rapports.valider-inventaire')
-                        <button type="button" class="btn btn-primary float-end" id="confirmationbtn"
+                        <button type="button" class="btn btn-sm bg-dark text_orange float-end" id="confirmationbtn"
                             data-invent-id="{{ $invent->id }}" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            Valider inventaire
+                            <i class="bi bi-check-circle"></i> Valider inventaire
                         </button>
                     @endcan
                 @endif
-                <a href="{{ route('inventaires.index') }}" class="btn btn-success float-end mx-2"> <i
+                <a href="{{ route('inventaires.index') }}" class="btn btn-sm bg-dark text_orange float-end mx-2"> <i
                         class="bi bi-arrow-left"></i> Retour</a>
 
             </div>
@@ -27,10 +27,10 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Liste des articles du détail</h5>
+                            <h5 class="card-title text-dark">Liste des articles du détail</h5>
 
-                            <table id="dataTable" class="table datatable">
-                                <thead>
+                            <table id="example" class="table border border-warning table-sm table-striped table-hover">
+                                <thead class="table-dark">
                                     <tr>
                                         <th>N°</th>
                                         <th>
