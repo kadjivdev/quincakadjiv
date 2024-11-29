@@ -33,22 +33,22 @@
         <section class="section">
             <div class="row">
                 <div class="col-lg-12">
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-                    @if (session('success'))
-                        <div class="alert alert-success">
-                            {{ session('success') }}
-                        </div>
-                    @endif
                     <div class="card">
-                        <div class="card-body">
+                        <div class="card-body py-2">
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+                            @if (session('success'))
+                                <div class="alert alert-success">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
                             <div class="d-flex justify-content-between align-items-center">
                                 <h5 class="card-title mb-0 text-dark">Liste des programmations d'achats non Validées</h5>
                                 <span class="badge rounded-pill bg-dark">{{ count($bons) }} Prog en attente au
@@ -109,9 +109,9 @@
                                                             <li>
                                                                 @can('programmations-achat.modifier-bon-commande')
                                                                     <a href="{{ route('bon-commandes.edit', $bon->id) }}"
-                                                                        class="dropdown-item text-warning"
+                                                                        class="dropdown-item text-dark"
                                                                         data-bs-toggle="tooltip" data-bs-placement="left"
-                                                                        data-bs-title="Modifier le bon"> Modifier le Bon de
+                                                                        data-bs-title="Modifier le bon"> <i class="bi bi-pencil"></i> Modifier le Bon de
                                                                         Commande</a>
                                                                 @endcan
                                                             </li>
@@ -123,9 +123,9 @@
                                                                         onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet bon de commande?');">
                                                                         @csrf
                                                                         @method('DELETE')
-                                                                        <button type="submit" class="dropdown-item text-danger"
+                                                                        <button type="submit" class="dropdown-item text-dark"
                                                                             data-bs-toggle="tooltip" data-bs-placement="left"
-                                                                            data-bs-title="Supprimer le bon ">Supprimer le Bon
+                                                                            data-bs-title="Supprimer le bon "><i class="bi bi-trash"></i> Supprimer le Bon
                                                                             de Commande</button>
                                                                     </form>
                                                                 @endcan

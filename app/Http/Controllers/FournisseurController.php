@@ -25,6 +25,8 @@ class FournisseurController extends Controller
         $fournisseurs = Fournisseur::orderBy("id","desc")->get();
         $total_restants = [];
 
+        $frn = Fournisseur::find(80);
+
         foreach ($fournisseurs as $fournisseur) {
             $id = $fournisseur->id;
 

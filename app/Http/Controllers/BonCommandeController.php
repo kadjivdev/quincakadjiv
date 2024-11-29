@@ -88,7 +88,6 @@ class BonCommandeController extends Controller
                 'user_id' => Auth::user()->id,
                 // 'reference' => date('dmY') . '-' . $lettres . '-B' . ($nbr + 1),
                 'reference' => 'KAD-' . 'PROG' . ($nbr + 1) . '-' . date('dmY') . '-' . $lettres,
-
             ]);
 
             if ($request->qte_cdes && count($request->qte_cdes) > 0) {
@@ -106,7 +105,6 @@ class BonCommandeController extends Controller
                 return redirect()->route('bon-commandes.create')->with('error', 'Erreur enregistrement Bon de commande.');
             }
 
-
             DB::commit();
             return redirect()->route('bon-commandes.index')->with('success', 'Bon de commande enregistré avec succès.');
         } catch (\Exception $e) {
@@ -118,6 +116,7 @@ class BonCommandeController extends Controller
     /**
      * Display the specified resource.
      */
+    
     public function show(string $id)
     {
         $bon = BonCommande::find($id);

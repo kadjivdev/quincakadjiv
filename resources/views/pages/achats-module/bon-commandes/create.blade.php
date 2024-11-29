@@ -200,7 +200,7 @@
                         <td>${articleNom}<input type="hidden" required name="articles[]" value="${articleId}"></td>
                         <td>${quantite} <input type="hidden" required name="qte_cdes[]" value="${quantite}"></td>
                         <td>${uniteNom} <input type="hidden" required name="unites[]" value="${uniteId}"></td>
-                        <td><button type="button" class="btn btn-danger btn-sm delete-row">Supprimer</button></td>
+                        <td><button type="button" class="btn bg-dark text_orange btn-sm delete-row">Supprimer</button></td>
                     </tr>`;
 
                 $('#editableTable tbody').append(newRow);

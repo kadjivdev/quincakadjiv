@@ -107,8 +107,10 @@
 
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Non</button>
-                                    <button type="button" class="btn btn-primary" id="confirmValidation">Oui</button>
+                                    <div class="col-lg-12 d-flex flex-row align-items-center justify-content-between">
+                                        <button type="submit" class="btn btn-sm btn-dark text_orange w-100 submitBtn" id="confirmValidation"><i class="bi bi-check-circle"></i> Enregistrer</button>
+                                        <button type="button" class="btn btn-sm btn-dark text_orange w-100 loadingBtn" hidden><span class="spinner-border spinner-border-sm text_orange loading"></span> En cours ...</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>

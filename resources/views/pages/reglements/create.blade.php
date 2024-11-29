@@ -94,7 +94,7 @@
                                         value="{{ old('reference') }}">
                                 </div>
 
-                                <div class="col-6 mb-3 d-none" id="preuveBloc">
+                                <div class="col-12 mb-3 d-none" id="preuveBloc">
                                     <label for="">Preuve de décharge</label>
                                     <input type="file" class="form-control" name="preuve_decharge"
                                         value="{{ old('preuve_decharge') }}">

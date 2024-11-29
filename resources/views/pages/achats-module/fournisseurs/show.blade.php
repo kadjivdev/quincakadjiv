@@ -135,7 +135,7 @@
                             </div>
 
                             <table id="example"
-                                class="table table-bordered border-warning  table-sm table-striped">
+                                class="table table-bordered border-warning table-hover  table-sm table-striped">
 
                                 <thead class="table-dark">
                                     <tr>

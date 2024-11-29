@@ -236,6 +236,7 @@ class ArticleController extends Controller
         $article = Article::find($request->article_id);
 
         $conversionItem = $article->getPivotValueForUnite($request->unite_mesure_id);
+        // dd($conversionItem);
         if (!is_null($conversionItem)) {
             $qte_vrai = $request->qte_stock * $conversionItem;
         } else {
