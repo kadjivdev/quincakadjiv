@@ -17,6 +17,7 @@ use App\Models\LigneCommande;
 use App\Models\Approvisionnement;
 use App\Models\Client;
 use App\Models\CompteClient;
+use App\Models\Devis;
 use App\Models\DevisDetail;
 use App\Models\FactureVente;
 use App\Models\Livraison_pv;
@@ -198,7 +199,7 @@ class RapportController extends Controller
 
     public function ventes(Request $request)
     {
-        $ventes = Vente::with(['typeVente']);
+        $ventes = Vente::with(['typeVente', 'acheteur']);
         if ($request->has('start_date') && $request->has('end_date')) {
             $startDate = Carbon::parse($request->start_date);
             $endDate = Carbon::parse($request->end_date)->endOfDay();
@@ -215,6 +216,46 @@ class RapportController extends Controller
         $i = 1;
         $typeVentes = TypeVente::all();
         return view('pages.rapport.rapport_vente', compact('ventes', 'i', 'typeVentes'));
+    }
+
+    public function ventesAll(Request $request)
+    {
+        $ventes = Vente::with(['typeVente', 'acheteur']);
+        if ($request->has('start_date') && $request->has('end_date')) {
+            $startDate = Carbon::parse($request->start_date);
+            $endDate = Carbon::parse($request->end_date)->endOfDay();
+
+            $ventes = $ventes->whereBetween('ventes.created_at', [$startDate, $endDate]);
+        }
+
+        $devis = Devis::with(['client']);
+        if ($request->has('start_date') && $request->has('end_date')) {
+            $startDate = Carbon::parse($request->start_date);
+            $endDate = Carbon::parse($request->end_date)->endOfDay();
+
+            $devis = $devis->whereBetween('devis.created_at', [$startDate, $endDate]);
+        }
+
+        // if ($request->has('type_vente') &&  $request->type_vente != '') {
+        //     $ventes = $ventes->where('ventes.type_vente_id', $request->type_vente);
+        // }
+
+        $ventes = $ventes->get();
+        $devis = $devis->get();
+
+        // dd($devis[0]->montant_total);
+
+        $ventesAll = $ventes->concat($devis);
+        $ventesAllSorted = $ventesAll->sortByDesc('id')->values();
+
+        // dd($ventesAllSorted);
+
+        $total_proforma = $devis->sum('montant_total');
+        $total_comptant = $ventes->sum('montant');
+
+        $i = 1;
+        $typeVentes = TypeVente::all();
+        return view('pages.rapport.rapport_vente_all', compact('ventesAllSorted', 'i', 'total_comptant', 'total_proforma'));
     }
 
     public function facturesFrs(Request $request)

@@ -15,7 +15,7 @@ class CategorieController extends Controller
      */
     public function index()
     {
-        $categories = Categorie::orderBy("id","desc")->get();
+        $categories = Categorie::all();
         return view('pages.categories.index', compact('categories'));
     }
 
@@ -98,11 +98,6 @@ class CategorieController extends Controller
         //
     }
 
-    public function retrieve(Request $request, $category)
-    {
-        $categ = Categorie::find($category);
-        return response()->json($categ);
-    }
 
     /**
      * Update the specified resource in storage.

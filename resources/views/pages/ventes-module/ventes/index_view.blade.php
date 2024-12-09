@@ -21,22 +21,22 @@
     <section class="section">
         <div class="row">
             <div class="col-lg-12">
-                @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-                @endif
-                @if (session('success'))
-                <div class="alert alert-success">
-                    {{ session('success') }}
-                </div>
-                @endif
                 <div class="card">
-                    <div class="card-body">
+                    <div class="card-body py-1">
+                        @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
+                        @if (session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                        @endif
                         <h5 class="card-title text-dark">Liste des ventes</h5>
 
                         <!-- Table with stripped rows -->
@@ -82,10 +82,10 @@
                                                         <a onclick="return confirm('Voulez-vius réellement encaisser cette vente ? Cette opération est irréversible')" href="{{ route('ventes-encaisser', $vente->id) }}" data-bs-toggle="tooltip" class="dropdown-item" data-bs-placement="left" data-bs-title="Voir détails"><i class="bi bi-cart3"></i> Encaisser </a>                                                        
                                                     @endif
                                                 </li>
+                                                @endcan
                                             </ul>
                                         </div>
                                     </td>
-                                    @endcan
 
                                 </tr>
                                 @empty

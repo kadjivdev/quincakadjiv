@@ -16,7 +16,6 @@ use App\Models\CompteClient;
 use App\Models\Encaissement;
 use App\Models\EncaisseReglement;
 use App\Models\FactureVente;
-use App\Models\Reglement;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\DB;
@@ -43,6 +42,7 @@ class ReglementClientController extends Controller
     public function regByCltToValid()
     {
         $reglements = ReglementClient::where('validated_at', null)->with(['client'])->orderBy('id', 'desc')->get(); 
+        // dd($reglements);
         return view('pages.reglements-client.reglement_by_clt_to_valid', compact('reglements'));
     }
 
@@ -246,7 +246,7 @@ class ReglementClientController extends Controller
                 ->with('success', 'Règlement validé avec succès.');
         }catch (\Exception $e) {
             DB::rollback();
-            return redirect()->route('real-reglements-clt', $client->id )->withErrors(['message' => 'Erreur validation règlement']);
+            return redirect()->route('real-reglements-clt', $client->id )->withErrors(['message' => 'Erreur validation règlement '.$e->getMessage()]);
         }
     }
 
@@ -356,7 +356,7 @@ class ReglementClientController extends Controller
         $solde = 0;
 
         foreach ($compte as $transaction) {
-            if ($transaction->type_op == "FAC" || $transaction->type_op == "FAC_AC" || $transaction->type_op == "FAC_VP" || $transaction->type_op == "FAC_VC") {
+            if ($transaction->type_op == "FAC" || $transaction->type_op == "FAC_AC" || $transaction->type_op == "FAC_VP" || $transaction->type_op == "FAC_VC" || $transaction->type_op == "FAC_RAN" || $transaction->type_op == "TRP") {
                 // Si c'est un règlement ou un acompte, on soustrait le montant
                 $solde -= $transaction->montant_op;
             } else {
@@ -378,10 +378,14 @@ class ReglementClientController extends Controller
 
     }
 
+
     public function getAccompteByClient($id)
     {
+
         $client = Client::find($id);
+
         $accomptes = AcompteClient::where('client_id', $client->id)->get();
+
         $getDateReglementByRegId = function ($reglement_client_id) {
             ReglementClient::find($reglement_client_id);
         };

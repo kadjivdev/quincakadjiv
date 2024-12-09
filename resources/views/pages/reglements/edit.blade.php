@@ -54,7 +54,7 @@
                             </div>
                         @endif
                         <div class="card-body">
-                            <h5 class="card-title"><i class="bi bi-pencil"></i> Modifier un règlement</h5>
+                            <h5 class="card-title text-dark"><i class="bi bi-pencil"></i> Modifier un règlement</h5>
 
                             <!-- Vertical Form -->
                             <form class="row g-3" action="{{ route('reglements.update', $reglement->id) }}" method="POST"

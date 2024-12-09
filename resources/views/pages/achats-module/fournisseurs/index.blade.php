@@ -86,7 +86,7 @@
                                                     <a href="{{ route('fournisseurs.edit', $fournisseur->id) }}"
                                                         class="dropdown-item" data-bs-toggle="tooltip"
                                                         data-bs-placement="left"
-                                                        data-bs-title="Modifier fournisseur"> Modifier le
+                                                        data-bs-title="Modifier fournisseur"><i class="bi bi-pencil"></i> Modifier le
                                                         fournisseur </a>
                                                     @endcan
                                                 </li>
@@ -96,7 +96,7 @@
                                                     <a href="{{ route('fournisseurs.show', $fournisseur->id) }}"
                                                         class="dropdown-item" data-bs-toggle="tooltip"
                                                         data-bs-placement="left" data-bs-title="Voir détails">
-                                                        Historique du Compte </a>
+                                                        <i class="bi bi-list"></i> Historique du Compte </a>
                                                     @endcan
                                                 </li>
                                             </ul>

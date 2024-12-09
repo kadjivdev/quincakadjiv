@@ -365,8 +365,12 @@ class FactureController extends Controller
 
             $facture->save();
 
-            CompteClient::where('facture_id', $id)->where('type_op', 'FAC_VP')->delete();
-            CompteClient::where('facture_id', $id)->where('type_op', 'REG_VP')->delete();
+            // CompteClient::where('facture_id', $id)->where('type_op', 'FAC_VP')->delete();
+            // CompteClient::where('facture_id', $id)->where('type_op', 'REG_VP')->delete();
+
+
+            // CompteClient::where('facture_id', $id)->where('client_id', $request->client_id)->where('type_op', 'FAC_VP')->delete();
+            // CompteClient::where('facture_id', $id)->where('client_id', $request->client_id)->where('type_op', 'REG_VP')->delete();
 
             // $compte_client = CompteClient::create([
             //     'date_op' => $facture->date_facture,
@@ -394,10 +398,11 @@ class FactureController extends Controller
             // dd($compte_client);
 
             ArticleFacture::where('facture_id', $id)->delete();
+            DevisDetail::where('devis_id', $request->devis_id)->delete();
             $count = count($request->qte_cmde);
             for ($i = 0; $i < $count; $i++) {
 
-                $devis = DevisDetail::where('devis_id', $request->devis_id)->where('article_id', $request->article[$i])->first();
+                // $devis = DevisDetail::where('devis_id', $request->devis_id)->where('article_id', $request->article[$i])->first();
 
                 $ligne = ArticleFacture::create([
                     'qte_cmd' => $request->qte_cmde[$i],
@@ -407,10 +412,18 @@ class FactureController extends Controller
                     'facture_id' => $facture->id,
                 ]);
 
-                $devis->update([
+                DevisDetail::create([
                     'qte_cmde' => $request->qte_cmde[$i],
-                    'prix_unit' => $request->prix_unit[$i]
+                    'article_id' => $request->article[$i],
+                    'prix_unit' => $request->prix_unit[$i],
+                    'unite_mesure_id' => $request->unite[$i],
+                    'devis_id' => $request->devis_id,
                 ]);
+
+                // $devis->update([
+                //     'qte_cmde' => $request->qte_cmde[$i],
+                //     'prix_unit' => $request->prix_unit[$i]
+                // ]);
             }
 
             DB::commit();

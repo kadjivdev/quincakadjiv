@@ -27,10 +27,18 @@ class BonCommandeController extends Controller
     public function index()
     {
         $i = 1;
+        // $users = Auth::user()->boutique()->users->pluck('id');
+        // dd($users);
         $bons = BonCommande::with('createur')
         ->whereNull('valideur_id')
         ->orderBy('id', 'desc')
         ->get();
+
+
+        // foreach($bons AS $bon){
+        //     print_r($bon->createur->name);
+        // }
+
         $arrayIds = Commande::pluck('bon_commande_id')->toArray();
         return view('pages.achats-module.bon-commandes.index', compact('bons', 'i', 'arrayIds'));
     }
@@ -88,6 +96,7 @@ class BonCommandeController extends Controller
                 'user_id' => Auth::user()->id,
                 // 'reference' => date('dmY') . '-' . $lettres . '-B' . ($nbr + 1),
                 'reference' => 'KAD-' . 'PROG' . ($nbr + 1) . '-' . date('dmY') . '-' . $lettres,
+
             ]);
 
             if ($request->qte_cdes && count($request->qte_cdes) > 0) {
@@ -105,6 +114,7 @@ class BonCommandeController extends Controller
                 return redirect()->route('bon-commandes.create')->with('error', 'Erreur enregistrement Bon de commande.');
             }
 
+
             DB::commit();
             return redirect()->route('bon-commandes.index')->with('success', 'Bon de commande enregistré avec succès.');
         } catch (\Exception $e) {
@@ -116,7 +126,6 @@ class BonCommandeController extends Controller
     /**
      * Display the specified resource.
      */
-    
     public function show(string $id)
     {
         $bon = BonCommande::find($id);
@@ -224,6 +233,8 @@ class BonCommandeController extends Controller
         $bon->valideur_id = Auth::user()->id;
         $bon->save();
         return response()->json(['redirectUrl' => route('bon-commandes.index')]);
+
+        // return redirect()->route('bon-commandes.index')->with('success', 'Bon de commande validé avec succès.');
     }
 
     public function cancelValider($id)
@@ -233,6 +244,8 @@ class BonCommandeController extends Controller
         $bon->valideur_id = null;
         $bon->save();
         return response()->json(['redirectUrl' => route('bon-commandes.index')]);
+
+        // return redirect()->route('bon-commandes.index')->with('success', 'Bon de commande validé avec succès.');
     }
 
     public function generatePDF($id)

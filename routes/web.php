@@ -4,6 +4,7 @@ use App\Http\Controllers\AgentController;
 use App\Http\Controllers\ApprovisionnementController;
 use App\Http\Controllers\AnnulationLivraisonFournisseurController;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\BackStockController;
 use App\Http\Controllers\BonCommandeController;
 use App\Http\Controllers\BonLivraisonController;
 use App\Http\Controllers\BonVenteController;
@@ -69,9 +70,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('fournisseurs', FournisseurController::class);
 
     Route::resource('categories', CategorieController::class);
-    Route::patch('/categories/{id}/update', [CategorieController::class, 'update'])->name('categories.update');
+    Route::put('/categories/{id}', [CategorieController::class, 'update'])->name('categories.update');
     Route::put('/categories/{id}', [CategorieController::class, 'destroy'])->name('categories.destroy');
-    Route::get('/categories/{id}/retrieve', [CategorieController::class, 'retrieve'])->name('categories.retrieve');
 
     Route::resource('articles', ArticleController::class);
     Route::resource('bon-commandes', BonCommandeController::class);
@@ -102,6 +102,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('inventaires-bulk', InventaireBulkController::class);
     Route::resource('bons-ventes', LivraisonVenteComptController::class);
     Route::resource('agents', AgentController::class);
+    Route::resource('back_stock', BackStockController::class);
 
     Route::put('reglement/validate/{id}', [ReglementController::class, 'validateReg'])->name('validate-reg');
     Route::delete('reglement/delete/{id}', [ReglementController::class, 'deleteReg'])->name('delete-reg');
@@ -182,6 +183,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/reglement-clt-to-valid', [ReglementClientController::class, 'regByCltToValid'])->name('reglements-clt-to-valid');
 
     // Ajax routes
+
     Route::get('/articles-supl/{id}', [SupplementController::class, 'lignesSup']);
     Route::get('/articles-frs/{id}/{bonId}', [CommandeController::class, 'articlesParFournisseur'])->name('articles-frs');
     Route::get('/unites-list', [BonCommandeController::class, 'listUnites'])->name('unites-list');
@@ -225,6 +227,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/rapport_livraison_frs', [RapportController::class, 'rapport_livraison_frs'])->name('rap_liv_frs');
     Route::get('/rapport_livraison_frs_detail/{liv}', [RapportController::class, 'rapport_livraison_frs_detail'])->name('rap_liv_frs_detail');
     Route::get('/rapport_factures_ventes', [RapportController::class, 'ventes'])->name('rap_fact_vte');
+    Route::get('/rapport_factures_ventes_all', [RapportController::class, 'ventesAll'])->name('rap_fact_vte_all');
     Route::get('/rapport_fact_frs', [RapportController::class, 'facturesFrs'])->name('rap_fact_frs');
     Route::get('/rapport_fact_vte_clt', [RapportController::class, 'facturesVteClt'])->name('rap_fact_vte_clt');
     Route::get('/rapport_fact_clt_non_reg', [RapportController::class, 'facturesCltSansReglemt'])->name('facturesCltSansReglemt');
@@ -246,7 +249,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::put('/update_compte_client', [UpdateSystemByAdmin::class, 'updateCompteClient'])->name('update_cpt_clt');
     Route::put('/update_compte_frs', [UpdateSystemByAdmin::class, 'updateCompteFrs'])->name('update_cpt_frs');
 
-
     Route::post('/show_frs', [FournisseurController::class, 'show_frs']);
     Route::post('/updateMasse', [TauxConversionController::class, 'updateMasse'])->name('TauxSupplementMassUpdate');
     Route::post('/updateBaseMasse', [TauxConversionController::class, 'UniteBaseMassUpdate'])->name('UniteBaseMassUpdate');
@@ -266,4 +268,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/valider-transport/{id}', [TransportController::class, 'validateRequete'])->name('valider-transport');
 
     Route::get('devis_client/{client_id}', [ClientController::class, 'devisByClient']);
+    Route::get('vente-validation/{id}', [VenteController::class, 'validation'])->name('vente-validation');
+    Route::get('back-validation/{id}', [BackStockController::class, 'validation'])->name('back-validation');
+    Route::get('back-validate/{id}', [BackStockController::class, 'back_validate'])->name('back-validate');
+
+    Route::get('/bons-par-client/{client_id}', [LivraisonVenteComptController::class, 'getBonsParClient']);
+
+    Route::get('/client-synchro', [ClientController::class, 'synchronizeCompteClient']);
 });

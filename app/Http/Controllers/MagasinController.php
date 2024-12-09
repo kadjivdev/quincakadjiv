@@ -24,7 +24,7 @@ class MagasinController extends Controller
     {
         $i = 1;
         $user = Auth::user();
-        if ($user->isAdmin()) {
+        if ($user->isAdmin() || $user->id==4) {
             $magasins = Magasin::all();
         } else {
             $magasins = Magasin::where('point_vente_id', $user->point_vente_id)->get();

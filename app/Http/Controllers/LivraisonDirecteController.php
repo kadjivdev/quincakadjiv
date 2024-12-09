@@ -21,8 +21,9 @@ class LivraisonDirecteController extends Controller
      */
     public function index()
     {
+
         $i = 1;
-        
+
         $livraisons = DB::table('livraison_directes')
             ->join('clients', 'clients.id', '=', 'livraison_directes.client_id')
             ->join('ligne_commandes', 'ligne_commandes.id', '=', 'livraison_directes.ligne_commande_id')

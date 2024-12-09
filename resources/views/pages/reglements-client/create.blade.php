@@ -95,6 +95,7 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
     <script>
         $('#type_reglement').change(function() {
             var typeR = $(this).val();
@@ -110,13 +111,11 @@
 
         $('#client_select').change(function() {
             var frsId = $(this).val();
+
             $.ajax({
                 url: apiUrl + '/facturesClt/' + cltId,
                 type: 'GET',
                 success: function(data) {
-
-                    console.log(data.factures);
-
                     var options = '<option value="">Choisir la facture</option>';
                     $.each(Object.values(data.factures), function(index, facture) {
                         var reste = parseFloat(facture.montant_total) - parseFloat(facture
@@ -126,8 +125,6 @@
                     });
 
                     $('#facture_select').html(options);
-
-
                 },
                 error: function(error) {
                     console.log('Erreur de la requête Ajax :', error);
@@ -136,15 +133,11 @@
         });
 
         $(document).ready(function() {
-
             var cltId = $('#client_select').val();
             $.ajax({
                 url: apiUrl + '/facturesClt/' + cltId,
                 type: 'GET',
                 success: function(data) {
-
-                    console.log(data.factures);
-
                     var options = '<option value="">Choisir la facture</option>';
                     $.each(Object.values(data.factures), function(index, facture) {
                         var reste = parseFloat(facture.montant_total) - parseFloat(facture
@@ -154,8 +147,6 @@
                     });
 
                     $('#facture_select').html(options);
-
-
                 },
                 error: function(error) {
                     console.log('Erreur de la requête Ajax :', error);
@@ -213,6 +204,5 @@
             });
         });
     </script>
-
 </main>
 @endsection

@@ -22,6 +22,7 @@ class Vente extends Model
         'date_vente',
         'validated_at',
         'validator_id',
+        'bon_livraison',
     ];
 
     public function lignesVente(): HasMany

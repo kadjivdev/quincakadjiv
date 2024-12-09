@@ -99,6 +99,8 @@ class PermissionTableSeeder extends Seeder
                 'ajouter-reglement-frs'    => 'Ajouter reglement fournisseur',
                 'modifier-reglement-frs'    =>             'Modifier reglement fournisseur',
                 'details-d-une-facture-frs'  =>     'Détails d\'une facture fournisseur',
+
+
             ],
 
             'clients'  => [

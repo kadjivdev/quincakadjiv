@@ -23,7 +23,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="card">
-                        <div class="card-body mt-1">
+                        <div class="card-body py-1">
                             @if ($errors->any())
                                 <div class="alert alert-danger">
                                     <ul>
@@ -47,7 +47,7 @@
 
                             <!-- Table with stripped rows -->
                             <table id="example" class="table table-bordered border-warning table-striped table-hover table-sm">
-                                <thead class="bg-dark">
+                                <thead class="table-dark">
                                     <tr>
                                         <th>N°</th>
                                         <th>Réf Commande</th>

@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Spatie\Permission\Models\Role;
 
 class LoginController extends Controller
 {
@@ -31,7 +29,7 @@ class LoginController extends Controller
         // dd('ok1');
 
         if (Auth::attempt($request->only($loginType, 'password')) && Auth::user()->is_active) {
-            return redirect()->intended('/');
+                 return redirect()->intended('/');
         }
 
         return back()->withErrors(['username' => 'Identifiants incorrectes.']);

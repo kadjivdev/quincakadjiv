@@ -109,14 +109,14 @@
                                                                 <a href="{{ route('commandes.show', $commande->id) }}"
                                                                     data-bs-toggle="tooltip" data-bs-placement="left"
                                                                     data-bs-title="Voir les détails du bon"
-                                                                    class="dropdown-item"> Voir détail </a>
+                                                                    class="dropdown-item"><i class="bi bi-list"></i> Voir détail </a>
                                                             </li>
                                                             <li>
                                                                 <a target="_blank"
                                                                     href="{{ url('generate_bon_cde', $commande->id) }}"
                                                                     class="dropdown-item" data-bs-toggle="tooltip"
                                                                     data-bs-placement="left"
-                                                                    data-bs-title="Générer le pdf à imprimer"> Générer PDF </a>
+                                                                    data-bs-title="Générer le pdf à imprimer"><i class="bi bi-file-pdf"></i> Générer PDF </a>
                                                             </li>
                                                         @endcan
 

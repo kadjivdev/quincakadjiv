@@ -188,7 +188,7 @@ class VenteController extends Controller
             'taux_remise' => 'required',
             'type_id' => 'required',
             'date_fact' => 'required',
-            // 'magasin_id' => 'required',
+            'bon_livraison' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -213,7 +213,7 @@ class VenteController extends Controller
                 'client_id' => $request->client_id,
                 'date_vente' => $request->date_fact,
                 'reference' => 'KAD-'. 'VTEC' . ($nbrv + 1).'-'.date('dmY') . '-' . $lettres,
-
+                'bon_livraison' => $request->bon_livraison
             ]);
 
             $nbr = BonVente::max('id');
@@ -288,6 +288,27 @@ class VenteController extends Controller
             // dd($e);
             return redirect()->route('ventes.index')->withErrors(['message' => 'Erreur enregistrement vente']);
         }
+    }
+
+    public function validation($id) {
+        $vente = Vente::with('factureVente')->with('acheteur')->find($id);
+        $client = $vente->acheteur->nom_client;
+        $lignes =  DB::table('vente_lignes')
+            ->join('unite_mesures', 'unite_mesures.id', '=', 'vente_lignes.unite_mesure_id')
+            ->join('articles', 'articles.id', '=', 'vente_lignes.article_id')
+            ->where('vente_lignes.vente_id', $id)
+            ->select('vente_lignes.*', 'unite_mesures.unite', 'articles.nom')
+            ->get();
+
+        $types = FactureType::all();
+        $typeVentes = TypeVente::all();
+        $articles = Article::all();
+        $data_vente = dataVente::where('vente_id', $id)->first();
+
+        // dd($data_vente);
+        
+            
+        return view('pages.ventes-module.ventes.validation', compact('vente', 'lignes', 'types', 'typeVentes', 'articles', 'client', 'data_vente'));
     }
 
     public function validateVente($id)
@@ -559,6 +580,7 @@ class VenteController extends Controller
                 'type_vente_id' => $request->type_vente_id,
                 'montant' => $request->montant_regle,
                 'client_id' => $request->client_id,
+                'date_vente' => $request->date_fact,
             ]);
 
 
@@ -684,11 +706,12 @@ class VenteController extends Controller
         $typeVentes = TypeVente::all();
         $articles = Article::all();
         $data_vente = dataVente::where('vente_id', $id)->first();
+        $clients = Client::all();
 
         // dd($data_vente);
         
             
-        return view('pages.ventes-module.ventes.edit', compact('vente', 'lignes', 'types', 'typeVentes', 'articles', 'client', 'data_vente'));
+        return view('pages.ventes-module.ventes.edit', compact('vente', 'lignes', 'types', 'typeVentes', 'articles', 'client', 'data_vente', 'clients'));
     }
 
     /**
@@ -727,7 +750,8 @@ class VenteController extends Controller
                 'user_id' => Auth::user()->id,
                 'type_vente_id' => $request->type_vente_id,
                 'montant' => $request->montant_regle,
-                // 'client_id' => $request->client_id,
+                'client_id' => $request->client_id,
+                'date_vente' => $request->date_fact,
             ]);
 
 

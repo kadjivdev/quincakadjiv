@@ -22,6 +22,8 @@ class FactureAncienneController extends Controller
     public function indexAccompte(Request $request)
     {
         $accomptes = AcompteClient::with(['client'])->get();
+
+
         return view('pages.reglements-client.list-accomptes', compact('accomptes'));
     }
 
@@ -174,7 +176,7 @@ class FactureAncienneController extends Controller
         $lastRow = CompteClient::orderBy('id', 'desc')->get()->first();
 
         $compte_client = CompteClient::create([
-            'date_op' => $facture->date_op,
+            'date_op' => $facture->date_op ?? explode(' ', $facture->created_at)[0],
             'montant_op' => $facture->montant_acompte,
             'facture_id' => $lastRow->facture_id,
             'client_id' => $facture->client_id,

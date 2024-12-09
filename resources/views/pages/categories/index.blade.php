@@ -80,7 +80,7 @@
                                                 </li>
                                                 @endcan
 
-                                                <!-- can('articles.delete-category') -->
+                                                @can('articles.delete-category')
                                                 <li>
                                                     <form action="{{ route('categories.destroy', $categorie->id) }}"
                                                         class="form-inline" method="POST"
@@ -90,7 +90,7 @@
                                                         <button type="submit" class="dropdown-item text_orange"><i class="bi bi-trash3"></i> Supprimer</button>
                                                     </form>
                                                 </li>
-                                                <!-- endcan -->
+                                                @endcan
                                             </ul>
                                         </div>
                                     </td>

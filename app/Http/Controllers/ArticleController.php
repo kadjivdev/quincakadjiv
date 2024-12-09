@@ -35,18 +35,9 @@ class ArticleController extends Controller
     public function index()
     {
         $articles_all = Article::all();
+        // dd(Article::latest()->first());
+
         return view('pages.articles.index', compact('articles_all'));
-    }
-
-    public function check_article(Request $request)
-    {
-        $articles_all = Article::all();
-        $articles = Article::with(['categorie', 'uniteBase'])->where("id", $request->id_art_sel)->get();
-        $unites = UniteMesure::all();
-        $points = PointVente::all();
-
-        $i = 1;
-        return view('pages.articles.index', compact('i', 'articles_all', 'articles', 'unites', 'points'));
     }
 
     public function allArticles(Request $request)
@@ -56,6 +47,20 @@ class ArticleController extends Controller
         $unites = UniteMesure::all();
         $points = PointVente::all();
         $i = 1;
+        return view('pages.articles.index', compact('i', 'articles_all', 'articles', 'unites', 'points'));
+    }
+
+
+    public function check_article(Request $request)
+    {
+        $articles_all = Article::all();
+        $articles = Article::with(['categorie', 'uniteBase'])->find($request->id_art_sel);
+        $unites = UniteMesure::all();
+        $points = PointVente::all();
+        $i = 1;
+        // dd(Article::latest()->first());
+
+        // return redirect()->route('index_articles')->with(compact('i', 'articles', 'unites', 'points'));
         return view('pages.articles.index', compact('i', 'articles_all', 'articles', 'unites', 'points'));
     }
 
@@ -221,7 +226,6 @@ class ArticleController extends Controller
 
     public function addStock(Request $request)
     {
-        
         $validator = Validator::make($request->all(), [
             'article_id' => 'required|string',
             'qte_stock' => 'required',
@@ -230,13 +234,12 @@ class ArticleController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect("/articles")->withErrors($validator)->withInput();
+            return redirect()->back()->withErrors($validator)->withInput();
         }
 
         $article = Article::find($request->article_id);
 
         $conversionItem = $article->getPivotValueForUnite($request->unite_mesure_id);
-        // dd($conversionItem);
         if (!is_null($conversionItem)) {
             $qte_vrai = $request->qte_stock * $conversionItem;
         } else {
@@ -250,7 +253,7 @@ class ArticleController extends Controller
             ],
             ['qte_stock' => $qte_vrai]
         );
-       
+
         return redirect()->route('articles.index')
             ->with('success', 'Stock enregistré avec succès.');
     }

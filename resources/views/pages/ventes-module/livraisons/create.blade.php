@@ -189,7 +189,7 @@
                                     <td data-name="unite" contenteditable="false">${data.articles[0].unite}
                                         <input type="hidden" name="unites[]" readonly value="${data.articles[0].unite_mesure_id}" class="form-control">
                                     </td>
-                                    <td><button class="btn btn-danger btn-sm delete-row"><i class="bi bi-trash"></i></button></td>
+                                    <td><button class="btn bg-dark text_orange btn-sm delete-row"><i class="bi bi-trash"></i></button></td>
                                 </tr>`;
 
                         $('#editableTable tbody').append(firstRow);
@@ -208,7 +208,7 @@
                                 <input type="hidden" name="unites[]" readonly value="${data.articles[i].unite_mesure_id}" class="form-control">
                             </td>
                             <td>
-                                <button class="btn btn-danger btn-sm delete-row">
+                                <button class="btn bg-dark text_orange btn-sm delete-row">
                                     <i class="bi bi-trash"></i>
                                 </button>
                             </td>

@@ -22,16 +22,38 @@ class FournisseurController extends Controller
      */
     public function index()
     {
-        $fournisseurs = Fournisseur::orderBy("id","desc")->get();
+        $fournisseurs = Fournisseur::all();
         $total_restants = [];
-
-        $frn = Fournisseur::find(80);
 
         foreach ($fournisseurs as $fournisseur) {
             $id = $fournisseur->id;
 
+            // Calcul des factures (type_op = 'FAC')
+            // $factures = CompteFrs::where("fournisseur_id", $id)
+            //                       ->where('type_op', 'FAC')
+            //                       ->get();
+
+            // Calcul des règlements (type_op = 'REG')
+            // $reglements = CompteFrs::where("fournisseur_id", $id)
+            //                        ->where('type_op', 'REG')
+            //                        ->get();
+
             // Initialisation du total pour ce fournisseur
             $total_restant = 0;
+
+            // Addition des montants des factures
+            // foreach ($factures as $facture) {
+            //     $total_restant -= $facture->montant_op; // Supposons que le montant est dans une colonne "montant"
+            // }
+
+            // Soustraction des montants des règlements
+            // foreach ($reglements as $reglement) {
+            //     $total_restant += $reglement->montant_op; // Supposons que le montant est dans une colonne "montant"
+            // }
+
+            // Stockage du total pour ce fournisseur
+            // $total_restants[$id] = $total_restant;
+
             $facturesSimples = FactureFournisseur::with(['typeFacture'])->where("fournisseur_id", $id)
                 ->whereNotNull('validated_at')
                 ->whereHas('typeFacture', function ($query) {
@@ -53,6 +75,9 @@ class FournisseurController extends Controller
             // $total_solde = $facturesSimples->sum('montant_regle');
             $total_solde = $totalReglements;
             $total_restant =  $total_solde - $total_du;
+
+
+
 
             $facturesNormalises = FactureFournisseur::with(['typeFacture'])->where("fournisseur_id", $id)
                 ->whereNotNull('validated_at')

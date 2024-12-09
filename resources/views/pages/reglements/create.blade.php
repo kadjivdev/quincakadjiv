@@ -48,10 +48,10 @@
                                     </ul>
                                 </div>
                             @endif
-                            <h5 class="card-title">Ajouter un règlement</h5>
+                            <h5 class="card-title text-dark ">Ajouter un règlement</h5>
 
                             <!-- Vertical Form -->
-                            <form class="row g-3" action="{{ route('reglements.store') }}" method="POST"
+                            <form class="row g-3 shadow shadow-sm p-2" action="{{ route('reglements.store') }}" method="POST"
                                 enctype="multipart/form-data">
                                 @csrf
                                 <div class="col-6 mb-3">

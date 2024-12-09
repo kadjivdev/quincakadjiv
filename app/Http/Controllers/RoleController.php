@@ -46,20 +46,19 @@ class RoleController extends Controller
             'permission' => 'required',
         ]);
 
+        // dd($request->all());
         $role = Role::create(['name' => $request->input('name')]);
         $role->syncPermissions($request->input('permission'));
 
         return redirect()->route('roles.index')
                         ->with('success','Role créé avec succès');
     }
-
     /**
      * Display the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-
     public function show($id)
     {
         $role = Role::find($id);
@@ -76,7 +75,6 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-
     public function edit($id)
     {
         $role = Role::find($id);

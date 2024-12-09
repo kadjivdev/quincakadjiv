@@ -72,7 +72,28 @@ class LivraisonVenteComptController extends Controller
             ->select('bon_ventes.*', 'clients.nom_client')
             ->get();
 
-        return view('pages.ventes-module.ventes.livraison', compact('bons', 'magasins', 'vehicules', 'chauffeurs'));
+        $clientsAvecBons = DB::table('bon_ventes')
+            ->join('ventes', 'ventes.id', '=', 'bon_ventes.vente_id')
+            ->join('clients', 'clients.id', '=', 'ventes.client_id')
+            ->whereIn('ventes.user_id', $users)
+            ->distinct() // Assure qu'on récupère uniquement des clients uniques
+            ->select('clients.id', 'clients.nom_client')
+            ->orderBy('clients.nom_client', 'asc') // Tri optionnel par nom
+            ->get();
+
+        // dd($bons);
+
+        return view('pages.ventes-module.ventes.livraison', compact('bons', 'magasins', 'vehicules', 'chauffeurs', 'clientsAvecBons'));
+    }
+
+    public function getBonsParClient($client_id){
+        $bons = BonVente::whereHas('vente', function ($query) use ($client_id) {
+            $query->where('client_id', $client_id);
+        })
+        ->orderBy('created_at', 'desc')
+        ->get(['id', 'code_bon']); // On récupère uniquement les champs nécessaires
+
+        return response()->json($bons);
     }
 
     // public function create() {

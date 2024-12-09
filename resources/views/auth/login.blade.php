@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 <style>
     :root {
-        --kadjiv-orange:#f8c714;
+        --kadjiv-orange:#FDC500;
         --kadjiv-dark-orange: #080808;
         --kadjiv-black: #000000;
         --kadjiv-white: #FFFFFF;

@@ -161,6 +161,11 @@
                         <i class="bi bi-circle"></i><span>Transports</span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('back_stock.index') }}" class="nav-link {{ request()->is('ventes.*') ? 'actif_menu' : '' }}">
+                        <i class="bi bi-circle"></i><span>Retour de stock</span>
+                    </a>
+                </li>
                 @endcan
                 @can('livraisons.list-livraison-directe')
                 <li>
@@ -257,6 +262,14 @@
                     <a href="{{ url('/rapport_factures_ventes') }}"
                         class="nav-link ">
                         <i class="bi bi-circle"></i><span>Ventes</span>
+                    </a>
+                </li>
+                @endcan
+                @can('rapports.rapport-factures-ventes-clt')
+                <li>
+                    <a href="{{ url('/rapport_factures_ventes_all   ') }}"
+                        class="nav-link collapsed {{ request()->is('rapports.*') ? 'actif_menu' : '' }}">
+                        <i class="bi bi-circle"></i><span>Toutes les ventes</span>
                     </a>
                 </li>
                 @endcan

@@ -57,7 +57,7 @@
 
                         @forelse ($clients as $client)
                         <a href="{{route('clients.show', $client->id)}}">
-                            <div class="selectable-div">
+                            <div class="selectable-div text-dark">
                                 {{ $client->nom_client }}
                                 <div class="overlay"></div>
                             </div>
@@ -65,7 +65,6 @@
                         @empty
                         <div>Aucun client enregistré</div>
                         @endforelse
-
 
                     </div>
                 </div>

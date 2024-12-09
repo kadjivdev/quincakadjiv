@@ -51,7 +51,6 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -64,6 +63,7 @@ class UserController extends Controller
             'point_vente_id' => 'required'
         ]);
 
+
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -73,7 +73,6 @@ class UserController extends Controller
             'is_active' => true,
             'password' => Hash::make($request->password),
         ]);
-
         $user->assignRole($request->input('roles'));
 
         return redirect()->route('users.index')

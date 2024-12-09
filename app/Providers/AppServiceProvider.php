@@ -23,5 +23,6 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
         app()->setLocale('fr');
         require_once app_path('Helpers/StringHelper.php');
+
     }
 }

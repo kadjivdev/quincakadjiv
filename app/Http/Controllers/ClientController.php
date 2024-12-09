@@ -8,6 +8,7 @@ use App\Imports\ReportANouveauImport;
 use App\Models\AcompteClient;
 use App\Models\Agent;
 use App\Models\Client;
+use App\Models\CompteClient;
 use App\Models\Departement;
 use App\Models\Devis;
 use App\Models\Facture;
@@ -16,6 +17,7 @@ use App\Models\FactureVente;
 use App\Models\ReglementClient;
 use App\Models\LivraisonDirecte;
 use App\Models\Requete;
+use App\Models\Transport;
 use App\Models\Vente;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -31,6 +33,14 @@ class ClientController extends Controller
      */
     public function index()
     {
+        // $clients = Client::all();
+
+        // $clients = DB::table('clients')
+        //     ->join('departements', 'clients.departement_id', '=', 'departements.id')
+        //     ->join('agents', 'clients.agent_id', '=', 'agents.id')
+        //     ->select('clients.*', 'departements.libelle as department_name', 'agents.nom as agent_name')
+        //     ->get();
+
         $clients = Client::with('departement')->with('agent')->get();
 
 
@@ -48,6 +58,7 @@ class ClientController extends Controller
                 return false;
             });
 
+            
 
             $total_du = $facturesSimples->sum('montant_total');
             $total_solde = $facturesSimples->sum('montant_regle');
@@ -62,14 +73,19 @@ class ClientController extends Controller
             });
 
             $montant_acompte = AcompteClient::where('client_id', $id)->whereNotNull('validator_id')->sum('montant_acompte');
-            $montant_requêtes = Requete::where('client_id', $id)->sum('montant');
+            $montant_requêtes = Requete::where('client_id', $id)->whereNotNull('validate_at')->sum('montant');
+            $montant_transports = Transport::where('client_id', $id)->whereNotNull('validate_at')->sum('montant');
 
             $avance = $montant_acompte;
             $total_du1 = $facturesNormalises->sum('montant_total');
             $total_solde1 = $facturesNormalises->sum('montant_regle');
             $total_restant1 = $total_du1  - $total_solde1;
 
-            $solde = $avance + $montant_requêtes - ($total_restant1 + $total_restant);
+            // if($client->id == 648){
+            //     dd($avance);
+            // }
+
+            $solde = $avance + $montant_requêtes - ($total_restant1 + $total_restant + $montant_transports);
             $client->solde = $solde;
         }
 
@@ -159,13 +175,15 @@ class ClientController extends Controller
 
         $facturesAnciennes = FactureAncienne::with(['typeFacture'])->where("client_id", $id)->get();
         $factures_simples = LivraisonDirecte::with(['typeFacture'])->where("client_id", $id)->whereNotNull('validated_at')->get();
-        $factures = $facturesDevis->concat($factures_simples)->concat($facturesAnciennes)->concat($facturesComptant);
+        $factures = $facturesDevis->concat($factures_simples)->concat($facturesAnciennes)->concat($facturesComptant)->sortByDesc('id');
         $facturesSimples = $factures->filter(function ($facture) {
             if ($facture->typeFacture && $facture->typeFacture->libelle === 'Simple') {
                 return true;
             }
             return false;
         });
+
+        // dd($facturesSimples);
 
 
         $total_du = $facturesSimples->sum('montant_total');
@@ -182,14 +200,15 @@ class ClientController extends Controller
         });
 
         $montant_acompte = AcompteClient::where('client_id', $id)->sum('montant_acompte');
-        $montant_requêtes = Requete::where('client_id', $id)->sum('montant');
+        $montant_requêtes = Requete::where('client_id', $id)->whereNotNull('validate_at')->sum('montant');
+        $montant_transports = Transport::where('client_id', $id)->whereNotNull('validate_at')->sum('montant');
 
         $avance = $montant_acompte + $montant_requêtes;
         $total_du1 = $facturesNormalises->sum('montant_total');
         $total_solde1 = $facturesNormalises->sum('montant_regle');
         $total_restant1 = $total_du1  - $total_solde1;
 
-        $solde = $avance - ($total_restant1 + $total_restant);
+        $solde = $avance - ($total_restant1 + $total_restant + $montant_transports);
 
         $client->credit_total = $total_restant1 + $total_restant - $avance;
         $client->save();
@@ -350,4 +369,51 @@ class ClientController extends Controller
         return redirect()->route('clients.index')
             ->with('success', 'Report à nouveau effectué avec succès.');
     }
+
+    public function synchronizeCompteClient(){
+        // Parcours des lignes dans la table reglementClient avec validator_id non nul
+        $reglements = ReglementClient::whereNotNull('validator_id')->get();
+
+        foreach ($reglements as $reglement) {
+            // Vérifie si une ligne correspondante existe dans compteClient
+            $exists = CompteClient::where('client_id', $reglement->client_id)
+                ->where('facture_id', $reglement->facture_id)
+                ->where('montant_op', $reglement->montant_regle)
+                ->exists();
+
+            // dd($exists);
+
+            if (!$exists) {
+                // Crée une nouvelle ligne dans compteClient si elle n'existe pas
+                CompteClient::create([
+                    'date_op' => explode(' ', $reglement->date_reglement)[0],
+                    'facture_id' => $reglement->facture_id,
+                    'cle' => $reglement->facture_id,
+                    'montant_op' => $reglement->montant_regle,
+                    'user_id' => $reglement->user_id,
+                    'client_id' => $reglement->client_id,
+                    'type_op' => 'REG_VP',
+                    'created_at' => $reglement->created_at,
+                    'updated_at' => $reglement->created_at,
+                ]);
+            }
+        }
+
+        $acomptes = AcompteClient::whereNull('date_op')->whereNull('validator_id')->get();
+
+        foreach ($acomptes as $acompte) {
+            $acompte->validator_id=1;
+            $acompte->validated_at=now();
+
+            try {
+                $acompte->save(); // Sauvegarde les modifications
+                echo "Acompte ID {$acompte->id} validé avec succès.\n";
+            } catch (\Exception $e) {
+                echo "Erreur lors de la validation de l'acompte ID {$acompte->id} : " . $e->getMessage() . "\n";
+            }
+        }
+
+        return "Synchronisation terminée.";
+    }
+
 }

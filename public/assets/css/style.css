@@ -15,11 +15,11 @@
 }
 
 /* body {
-  background: linear-gradient(135deg, var(#f8c714) 0%, var(#080808) 100%);
+  background: linear-gradient(135deg, var(#FDC500) 0%, var(#080808) 100%);
 } */
 
 .text_orange {
-  color: #f8c714!important;
+  color: #FDC500!important;
 }
 
 .breadcrumb-item{
@@ -57,12 +57,12 @@ body {
 }
 
 a {
-  color: #f8c714;
+  color: #FDC500;
   text-decoration: none;
 }
 
 a:hover {
-  color: #f8c714;
+  color: #FDC500;
   text-decoration: none;
 }
 
@@ -114,7 +114,7 @@ h6 {
   right: 15px;
   bottom: 15px;
   z-index: 99999;
-  background: #f8c714;
+  background: #FDC500;
   width: 40px;
   height: 40px;
   border-radius: 4px;
@@ -128,7 +128,7 @@ h6 {
 }
 
 .back-to-top:hover {
-  background: #f8c714;
+  background: #FDC500;
   color: #fff;
 }
 
@@ -319,7 +319,7 @@ h6 {
 }
 
 .accordion-button:not(.collapsed) {
-  color: #f8c714;
+  color: #FDC500;
   background-color: #f6f9ff;
 }
 
@@ -331,7 +331,7 @@ h6 {
 
 .accordion-flush .accordion-button:not(.collapsed) {
   box-shadow: none;
-  color: #f8c714;
+  color: #FDC500;
 }
 
 .accordion-flush .accordion-body {
@@ -379,7 +379,7 @@ h6 {
 
 .nav-tabs-bordered .nav-link:hover,
 .nav-tabs-bordered .nav-link:focus {
-  color: #f8c714;
+  color: #FDC500;
 }
 
 .nav-tabs-bordered .nav-link.active {
@@ -407,11 +407,11 @@ h6 {
 } */
 
 .border_orange{
-  border: 3px solid #f8c714;
+  border: 3px solid #FDC500;
 }
 
 .bg_orange{
-  background-color: #f8c714;
+  background-color: #FDC500;
 }
 
 .text-bold{
@@ -422,7 +422,7 @@ h6 {
   background-color: #fff !important;
   padding: 10px;
   border-radius: 10px;
-  border: 3px solid #f8c714;
+  border: 3px solid #FDC500;
 }
 
 ._card_body i,strong {
@@ -515,7 +515,7 @@ h6 {
 }
 
 .header .search-form button i {
-  color: #f8c714;
+  color: #FDC500;
 }
 
 /*--------------------------------------------------------------
@@ -988,7 +988,7 @@ h6 {
 }
 
 .dashboard .news h4 a:hover {
-  color: #f8c714;
+  color: #FDC500;
 }
 
 .dashboard .news p {
@@ -1104,7 +1104,7 @@ h6 {
 }
 
 .profile .profile-card .social-links a:hover {
-  color: #f8c714;
+  color: #FDC500;
 }
 
 .profile .profile-overview .row {
@@ -1232,7 +1232,7 @@ h6 {
 }
 
 .contact .php-email-form button[type=submit] {
-  background: #f8c714;
+  background: #FDC500;
   border: 0;
   padding: 10px 30px;
   color: #fff;
@@ -1241,7 +1241,7 @@ h6 {
 }
 
 .contact .php-email-form button[type=submit]:hover {
-  background: #f8c714;
+  background: #FDC500;
 }
 
 @keyframes animate-loading {
@@ -1283,7 +1283,7 @@ h6 {
 }
 
 .error-404 .btn:hover {
-  background: #f8c714;
+  background: #FDC500;
 }
 
 @media (min-width: 992px) {

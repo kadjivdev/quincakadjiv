@@ -157,7 +157,7 @@ class LivraisonClientController extends Controller
                     $qte_vrai = $livraison_ligne->qte_livre * $conversionItem;
                 }
             } else {
-                return redirect()->route('validation-liv-clt')->withErrors(['message' => 'Vous n\'avez pas configuré de taux de conversion pour cette unité d\'article.']);
+                return redirect()->back()->withErrors(['message' => 'Vous n\'avez pas configuré de taux de conversion pour cette unité d\'article.']);
             }
 
             $magasin = Magasin::find($livraison_ligne->magasin_id);
@@ -169,7 +169,7 @@ class LivraisonClientController extends Controller
                 $stockMag->qte_stock = $qte_stock;
                 $stockMag->save();
             } else {
-                return redirect()->route('validation-liv-clt')->withErrors(['message' => 'Quantité insufisante pour l\'article ' . $article->nom]);
+                return redirect()->back()->withErrors(['message' => 'Quantité insufisante pour l\'article ' . $article->nom]);
             }
 
             if ($element) {
@@ -245,6 +245,8 @@ class LivraisonClientController extends Controller
             'prixUnits.*' => 'required',
             'unites.*' => 'required',
         ]);
+
+        // dd($request);
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
@@ -324,7 +326,7 @@ class LivraisonClientController extends Controller
             return redirect()->route('deliveries.index')->with('success', 'Livraison enregistrée avec succès');
         } catch (\Exception $e) {
             DB::rollback();
-            return redirect()->route('deliveries.index')->withErrors(['message' => 'Erreur enregistrement Bon de commande ' . $e->getMessage()]);
+            return redirect()->route('deliveries.index')->withErrors(['message' => 'Erreur enregistrement Bon de Livraison ' . $e->getMessage()]);
         }
     }
 
