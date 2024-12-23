@@ -54,7 +54,7 @@
 
     <div class="container-fluid">
         <!-- HEADER -->
-        <div class="row">
+        <!-- <div class="row">
             <div class="col-md-12 px-0 mx-0 fixed-top">
                 <nav class="navbar navbar-expand-lg bg-body-tertiary">
                     <div class="container-fluid">
@@ -72,18 +72,19 @@
                     </div>
                 </nav>
             </div>
-        </div>
+        </div> -->
         <div class="row">
             <div class="col py-5">
                 @yield('content')
+                <p class="text-center text-white">© Copyright <em class="text_orange"> {{date("Y")}}</em> | Powered By -- <strong class="text_orange">Kadjiv </strong> </p>
             </div>
         </div>
         <!-- FOOTER -->
-        <div class="row bg-white fixed-bottom">
+        <!-- <div class="row bg-white fixed-bottom">
             <div class="col-md-12 px-0 mx-0 py-3">
                 <p class="text-center">© Copyright <em class="text_orange"> {{date("Y")}}</em> | Powered By -- <strong class="text_orange">Kadjiv </strong> </p>
             </div>
-        </div>
+        </div> -->
     </div>
 
 

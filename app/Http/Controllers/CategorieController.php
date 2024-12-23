@@ -7,6 +7,7 @@ use App\Models\Categorie;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
+use PhpOffice\PhpSpreadsheet\Calculation\Category;
 
 class CategorieController extends Controller
 {
@@ -96,6 +97,12 @@ class CategorieController extends Controller
     public function edit(string $id)
     {
         //
+    }
+
+    public function retrieve(Request $request,$id) {
+        $categorie = Categorie::findOrFail($id);
+
+        return response()->json($categorie);
     }
 
 

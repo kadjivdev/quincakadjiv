@@ -183,6 +183,7 @@
 
 
     <script type="text/javascript">
+        
         function getCategory(Id) {
             $(".loading").removeAttr("hidden")
             $("#category").val()

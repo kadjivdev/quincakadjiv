@@ -70,7 +70,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('fournisseurs', FournisseurController::class);
 
     Route::resource('categories', CategorieController::class);
-    Route::put('/categories/{id}', [CategorieController::class, 'update'])->name('categories.update');
+    Route::get('/categories/{id}/retrieve', [CategorieController::class, 'retrieve'])->name('categories.retrieve');
+    Route::put('/categories/{id}', [CategorieController::class, 'destroy'])->name('categories.destroy');
     Route::put('/categories/{id}', [CategorieController::class, 'destroy'])->name('categories.destroy');
 
     Route::resource('articles', ArticleController::class);
