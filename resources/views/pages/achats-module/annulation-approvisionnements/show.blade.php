@@ -24,8 +24,8 @@
                             <h5 class="card-title text-dark">Liste des articles livrés</h5>
 
                             <!-- Table with stripped rows -->
-                            <table class="table datatable">
-                                <thead>
+                            <table id="example" class="table table-bordered border-warning  table-hover table-sm table-striped">
+                                <thead class="table-dark">
                                     <tr>
                                         <th>N°</th>
                                         <th>Article</th>

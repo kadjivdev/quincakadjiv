@@ -61,46 +61,68 @@
                                 $formattedDateVente = $datevente_vte->locale('fr_FR')->isoFormat('ll');
                                 @endphp
                                 @if (is_null($vente->validated_at))
-                                    <tr>
-                                        <td>{{ $i++ }} </td>
-                                        <td class="text-center">{{ $vente->id }} </td>
-                                        <td>{{ $formattedDateVente }}</td>
-                                        <td>{{ $formattedDate }}</td>
-                                        <td>{{ $getClientById($vente->client_id) ? $getClientById($vente->client_id)->nom_client : $vente->client }} </td>
-                                        <td>{{ number_format($vente->montant, 0, ',', ' ') }} </td>
-                                        <td>
-                                            <div class="dropdown">
-                                                <button class="btn btn-sm bg-dark text_orange w-100 dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                                    <i class="bi bi-gear"></i>
-                                                </button>
-                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">                                                
-                                                    @can('ventes.voir-vente')
-                                                    <li>
-                                                        <a href="{{ route('ventes.show', $vente->id) }}" data-bs-toggle="tooltip" class="dropdown-item" data-bs-placement="left" data-bs-title="Voir détails"><i class="bi bi-list"></i> Détails </a>
-                                                    </li> 
-                                                    @endcan
-                                                    @if (!$vente->validated_at)
-                                                        @can('ventes.voir-vente')
-                                                        <li>
-                                                            <a href="{{route('vente-validate', $vente->id)}}" onclick="return confirm('Êtes-vous sûr de vouloir valider la vente ?')" data-bs-toggle="tooltip" class="dropdown-item" data-bs-placement="left" data-bs-title="Valider la vente"><i class="bi bi-check-circle"></i> Valider </a>
-                                                        </li>  
-                                                        <li>
-                                                            <a href="{{route('ventes.edit', $vente->id )}}"  data-bs-toggle="tooltip" class="dropdown-item" data-bs-placement="left" data-bs-title="Modifier vente"><i class="bi bi-pencil"></i>Modifier </a>
-                                                        </li>
-                                                        <li>
-                                                            <form action="{{ route('vente-del', $vente->id) }}" method="POST" class="col-3">
-                                                                @csrf
-                                                                @method('DELETE')
-                                                                <button type="submit"  class="dropdown-item" data-bs-placement="left" data-bs-toggle="tooltip" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette ? Cette opération est irréversible')" data-bs-title="Supprimer la vente"><i class="bi bi-trash3"></i> Supprimer</button>
-                                                            </form>
-                                                        </li>
-                                                        @endcan
-                                                    @endif
-                                                </ul>
-                                            </div>
-                                        </td>
-                                    </tr>                                    
-                                    @endif
+                                <tr>
+                                    <td>{{ $i++ }} </td>
+                                    <td class="text-center">{{ $vente->id }} </td>
+                                    <td>{{ $formattedDateVente }}</td>
+                                    <td>{{ $formattedDate }}</td>
+                                    <td>{{ $getClientById($vente->client_id) ? $getClientById($vente->client_id)->nom_client : $vente->client }} </td>
+                                    <td>{{ number_format($vente->montant, 0, ',', ' ') }} </td>
+                                    <td>
+                                        <div class="dropdown">
+                                            <button class="btn btn-sm bg-dark text_orange w-100 dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <i class="bi bi-gear"></i>
+                                            </button>
+                                            <!-- <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                @can('ventes.voir-vente')
+                                                <li>
+                                                    <a href="{{ route('ventes.show', $vente->id) }}" data-bs-toggle="tooltip" class="dropdown-item" data-bs-placement="left" data-bs-title="Voir détails"><i class="bi bi-list"></i> Détails </a>
+                                                </li>
+                                                @endcan
+
+                                                @if (!$vente->validated_at)
+                                                @can('ventes.voir-vente')
+                                                <li>
+                                                    <a href="{{route('vente-validate', $vente->id)}}" onclick="return confirm('Êtes-vous sûr de vouloir valider la vente ?')" data-bs-toggle="tooltip" class="dropdown-item" data-bs-placement="left" data-bs-title="Valider la vente"><i class="bi bi-check-circle"></i> Valider </a>
+                                                </li>
+                                                <li>
+                                                    <a href="{{route('ventes.edit', $vente->id )}}" data-bs-toggle="tooltip" class="dropdown-item" data-bs-placement="left" data-bs-title="Modifier vente"><i class="bi bi-pencil"></i>Modifier </a>
+                                                </li>
+                                                <li>
+                                                    <form action="{{ route('vente-del', $vente->id) }}" method="POST" class="col-3">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="dropdown-item" data-bs-placement="left" data-bs-toggle="tooltip" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette ? Cette opération est irréversible')" data-bs-title="Supprimer la vente"><i class="bi bi-trash3"></i> Supprimer</button>
+                                                    </form>
+                                                </li>
+                                                @endcan
+                                                @endif
+                                            </ul> -->
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                @can('ventes.voir-vente')
+                                                @endcan
+                                                @if (!$vente->validated_at)
+                                                @can('ventes.voir-vente')
+                                                <li>
+                                                    <a href="{{route('vente-validation', $vente->id)}}" data-bs-toggle="tooltip" class="dropdown-item" data-bs-placement="left" data-bs-title="Valider la vente"><i class="bi bi-check-circle"></i> Validation </a>
+                                                </li>
+                                                <li>
+                                                    <a href="{{route('ventes.edit', $vente->id )}}" data-bs-toggle="tooltip" class="dropdown-item" data-bs-placement="left" data-bs-title="Modifier vente"><i class="bi bi-pencil"></i> Modifier </a>
+                                                </li>
+                                                <li>
+                                                    <form action="{{ route('vente-del', $vente->id) }}" method="POST" class="col-3">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="dropdown-item" data-bs-placement="left" data-bs-toggle="tooltip" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette ? Cette opération est irréversible')" data-bs-title="Supprimer la vente"><i class="bi bi-trash3"></i> Supprimer</button>
+                                                    </form>
+                                                </li>
+                                                @endcan
+                                                @endif
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                                @endif
                                 @empty
                                 <tr>Aucune vente enregistrée</tr>
                                 @endforelse

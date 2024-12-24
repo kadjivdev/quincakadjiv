@@ -19,7 +19,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
-                    <div class="card-body py-1">
+                    <div class="card-body py-2">
                         @if ($errors->any())
                         <div class="alert alert-danger">
                             <ul>

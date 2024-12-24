@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
-                    <div class="card-body my-1">
+                    <div class="card-body py-2">
                         <!-- Afficher des messages de succès -->
                         @if (session('success'))
                         <div class="alert alert-success">
@@ -32,38 +32,40 @@
                         <form class="row g-3" id="programForm" action="{{ route('inventaires.store') }}" method="POST">
                             @csrf
                             <div class="row">
-                                <div class="col-4 mb-3">
+                                <div class="col-12 mb-3">
                                     <label class="form-label">Date inventaire</label>
                                     <input type="text" class="form-control" name="date_inventaire" id="dateReglement">
 
                                 </div>
                             </div>
-                            <div class="col-3">
-                                <label class="form-label">Choisir l'article</label>
-                                <select class="form-select form-control test" name="article_id" id="articleSelect">
-                                    <option value="">Choisir l'article </option>
-                                    @foreach ($articles as $article)
-                                    <option value="{{ $article->id }}" data-qteStock="{{ $article->qte_stock }}">
-                                        {{ $article->nom }}
-                                    </option>
-                                    @endforeach
-                                </select>
-                            </div>
-
-                            <div class="col-3">
-                                <label class="form-label">Qté Stock</label>
-                                <input type="hidden" readonly name="magasin_id" value="{{ $magasin->id}}" class="form-control">
-                                <input type="number" readonly name="qte_stock" id="qte_stock" class="form-control">
-                            </div>
-
-                            <div class="col-3">
-                                <label class="form-label">Qté réelle</label>
-                                <input type="number" min="0" name="qte_reel" id="qte" class="form-control">
-                            </div>
-
-                            <div class="col-3 py-2">
-                                <button class="btn btn-sm bg-dark text_orange mt-4" type="button" id="ajouterArticle">
-                                    Ajouter</button>
+                            <div class="row">
+                                <div class="col-3">
+                                    <label class="form-label">Choisir l'article</label>
+                                    <select class="form-select form-control test" name="article_id" id="articleSelect">
+                                        <option value="">Choisir l'article </option>
+                                        @foreach ($articles as $article)
+                                        <option value="{{ $article->id }}" data-qteStock="{{ $article->qte_stock }}">
+                                            {{ $article->nom }}
+                                        </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+    
+                                <div class="col-3">
+                                    <label class="form-label">Qté Stock</label>
+                                    <input type="hidden" readonly name="magasin_id" value="{{ $magasin->id}}" class="form-control">
+                                    <input type="number" readonly name="qte_stock" id="qte_stock" class="form-control">
+                                </div>
+    
+                                <div class="col-3">
+                                    <label class="form-label">Qté réelle</label>
+                                    <input type="number" min="0" name="qte_reel" id="qte" class="form-control">
+                                </div>
+    
+                                <div class="col-3 py-2">
+                                    <button class="btn btn-sm bg-dark text_orange mt-4 w-100" type="button" id="ajouterArticle">
+                                        Ajouter</button>
+                                </div>
                             </div>
 
                             <div id="dynamic-fields-container">

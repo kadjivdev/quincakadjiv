@@ -57,16 +57,16 @@
                                             </select>
                                         </div>
 
-                                        <div class="col-2">
+                                        <div class="col-3">
                                             <label class="form-label">Quantité</label>
                                             <input type="text" name="qte" id="qte" class="form-control">
                                         </div>
 
-                                        <div class="col-2">
+                                        <div class="col-3">
                                             <label class="form-label">Prix unitaire</label>
                                             <input type="text" name="prix" id="prix" class="form-control">
                                         </div>
-                                        <div class="col-2">
+                                        <div class="col-3">
                                             <label class="form-label">Unité</label>
                                             <select class="form-select" name="unite_id" id="uniteSelect">
 

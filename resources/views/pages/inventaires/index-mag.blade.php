@@ -39,7 +39,7 @@
 
                             <table id="example"
                                 class="table table-bordered border-warning  table-hover table-striped table-sm">
-                                <thead>
+                                <thead class="table-dark">
                                     <tr>
                                         <th>N°</th>
                                         <th>

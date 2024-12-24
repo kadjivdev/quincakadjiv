@@ -8,7 +8,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
-                    <div class="card-body py-1">
+                    <div class="card-body py-2">
                         <!-- Afficher des messages de succès -->
                         @if (session('success'))
                         <div class="alert alert-success">
@@ -33,7 +33,7 @@
                             <td><input style="width:150px" value="{{$magasin->id}}" type="hidden" class="form-control datepicker" name="magasin_id"></td>
                             <div class="table-responsive">
                                 <table id="example" class="table border border-warning table-sm table-striped ">
-                                    <thead>
+                                    <thead class="table-dark">
                                         <tr>
                                             <th>N°</th>
                                             <th>Article</th>

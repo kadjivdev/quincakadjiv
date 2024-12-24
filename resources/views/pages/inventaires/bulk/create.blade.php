@@ -16,14 +16,14 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
-                    <div class="card-body py-1">
+                    <div class="card-body py-2">
                         <!-- Afficher des messages de succès -->
                         @if (session('success'))
                         <div class="alert alert-success">
                             {{ session('success') }}
                         </div>
                         @endif
-    
+
                         <!-- Afficher des erreurs de validation -->
                         @if ($errors->any())
                         <div class="alert alert-danger">
@@ -38,66 +38,61 @@
                         <!-- Vertical Form -->
 
                         <div class="row g-3">
-                            <div class="col-4 mb-3">
-                                <label class="form-label">Catégorie</label>
-                                <select id="categoryInput" class="form-select js-data-example-ajax" aria-label="Default select example">
-                                    <option selected value="">Toute les catégories </option>
-                                    @foreach($allCategories as $eachCategory)
-                                    <option value="{{$eachCategory->libelle}}">{{$eachCategory->libelle }} </option>
-                                    @endforeach
-
-                                </select>
-                            </div>
-
-                            <div class="col-4 mb-3 mt-2">
-                                <!--    <button type="button" class="btn btn-primary mt-4" id="filterButton">Filtrer</button> -->
-                            </div>
-                        </div>
-                        <form class="row g-3" id="programForm" action="{{ route('inventaires-bulk.store') }}" method="POST">
-                            @csrf
-                            <div class="row">
+                            <form class="" id="programForm" action="{{ route('inventaires-bulk.store') }}" method="POST">
+                                @csrf
                                 <input type="hidden" id="allArticles" name="allArticles" value="{{ json_encode($articles) }}">
+                                <div class="row">
+                                    <div class="col-6 mb-3">
+                                        <label class="form-label">Catégorie</label>
+                                        <select id="categoryInput" class="form-select js-data-example-ajax" aria-label="Default select example">
+                                            <option selected value="">Toute les catégories </option>
+                                            @foreach($allCategories as $eachCategory)
+                                            <option value="{{$eachCategory->libelle}}">{{$eachCategory->libelle }} </option>
+                                            @endforeach
 
-                                <div class="col-4 mb-3">
-                                    <label class="form-label">Date inventaire</label>
-                                    <input type="text" class="form-control" name="date_inventaire" id="dateReglement">
+                                        </select>
+                                    </div>
+                                    <div class="col-6 mb-3">
+                                        <label class="form-label">Date inventaire</label>
+                                        <input type="text" class="form-control" name="date_inventaire" id="dateReglement">
+                                    </div>
                                 </div>
-                            </div>
 
-                            <table id="table" class=" table table-bordered border-warning data-table table-hover table-striped table-sm">
-                                <thead>
-                                    <tr>
-                                        <th>N°</th>
-                                        <th>Désignations</th>
-                                        <th>Catégorie</th>
-                                        <th>Stock</th>
-                                        <th>Stock réelle</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @forelse ($articles as $article)
-                                    <tr>
-                                        <td>{{ $i++ }} </td>
-                                        <td>
-                                            <input type="hidden" name="magasin_id" value="{{ $article->magasin_id }}">
-                                            <input type="hidden" name="stock_magasin[]" value="{{ $article->id }}">
-                                            {{ $article->nom }}
-                                        </td>
-                                        <td>{{ $article->libelle }}</td>
-                                        <td><input type="hidden" class="form-control" name="qte_stock[]" min="0" value="{{ $article->qte_stock }}">{{ $article->qte_stock }}</td>
-                                        <td> <input type="text" class="form-control" name="qte_reel[]" id=""></td>
-                                    </tr>
-                                    @empty
-                                    <tr>Aucun article disponible ici.</tr>
-                                    @endforelse
-                                </tbody>
-                            </table>
-
-                            <div class="col-lg-12 d-flex flex-row align-items-center justify-content-between">
-                                <button type="submit" class="btn btn-sm btn-dark text_orange w-100 submitBtn" id="ajouterArticle"><i class="bi bi-check-circle"></i> Enregistrer</button>
-                                <button type="button" class="btn btn-sm btn-dark text_orange w-100 loadingBtn" hidden><span class="spinner-border spinner-border-sm text_orange loading"></span> En cours ...</button>
-                            </div>
-                        </form>
+                                <table id="example" class=" table table-bordered border-warning data-table table-hover table-striped table-sm">
+                                    <thead class="table-dark">
+                                        <tr>
+                                            <th>N°</th>
+                                            <th>Désignations</th>
+                                            <th>Catégorie</th>
+                                            <th>Stock</th>
+                                            <th>Stock réelle</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @forelse ($articles as $article)
+                                        <tr>
+                                            <td>{{ $i++ }} </td>
+                                            <td>
+                                                <input type="hidden" name="magasin_id" value="{{ $article->magasin_id }}">
+                                                <input type="hidden" name="stock_magasin[]" value="{{ $article->id }}">
+                                                {{ $article->nom }}
+                                            </td>
+                                            <td>{{ $article->libelle }}</td>
+                                            <td><input type="hidden" class="form-control" name="qte_stock[]" min="0" value="{{ $article->qte_stock }}">{{ $article->qte_stock }}</td>
+                                            <td> <input type="text" class="form-control" name="qte_reel[]" id=""></td>
+                                        </tr>
+                                        @empty
+                                        <tr>Aucun article disponible ici.</tr>
+                                        @endforelse
+                                    </tbody>
+                                </table>
+                                <br>
+                                <div class="col-lg-12 d-flex flex-row align-items-center justify-content-between">
+                                    <button type="submit" class="btn btn-sm btn-dark text_orange w-100 submitBtn" id="ajouterArticle"><i class="bi bi-check-circle"></i> Enregistrer</button>
+                                    <button type="button" class="btn btn-sm btn-dark text_orange w-100 loadingBtn" hidden><span class="spinner-border spinner-border-sm text_orange loading"></span> En cours ...</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>

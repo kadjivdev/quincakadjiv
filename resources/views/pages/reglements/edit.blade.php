@@ -15,7 +15,6 @@
                 <li class="breadcrumb-item"><a href="{{ route('fournisseurs.index') }}">Fournisseur</a></li>
                 <li class="breadcrumb-item"><a href="{{ route('reglements.index') }}">Règlement</a></li>
                 <li class="breadcrumb-item active">Modifier Règlement</li>
-
             </ol>
         </nav>
 
@@ -61,12 +60,12 @@
                                 enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
-                                <div class="col-5 mb-3">
+                                <div class="col-6 mb-3">
                                     <label class="form-label">Fournisseur</label>
                                     <input type="hidden" id="frsId" value="{{ $frs->id }}">
                                     <input type="text" class="form-control" readonly name="fournisseur_id" value="{{ $frs->name }}" />
                                 </div>
-                                <div class="col-7 mb-3">
+                                <div class="col-6 mb-3">
                                     <label class="form-label">Facture</label>
                                     <input type="hidden" id="factId" value="{{ $reglement->facture_fournisseur_id }}">
                                     <input type="text" class="form-control" readonly name="facture_fournisseur_id" value="{{ $facture->ref_facture }}" />

@@ -4,7 +4,7 @@
 
     <div class="pagetitle d-flex">
         <div class="col-10">
-            <h1 class="float-left">Détail du Bon de Livraison {{$liv[0]->ref_liv}} </h1>
+            <h1 class="float-left">Détail du Bon de Livraison <span class="badge bg-dark text_orange">  {{$liv[0]->ref_liv}} </span> </h1>
         </div>
 
         <div class="col-10">

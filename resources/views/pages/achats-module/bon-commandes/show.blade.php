@@ -60,7 +60,7 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Liste des articles de la programmation</h5>
+                            <h5 class="card-title text-dark">Liste des articles de la programmation</h5>
 
                             <table id="example"
                                 class="table table-bordered border-warning  table-hover table-striped table-sm">

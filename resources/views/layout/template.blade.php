@@ -167,6 +167,7 @@
     <script>
         $(document).ready(function() {
             $('#example').DataTable({
+                lengthChange: true,
                 "order": [], // Désactive l'ordre initial
                 "columnDefs": [{
                         "orderable": false,
@@ -440,7 +441,5 @@
     <script src="{{ asset('assets/js/main.js') }}"></script>
     <script src="{{ asset('assets/js/loader.js') }}"></script>
     @yield('scripts')
-
 </body>
-
 </html>

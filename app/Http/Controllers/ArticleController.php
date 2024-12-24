@@ -53,12 +53,13 @@ class ArticleController extends Controller
 
     public function check_article(Request $request)
     {
+        // dd(request()->is("article_by_id"));
         $articles_all = Article::all();
-        $articles = Article::with(['categorie', 'uniteBase'])->find($request->id_art_sel);
+        $articles = Article::with(['categorie', 'uniteBase'])->where("id",$request->id_art_sel)->get();
         $unites = UniteMesure::all();
         $points = PointVente::all();
         $i = 1;
-        // dd(Article::latest()->first());
+        // dd($articles);
 
         // return redirect()->route('index_articles')->with(compact('i', 'articles', 'unites', 'points'));
         return view('pages.articles.index', compact('i', 'articles_all', 'articles', 'unites', 'points'));

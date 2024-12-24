@@ -53,7 +53,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex justify-content-between align-items-center">
-                                <h5 class="card-title mb-0">Liste des programmations d'achats Validées</h5>
+                                <h5 class="card-title mb-0 text-dark">Liste des programmations d'achats Validées</h5>
                                 <span class="badge rounded-pill bg-dark">{{ count($bons) }} Prog validées au
                                     total</span>
                             </div>

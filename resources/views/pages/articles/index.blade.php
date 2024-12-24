@@ -64,10 +64,9 @@
                             <div class="row">
                                 <div class="col-10">
                                     <select required class="form-select form-control mb-3" name="id_art_sel" id="id_art_sel">
-
                                         @foreach ($articles_all as $article)
-                                        <option value="{{ $article->id }}" data-donnee="{{ $article->nom }}">
-                                            {{ $article->nom }}
+                                        <option value="{{ $article->id }}" data-donnee="@if(request()->is('article_by_id')) {{$articles->first()->nom }} @else {{$article->nom }} @endif">
+                                            {{$article->nom }}
                                         </option>
                                         @endforeach
                                     </select>

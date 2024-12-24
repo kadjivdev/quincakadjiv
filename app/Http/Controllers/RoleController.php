@@ -7,21 +7,24 @@ use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
+use function Laravel\Prompts\alert;
+use function Laravel\Prompts\confirm;
+
 class RoleController extends Controller
 {
-     /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
     {
-        $roles = Role::orderBy('id','ASC')->get();
-        return view('pages.roles.index',compact('roles'))
+        $roles = Role::orderBy('id', 'ASC')->get();
+        return view('pages.roles.index', compact('roles'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
-     /**
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -30,7 +33,7 @@ class RoleController extends Controller
     {
         $permissions = Permission::get();
         // dd($permission);
-        return view('pages.roles.create',compact('permissions'));
+        return view('pages.roles.create', compact('permissions'));
     }
 
     /**
@@ -51,7 +54,7 @@ class RoleController extends Controller
         $role->syncPermissions($request->input('permission'));
 
         return redirect()->route('roles.index')
-                        ->with('success','Role créé avec succès');
+            ->with('success', 'Role créé avec succès');
     }
     /**
      * Display the specified resource.
@@ -62,11 +65,11 @@ class RoleController extends Controller
     public function show($id)
     {
         $role = Role::find($id);
-        $rolePermissions = Permission::join("role_has_permissions","role_has_permissions.permission_id","=","permissions.id")
-            ->where("role_has_permissions.role_id",$id)
+        $rolePermissions = Permission::join("role_has_permissions", "role_has_permissions.permission_id", "=", "permissions.id")
+            ->where("role_has_permissions.role_id", $id)
             ->get();
 
-        return view('pages.roles.show',compact('role','rolePermissions'));
+        return view('pages.roles.show', compact('role', 'rolePermissions'));
     }
 
     /**
@@ -79,12 +82,12 @@ class RoleController extends Controller
     {
         $role = Role::find($id);
         $permission = Permission::get();
-        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id",$id)
-            ->pluck('role_has_permissions.permission_id','role_has_permissions.permission_id')
+        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", $id)
+            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
             // ->distinct()
             ->all();
 
-        return view('pages.roles.edit',compact('role','permission','rolePermissions'));
+        return view('pages.roles.edit', compact('role', 'permission', 'rolePermissions'));
     }
 
     /**
@@ -108,7 +111,7 @@ class RoleController extends Controller
         $role->syncPermissions($request->input('permission'));
 
         return redirect()->route('roles.index')
-                        ->with('success','Role updated successfully');
+            ->with('success', 'Role updated successfully');
     }
 
     /**
@@ -117,10 +120,11 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function destroy($id)
     {
-        DB::table("roles")->where('id',$id)->delete();
+        DB::table("roles")->where('id', $id)->delete();
         return redirect()->route('roles.index')
-                        ->with('success','Role deleted successfully');
+            ->with('success', 'Role deleted successfully');
     }
 }
