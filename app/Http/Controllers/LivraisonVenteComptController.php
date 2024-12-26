@@ -21,12 +21,10 @@ use App\Models\ArticlePointVente;
 use App\Models\UniteMesure;
 use App\Models\Article;
 
-
-
 class LivraisonVenteComptController extends Controller
 {
-    public function index() {
-
+    public function index()
+    {
         $bon_liv_clt = BonLivraisonVenteComptant::select(
             'bon_livraison_vente_comptants.*',
             'ventes.reference as vente_reference',
@@ -86,12 +84,13 @@ class LivraisonVenteComptController extends Controller
         return view('pages.ventes-module.ventes.livraison', compact('bons', 'magasins', 'vehicules', 'chauffeurs', 'clientsAvecBons'));
     }
 
-    public function getBonsParClient($client_id){
+    public function getBonsParClient($client_id)
+    {
         $bons = BonVente::whereHas('vente', function ($query) use ($client_id) {
             $query->where('client_id', $client_id);
         })
-        ->orderBy('created_at', 'desc')
-        ->get(['id', 'code_bon']); // On récupère uniquement les champs nécessaires
+            ->orderBy('created_at', 'desc')
+            ->get(['id', 'code_bon']); // On récupère uniquement les champs nécessaires
 
         return response()->json($bons);
     }
@@ -258,11 +257,11 @@ class LivraisonVenteComptController extends Controller
 
             DB::commit();
             return redirect()->route('bons-ventes.show', ['bons_vente' => $livraison_ligne->bon_livraison_vente_comptant_id])
-                     ->with('success', 'Livraison enregistrée avec succès');
+                ->with('success', 'Livraison enregistrée avec succès');
         } catch (\Exception $e) {
             DB::rollback();
             return redirect()->route('bons-ventes.show', ['bons_vente' => $livraison_ligne->bon_livraison_vente_comptant_id])
-            ->withErrors(['message' => 'Erreur enregistrement Bon de commande ' . $e->getMessage()]);
+                ->withErrors(['message' => 'Erreur enregistrement Bon de commande ' . $e->getMessage()]);
         }
 
 
@@ -356,7 +355,7 @@ class LivraisonVenteComptController extends Controller
 
 
 
-        /**
+    /**
      * Remove the specified resource from storage.
      */
     public function destroy(int $id)
